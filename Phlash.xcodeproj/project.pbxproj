@@ -14,6 +14,18 @@
 		A5DE46891D11515E00047C73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46871D11515E00047C73 /* LaunchScreen.storyboard */; };
 		A5DE46941D11515E00047C73 /* PhlashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE46931D11515E00047C73 /* PhlashTests.swift */; };
 		A5DE469F1D11515E00047C73 /* PhlashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE469E1D11515E00047C73 /* PhlashUITests.swift */; };
+		A5DE46B71D1151A000047C73 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46AD1D1151A000047C73 /* AudioToolbox.framework */; };
+		A5DE46B81D1151A000047C73 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46AE1D1151A000047C73 /* CFNetwork.framework */; };
+		A5DE46B91D1151A000047C73 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46AF1D1151A000047C73 /* CoreGraphics.framework */; };
+		A5DE46BA1D1151A000047C73 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B01D1151A000047C73 /* CoreLocation.framework */; };
+		A5DE46BB1D1151A000047C73 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B11D1151A000047C73 /* libsqlite3.tbd */; };
+		A5DE46BC1D1151A000047C73 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B21D1151A000047C73 /* libz.tbd */; };
+		A5DE46BD1D1151A000047C73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B31D1151A000047C73 /* QuartzCore.framework */; };
+		A5DE46BE1D1151A000047C73 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B41D1151A000047C73 /* Security.framework */; };
+		A5DE46BF1D1151A000047C73 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B51D1151A000047C73 /* StoreKit.framework */; };
+		A5DE46C01D1151A000047C73 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */; };
+		A5DE46C21D1151AC00047C73 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46C11D1151AC00047C73 /* Bolts.framework */; };
+		A5DE46C41D1151B700047C73 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46C31D1151B700047C73 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +59,18 @@
 		A5DE469A1D11515E00047C73 /* PhlashUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhlashUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE469E1D11515E00047C73 /* PhlashUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhlashUITests.swift; sourceTree = "<group>"; };
 		A5DE46A01D11515F00047C73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5DE46AD1D1151A000047C73 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A5DE46AE1D1151A000047C73 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A5DE46AF1D1151A000047C73 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A5DE46B01D1151A000047C73 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A5DE46B11D1151A000047C73 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A5DE46B21D1151A000047C73 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A5DE46B31D1151A000047C73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A5DE46B41D1151A000047C73 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A5DE46B51D1151A000047C73 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A5DE46C11D1151AC00047C73 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		A5DE46C31D1151B700047C73 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +78,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DE46B71D1151A000047C73 /* AudioToolbox.framework in Frameworks */,
+				A5DE46B81D1151A000047C73 /* CFNetwork.framework in Frameworks */,
+				A5DE46B91D1151A000047C73 /* CoreGraphics.framework in Frameworks */,
+				A5DE46BA1D1151A000047C73 /* CoreLocation.framework in Frameworks */,
+				A5DE46BB1D1151A000047C73 /* libsqlite3.tbd in Frameworks */,
+				A5DE46BC1D1151A000047C73 /* libz.tbd in Frameworks */,
+				A5DE46BD1D1151A000047C73 /* QuartzCore.framework in Frameworks */,
+				A5DE46BE1D1151A000047C73 /* Security.framework in Frameworks */,
+				A5DE46C21D1151AC00047C73 /* Bolts.framework in Frameworks */,
+				A5DE46BF1D1151A000047C73 /* StoreKit.framework in Frameworks */,
+				A5DE46C41D1151B700047C73 /* Parse.framework in Frameworks */,
+				A5DE46C01D1151A000047C73 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +113,7 @@
 		A5DE46721D11515E00047C73 = {
 			isa = PBXGroup;
 			children = (
+				A5DE46AC1D11517200047C73 /* Frameworks */,
 				A5DE467D1D11515E00047C73 /* Phlash */,
 				A5DE46921D11515E00047C73 /* PhlashTests */,
 				A5DE469D1D11515E00047C73 /* PhlashUITests */,
@@ -123,6 +160,25 @@
 				A5DE46A01D11515F00047C73 /* Info.plist */,
 			);
 			path = PhlashUITests;
+			sourceTree = "<group>";
+		};
+		A5DE46AC1D11517200047C73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5DE46C31D1151B700047C73 /* Parse.framework */,
+				A5DE46C11D1151AC00047C73 /* Bolts.framework */,
+				A5DE46AD1D1151A000047C73 /* AudioToolbox.framework */,
+				A5DE46AE1D1151A000047C73 /* CFNetwork.framework */,
+				A5DE46AF1D1151A000047C73 /* CoreGraphics.framework */,
+				A5DE46B01D1151A000047C73 /* CoreLocation.framework */,
+				A5DE46B11D1151A000047C73 /* libsqlite3.tbd */,
+				A5DE46B21D1151A000047C73 /* libz.tbd */,
+				A5DE46B31D1151A000047C73 /* QuartzCore.framework */,
+				A5DE46B41D1151A000047C73 /* Security.framework */,
+				A5DE46B51D1151A000047C73 /* StoreKit.framework */,
+				A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,7 +455,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Phlash/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,7 +471,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Phlash/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
