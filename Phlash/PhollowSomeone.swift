@@ -10,7 +10,9 @@ import Parse
 
 class PhollowSomeone {
     
-    func phollow(toUsername: String, phollowView: UIView) {
+    let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
+    
+    func phollow(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton) {
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             print ("Checked User  is nil")
@@ -24,7 +26,7 @@ class PhollowSomeone {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("succesful phollow!")
-                phollowView.removeFromSuperview()
+                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false)
             } else  {
                 print("Error: \(error!) \(error!.userInfo)")
             }

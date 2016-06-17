@@ -23,9 +23,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
+        cameraView.swipeLeft.addTarget(self, action: #selector(respondToSwipeGesture))
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        
         
         //add targets for swipe gestures (left)
     }
@@ -55,6 +57,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.Right:
                 picker.takePicture()
+            case UISwipeGestureRecognizerDirection.Left:
+                RetrievePhoto().showFirstPhlashImage(cameraView)
             default:
                 break
             }
@@ -99,7 +103,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView)
+        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton)
     }
     
     func cancelPhollowPage() {

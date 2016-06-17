@@ -14,15 +14,15 @@ class CameraView: UIView {
     var logoutButton = UIButton()
     let phollowButton = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
+    let swipeLeft = UISwipeGestureRecognizer()
 
-    
     override init(frame: CGRect) {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addLogoutButton()
         addPhollowButton()
         addRightSwipe()
-        //add phollow, left swipe and right swipe
+        addLeftSwipe()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,6 +39,11 @@ class CameraView: UIView {
     func addRightSwipe() {
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         addGestureRecognizer(swipeRight)
+    }
+    
+    func addLeftSwipe() {
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        addGestureRecognizer(swipeLeft)
     }
     
     func addPhollowButton() {

@@ -15,6 +15,7 @@
 		8CC1B5901D13F627000E892F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B58F1D13F627000E892F /* CameraController.swift */; };
 		8CC1B5921D13F7CA000E892F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5911D13F7CA000E892F /* CameraView.swift */; };
 		8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5931D13F9CB000E892F /* PickerSetup.swift */; };
+		8CCD9CA01D142FD700F5031F /* RetrievePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */; };
 		954335521D14123E00276828 /* PhollowSomeone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954335511D14123E00276828 /* PhollowSomeone.swift */; };
 		954335541D1413EF00276828 /* PhollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954335531D1413EF00276828 /* PhollowView.swift */; };
 		A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */; };
@@ -67,6 +68,7 @@
 		8CC1B58F1D13F627000E892F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		8CC1B5911D13F7CA000E892F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		8CC1B5931D13F9CB000E892F /* PickerSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerSetup.swift; sourceTree = "<group>"; };
+		8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrievePhoto.swift; sourceTree = "<group>"; };
 		954335511D14123E00276828 /* PhollowSomeone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowSomeone.swift; sourceTree = "<group>"; };
 		954335531D1413EF00276828 /* PhollowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowView.swift; sourceTree = "<group>"; };
 		A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				84F0267B1D14083600083A0B /* SendPhoto.swift */,
 				954335511D14123E00276828 /* PhollowSomeone.swift */,
 				A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */,
+				8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -312,7 +315,7 @@
 				TargetAttributes = {
 					A5DE467A1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MMBSHBYFBS;
+						DevelopmentTeam = U66XP5DAXK;
 					};
 					A5DE468E1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F026781D14048700083A0B /* Delay.swift in Sources */,
+				8CCD9CA01D142FD700F5031F /* RetrievePhoto.swift in Sources */,
 				A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */,
 				954335541D1413EF00276828 /* PhollowView.swift in Sources */,
 				84F0267C1D14083600083A0B /* SendPhoto.swift in Sources */,
@@ -541,7 +545,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chrisnewaccount.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -560,7 +564,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chrisnewaccount.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
