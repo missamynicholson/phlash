@@ -76,11 +76,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             logout()
         case cameraView.phollowButton:
             showPhollowPage()
-        //define actions for phollow button
         case phollowView.submitButton:
             phollow()
         case phollowView.cancelButton:
-            phollowView.removeFromSuperview()
+            cancelPhollowPage()
         default:
             break
         }
@@ -95,11 +94,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func showPhollowPage() {
         cameraView.addSubview(phollowView)
-        
+        ButtonShowHide().hide(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
     }
     
     func phollow() {
         PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView)
+    }
+    
+    func cancelPhollowPage() {
+        phollowView.removeFromSuperview()
+        ButtonShowHide().show(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
     }
     
     //add phollow function, swipe gestures function and imagepickercontroller function
