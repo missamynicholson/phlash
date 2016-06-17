@@ -59,7 +59,7 @@ class PhollowUITests: XCTestCase {
         sleep(1)
         app.buttons["phollow"].tap()
         sleep(1)
-        XCTAssertNotEqual(app.staticTexts["CameraView"].exists, false)
+        XCTAssertFalse(app.staticTexts["CameraView"].exists)
         app.textFields["phollowee"].tap()
         app.textFields["phollowee"].typeText("testuser2")
         app.buttons["pholloweesubmit"].tap()

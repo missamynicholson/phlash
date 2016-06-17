@@ -100,16 +100,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func showPhollowPage() {
         cameraView.addSubview(phollowView)
+        cameraView.identificationLabel.text = ""
         
-        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: 0, appear: true)
+        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: 0, appear: true, cameraViewId: cameraView.identificationLabel)
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel)
+        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func cancelPhollowPage() {
-       PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false)
+       PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
 }
 
