@@ -12,11 +12,14 @@ class CameraView: UIView {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     let logoutButton = UIButton()
+    let swipeRight = UISwipeGestureRecognizer()
+
     
     override init(frame: CGRect) {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addLogoutButton()
+        addRightSwipe()
         //add phollow, left swipe and right swipe
     }
     
@@ -29,6 +32,11 @@ class CameraView: UIView {
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle("Logout", forState: .Normal)
         addSubview(logoutButton)
+    }
+    
+    func addRightSwipe() {
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        addGestureRecognizer(swipeRight)
     }
     
 }

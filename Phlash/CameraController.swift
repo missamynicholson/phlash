@@ -20,6 +20,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
         //add targets for phollow and swipe gestures
     }
     
@@ -43,6 +44,25 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                picker.takePicture()
+            default:
+                break
+            }
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
+        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false)
+        SendPhoto().sendPhoto(resizedImage)
+    }
     
     func buttonAction(sender: UIButton!) {
         switch sender {
