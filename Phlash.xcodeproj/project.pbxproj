@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8CC1B5901D13F627000E892F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B58F1D13F627000E892F /* CameraController.swift */; };
+		8CC1B5921D13F7CA000E892F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5911D13F7CA000E892F /* CameraView.swift */; };
+		8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5931D13F9CB000E892F /* PickerSetup.swift */; };
 		A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */; };
 		A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824E1D13F0A70013310D /* AuthenticationView.swift */; };
 		A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82511D13F1590013310D /* UserAuthentication.swift */; };
@@ -48,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8CC1B58F1D13F627000E892F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		8CC1B5911D13F7CA000E892F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		8CC1B5931D13F9CB000E892F /* PickerSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerSetup.swift; sourceTree = "<group>"; };
 		A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		A5CC824E1D13F0A70013310D /* AuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		A5CC82511D13F1590013310D /* UserAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthentication.swift; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */,
+				8CC1B58F1D13F627000E892F /* CameraController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -126,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CC824E1D13F0A70013310D /* AuthenticationView.swift */,
+				8CC1B5911D13F7CA000E892F /* CameraView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -134,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				A5CC82511D13F1590013310D /* UserAuthentication.swift */,
+				8CC1B5931D13F9CB000E892F /* PickerSetup.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -343,9 +352,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */,
+				8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */,
 				A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */,
 				A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */,
+				8CC1B5921D13F7CA000E892F /* CameraView.swift in Sources */,
 				A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */,
+				8CC1B5901D13F627000E892F /* CameraController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

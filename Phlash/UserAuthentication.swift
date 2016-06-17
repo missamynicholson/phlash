@@ -25,8 +25,8 @@ class UserAuthentication {
                 let errorMessage = error.userInfo["error"] as? NSString
                 print("Error with singup \(errorMessage)")
             } else {
-                //segue to camera
                 print("Successful sign up")
+                controller.performSegueWithIdentifier("toCamera", sender: nil)
                 //self.defaults.setValue(twentyFourHoursSince, forKey: "lastSeen")
             }
         }
@@ -37,8 +37,8 @@ class UserAuthentication {
         PFUser.logInWithUsernameInBackground(username, password:password) {
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
-                //segue to camera
                 print("Successful login up")
+                controller.performSegueWithIdentifier("toCamera", sender: nil)
             } else {
                 print("Error: \(error!) \(error!.userInfo)")
             }
