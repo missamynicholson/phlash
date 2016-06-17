@@ -321,7 +321,7 @@
 				TargetAttributes = {
 					A5DE467A1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MMBSHBYFBS;
+						DevelopmentTeam = 24T7JPRRUH;
 					};
 					A5DE468E1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -546,7 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chris_elevate@hotmail.com (26VCXX6F26)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,9 +555,9 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christestbundle.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6abb3ac4-4c63-47e2-9e4c-b6dc54c9fcf1";
 			};
 			name = Debug;
 		};
@@ -565,7 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: chris_elevate@hotmail.com (26VCXX6F26)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -574,9 +574,9 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christestbundle.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6abb3ac4-4c63-47e2-9e4c-b6dc54c9fcf1";
 			};
 			name = Release;
 		};

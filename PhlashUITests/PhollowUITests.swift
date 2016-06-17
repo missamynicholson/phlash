@@ -11,6 +11,8 @@ import XCTest
 
 class PhollowUITests: XCTestCase {
     
+    let app = XCUIApplication()
+    
     override func setUp() {
         super.setUp()
        
@@ -30,7 +32,6 @@ class PhollowUITests: XCTestCase {
     }
 
     func testPhollowViewIsShown() {
-        let app = XCUIApplication()
         sleep(1)
         app.buttons["login"].tap()
         app.textFields["username"].tap()
@@ -43,6 +44,20 @@ class PhollowUITests: XCTestCase {
         sleep(2)
         XCTAssert(app.staticTexts["PhollowView"].exists)
     }
+    
+    func testPhollowAUser() {
+        
+    }
+    
+    // Type in name that exists to follow
+    // hit follow
+    // expect confirmation of person we are following
+    // finish on main camera view
+    
+    // Type in a name that does not exist
+    // hit follow
+    // expect error message saying XXXX does not exist
+    // Remain on follow screen
 
 
 }
