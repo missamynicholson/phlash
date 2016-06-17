@@ -59,22 +59,32 @@ class PhollowUITests: XCTestCase {
         sleep(1)
         app.buttons["phollow"].tap()
         sleep(1)
+        XCTAssertNotEqual(app.staticTexts["CameraView"].exists, false)
         app.textFields["phollowee"].tap()
         app.textFields["phollowee"].typeText("testuser2")
         app.buttons["pholloweesubmit"].tap()
         XCTAssert(app.staticTexts["Successfully phollowed testuser2"].exists)
+        XCTAssert(app.staticTexts["CameraView"].exists)
         app.buttons["logout"].tap()
     }
     
-    // Type in name that exists to follow
-    // hit follow
-    // expect confirmation of person we are following
-    // finish on main camera view
-    
-    // Type in a name that does not exist
-    // hit follow
-    // expect error message saying XXXX does not exist
-    // Remain on follow screen
-
+    func testPhollowANonUser() {
+        sleep(1)
+        app.buttons["login"].tap()
+        app.textFields["username"].tap()
+        app.textFields["username"].typeText("testuser1")
+        app.secureTextFields["password"].tap()
+        app.secureTextFields["password"].typeText("password")
+        app.buttons["submit"].tap()
+        sleep(1)
+        app.buttons["phollow"].tap()
+        sleep(1)
+        app.textFields["phollowee"].tap()
+        app.textFields["phollowee"].typeText("testuser3")
+        app.buttons["pholloweesubmit"].tap()
+        XCTAssert(app.staticTexts["testuser3 does not exist"].exists)
+        XCTAssert(app.staticTexts["FollowView"].exists)
+        app.buttons["logout"].tap()
+    }
 
 }

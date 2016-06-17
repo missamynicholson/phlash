@@ -62,7 +62,7 @@ class CameraView: UIView {
     
     func addIdLabel() {
         identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
-        identificationLabel.text = "PhollowView"
+        identificationLabel.text = "CameraView"
         identificationLabel.textColor = UIColor.clearColor()
         identificationLabel.userInteractionEnabled = false
         addSubview(identificationLabel)
