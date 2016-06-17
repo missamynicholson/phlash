@@ -40,6 +40,7 @@ class PhollowView: UIView {
         usernameField.backgroundColor = UIColor.colorWithAlphaComponent(.whiteColor())(0.5)
         usernameField.placeholder = "Username"
         usernameField.textAlignment = .Center
+        usernameField.accessibilityLabel = "phollowee"
         addSubview(usernameField)
     }
     
@@ -47,6 +48,7 @@ class PhollowView: UIView {
         submitButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
         submitButton.setTitleColor(.whiteColor(), forState: .Normal)
         submitButton.setTitle("Submit", forState: .Normal)
+        submitButton.accessibilityLabel = "pholloweesubmit"
         addSubview(submitButton)
     }
     
@@ -54,6 +56,7 @@ class PhollowView: UIView {
         cancelButton.frame = CGRect(x: screenBounds.width*4/5, y: 20, width: screenBounds.width/5, height: 30)
         cancelButton.setTitleColor(.whiteColor(), forState: .Normal)
         cancelButton.setTitle("Cancel", forState: .Normal)
+        cancelButton.accessibilityLabel = "cancel"
         addSubview(cancelButton)
     }
     

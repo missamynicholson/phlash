@@ -44,6 +44,8 @@ class AuthenticationView: UIView {
         usernameField.placeholder = "Username"
         usernameField.textAlignment = .Center
         usernameField.accessibilityLabel = "username"
+        usernameField.autocorrectionType = .No
+        usernameField.autocapitalizationType = UITextAutocapitalizationType.None
         
         emailField.frame = CGRect(x: 0, y: screenBounds.height/4, width: screenBounds.width, height: screenBounds.height/15)
         emailField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
@@ -93,11 +95,21 @@ class AuthenticationView: UIView {
         addSubview(submitButton)
         addSubview(loginButton)
         addSubview(signupButton)
-         addSubview(statusLabel)
+        addSubview(statusLabel)
         addSubview(goBackButton)
         
         showLoginOrSignupScreen()
     }
+    
+    //needs adjusting
+    func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
+        if let _ = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet()) {
+            // Do not allow upper case letters
+            return false
+        }
+        return true
+    }
+    //needs adjusting
     
     
     func showLoginOrSignupScreen() {
