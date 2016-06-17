@@ -20,7 +20,7 @@
 		A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */; };
 		A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824E1D13F0A70013310D /* AuthenticationView.swift */; };
 		A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82511D13F1590013310D /* UserAuthentication.swift */; };
-		A5CC82541D141B8C0013310D /* ButtonShowHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82531D141B8C0013310D /* ButtonShowHide.swift */; };
+		A5CC82541D141B8C0013310D /* PhollowViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */; };
 		A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE467E1D11515E00047C73 /* AppDelegate.swift */; };
 		A5DE46841D11515E00047C73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46821D11515E00047C73 /* Main.storyboard */; };
 		A5DE46861D11515E00047C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46851D11515E00047C73 /* Assets.xcassets */; };
@@ -72,7 +72,7 @@
 		A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		A5CC824E1D13F0A70013310D /* AuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		A5CC82511D13F1590013310D /* UserAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthentication.swift; sourceTree = "<group>"; };
-		A5CC82531D141B8C0013310D /* ButtonShowHide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonShowHide.swift; sourceTree = "<group>"; };
+		A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowViewSetup.swift; sourceTree = "<group>"; };
 		A5DE467B1D11515E00047C73 /* Phlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE467E1D11515E00047C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DE46831D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 				84F026771D14048700083A0B /* Delay.swift */,
 				84F0267B1D14083600083A0B /* SendPhoto.swift */,
 				954335511D14123E00276828 /* PhollowSomeone.swift */,
-				A5CC82531D141B8C0013310D /* ButtonShowHide.swift */,
+				A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -390,7 +390,7 @@
 				A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */,
 				8CC1B5901D13F627000E892F /* CameraController.swift in Sources */,
 				954335521D14123E00276828 /* PhollowSomeone.swift in Sources */,
-				A5CC82541D141B8C0013310D /* ButtonShowHide.swift in Sources */,
+				A5CC82541D141B8C0013310D /* PhollowViewSetup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

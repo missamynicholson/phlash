@@ -23,7 +23,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
-        phollowView.frame = view.frame
+        phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         
@@ -94,7 +94,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func showPhollowPage() {
         cameraView.addSubview(phollowView)
-        ButtonShowHide().hide(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
+        
+        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: 0, appear: true)
     }
     
     func phollow() {
@@ -102,11 +103,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func cancelPhollowPage() {
-        phollowView.removeFromSuperview()
-        ButtonShowHide().show(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
+       PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false)
     }
-    
-    //add phollow function, swipe gestures function and imagepickercontroller function
-
 }
 
