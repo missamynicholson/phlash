@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */; };
+		A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824E1D13F0A70013310D /* AuthenticationView.swift */; };
+		A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82511D13F1590013310D /* UserAuthentication.swift */; };
 		A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE467E1D11515E00047C73 /* AppDelegate.swift */; };
-		A5DE46811D11515E00047C73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE46801D11515E00047C73 /* ViewController.swift */; };
 		A5DE46841D11515E00047C73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46821D11515E00047C73 /* Main.storyboard */; };
 		A5DE46861D11515E00047C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46851D11515E00047C73 /* Assets.xcassets */; };
 		A5DE46891D11515E00047C73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46871D11515E00047C73 /* LaunchScreen.storyboard */; };
@@ -46,9 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		A5CC824E1D13F0A70013310D /* AuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		A5CC82511D13F1590013310D /* UserAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthentication.swift; sourceTree = "<group>"; };
 		A5DE467B1D11515E00047C73 /* Phlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE467E1D11515E00047C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5DE46801D11515E00047C73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A5DE46831D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5DE46851D11515E00047C73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5DE46881D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -110,6 +114,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5CC824A1D13EF020013310D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5CC824B1D13EF230013310D /* AuthenticationViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A5CC824D1D13F04C0013310D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5CC824E1D13F0A70013310D /* AuthenticationView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A5CC82501D13F13B0013310D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A5CC82511D13F1590013310D /* UserAuthentication.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		A5DE46721D11515E00047C73 = {
 			isa = PBXGroup;
 			children = (
@@ -134,8 +162,10 @@
 		A5DE467D1D11515E00047C73 /* Phlash */ = {
 			isa = PBXGroup;
 			children = (
+				A5CC82501D13F13B0013310D /* Helpers */,
+				A5CC824D1D13F04C0013310D /* Views */,
+				A5CC824A1D13EF020013310D /* Controllers */,
 				A5DE467E1D11515E00047C73 /* AppDelegate.swift */,
-				A5DE46801D11515E00047C73 /* ViewController.swift */,
 				A5DE46821D11515E00047C73 /* Main.storyboard */,
 				A5DE46851D11515E00047C73 /* Assets.xcassets */,
 				A5DE46871D11515E00047C73 /* LaunchScreen.storyboard */,
@@ -312,8 +342,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5DE46811D11515E00047C73 /* ViewController.swift in Sources */,
+				A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */,
 				A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */,
+				A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */,
+				A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +580,7 @@
 				A5DE46A51D11515F00047C73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A5DE46A61D11515F00047C73 /* Build configuration list for PBXNativeTarget "PhlashTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +589,7 @@
 				A5DE46A81D11515F00047C73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A5DE46A91D11515F00047C73 /* Build configuration list for PBXNativeTarget "PhlashUITests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +598,7 @@
 				A5DE46AB1D11515F00047C73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
