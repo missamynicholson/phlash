@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Initialize Parse.
-        Parse.setApplicationId("******", clientKey: "****")
+        Parse.setApplicationId("QrcCzqiYvo9gvGGzAb0bhyRSgBmPryGKnXxRSwOL", clientKey: "HCpqRugTMkMvGW6su7JCmhzXnacCnY2ZyXQnuDRj")
         
         let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
