@@ -38,6 +38,7 @@ class CameraView: UIView {
         logoutButton.frame = CGRect(x: screenBounds.width*4/5, y: 20, width: screenBounds.width/5, height: 30)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.accessibilityLabel = "logout"
         addSubview(logoutButton)
     }
     
@@ -61,7 +62,7 @@ class CameraView: UIView {
     
     func addIdLabel() {
         identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
-        identificationLabel.text = "PhollowView"
+        identificationLabel.text = "CameraView"
         identificationLabel.textColor = UIColor.clearColor()
         identificationLabel.userInteractionEnabled = false
         addSubview(identificationLabel)

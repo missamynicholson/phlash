@@ -21,7 +21,7 @@ class PhollowViewSetup {
         phollowButton.hidden = false
     }
     
-    func animate(phollowView: UIView, phollowButton: UIButton, logoutButton: UIButton, yValue: CGFloat, appear: Bool) {
+    func animate(phollowView: UIView, phollowButton: UIButton, logoutButton: UIButton, yValue: CGFloat, appear: Bool, cameraViewId: UILabel) {
         UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
             phollowView.frame.origin.y = yValue
             }, completion: { finished in
@@ -29,6 +29,7 @@ class PhollowViewSetup {
                     self.hide(logoutButton, phollowButton: phollowButton)
                 } else {
                     phollowView.removeFromSuperview()
+                    cameraViewId.text = "CameraView"
                     self.show(logoutButton, phollowButton: phollowButton)
                 }
         })

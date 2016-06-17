@@ -330,7 +330,7 @@
 					};
 					A5DE46991D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MMBSHBYFBS;
+						DevelopmentTeam = U66XP5DAXK;
 						TestTargetID = A5DE467A1D11515E00047C73;
 					};
 				};
@@ -555,7 +555,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -574,7 +574,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -617,7 +617,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;
@@ -631,7 +631,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ollie.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;
