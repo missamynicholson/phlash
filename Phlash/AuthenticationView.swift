@@ -21,6 +21,8 @@ class AuthenticationView: UIView {
     let loginButton = UIButton()
     let signupButton = UIButton()
     let logoutButton = UIButton()
+    var statusLabel = UILabel()
+    let goBackButton = UIButton()
     let defaults = NSUserDefaults.standardUserDefaults()
     
     override init(frame: CGRect) {
@@ -41,12 +43,14 @@ class AuthenticationView: UIView {
         usernameField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         usernameField.placeholder = "Username"
         usernameField.textAlignment = .Center
+        usernameField.accessibilityLabel = "username"
         
         emailField.frame = CGRect(x: 0, y: screenBounds.height/4, width: screenBounds.width, height: screenBounds.height/15)
         emailField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         emailField.placeholder = "Email"
         emailField.textAlignment = .Center
         emailField.keyboardType = UIKeyboardType.EmailAddress
+        emailField.accessibilityLabel = "email"
         
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
         passwordField.backgroundColor = UIColor.whiteColor()
@@ -54,19 +58,33 @@ class AuthenticationView: UIView {
         passwordField.placeholder = "Password"
         passwordField.textAlignment = .Center
         passwordField.secureTextEntry = true
+        passwordField.accessibilityLabel = "password"
         
         submitButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
         submitButton.setTitleColor(.whiteColor(), forState: .Normal)
         submitButton.setTitle("Submit", forState: .Normal)
+        submitButton.accessibilityLabel = "submit"
         
         loginButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height/2 - 50, width: screenBounds.width/5, height: 30)
         loginButton.setTitleColor(.whiteColor(), forState: .Normal)
         loginButton.setTitle("Login", forState: .Normal)
+        loginButton.accessibilityLabel = "login"
         
         
         signupButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height/2, width: screenBounds.width/5, height: 30)
         signupButton.setTitleColor(.whiteColor(), forState: .Normal)
         signupButton.setTitle("Signup", forState: .Normal)
+        signupButton.accessibilityLabel = "signup"
+        
+        statusLabel.frame = CGRect(x: 0, y: 5, width: screenBounds.width, height: 40)
+        statusLabel.textColor = UIColor.whiteColor()
+        statusLabel.textAlignment = .Center
+        statusLabel.userInteractionEnabled = false
+        
+        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/5, height: 30)
+        goBackButton.setTitleColor(.whiteColor(), forState: .Normal)
+        goBackButton.setTitle("Go back", forState: .Normal)
+        goBackButton.accessibilityLabel = "goBack"
         
         
         addSubview(usernameField)
@@ -75,6 +93,8 @@ class AuthenticationView: UIView {
         addSubview(submitButton)
         addSubview(loginButton)
         addSubview(signupButton)
+         addSubview(statusLabel)
+        addSubview(goBackButton)
         
         showLoginOrSignupScreen()
     }

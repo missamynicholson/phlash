@@ -22,6 +22,8 @@
 		A5CC824F1D13F0A70013310D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC824E1D13F0A70013310D /* AuthenticationView.swift */; };
 		A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82511D13F1590013310D /* UserAuthentication.swift */; };
 		A5CC82541D141B8C0013310D /* PhollowViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */; };
+		A5CC82561D143EAD0013310D /* PhollowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82551D143EAD0013310D /* PhollowUITests.swift */; };
+		A5CC82581D1442370013310D /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82571D1442370013310D /* AlertMessage.swift */; };
 		A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE467E1D11515E00047C73 /* AppDelegate.swift */; };
 		A5DE46841D11515E00047C73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46821D11515E00047C73 /* Main.storyboard */; };
 		A5DE46861D11515E00047C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46851D11515E00047C73 /* Assets.xcassets */; };
@@ -75,6 +77,8 @@
 		A5CC824E1D13F0A70013310D /* AuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		A5CC82511D13F1590013310D /* UserAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthentication.swift; sourceTree = "<group>"; };
 		A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowViewSetup.swift; sourceTree = "<group>"; };
+		A5CC82551D143EAD0013310D /* PhollowUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowUITests.swift; sourceTree = "<group>"; };
+		A5CC82571D1442370013310D /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		A5DE467B1D11515E00047C73 /* Phlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE467E1D11515E00047C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DE46831D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				954335511D14123E00276828 /* PhollowSomeone.swift */,
 				A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */,
 				8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */,
+				A5CC82571D1442370013310D /* AlertMessage.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			children = (
 				A5DE469E1D11515E00047C73 /* PhlashUITests.swift */,
 				A5DE46A01D11515F00047C73 /* Info.plist */,
+				A5CC82551D143EAD0013310D /* PhollowUITests.swift */,
 			);
 			path = PhlashUITests;
 			sourceTree = "<group>";
@@ -315,14 +321,16 @@
 				TargetAttributes = {
 					A5DE467A1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = U66XP5DAXK;
+						DevelopmentTeam = MMBSHBYFBS;
 					};
 					A5DE468E1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MMBSHBYFBS;
 						TestTargetID = A5DE467A1D11515E00047C73;
 					};
 					A5DE46991D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MMBSHBYFBS;
 						TestTargetID = A5DE467A1D11515E00047C73;
 					};
 				};
@@ -381,6 +389,7 @@
 			files = (
 				84F026781D14048700083A0B /* Delay.swift in Sources */,
 				8CCD9CA01D142FD700F5031F /* RetrievePhoto.swift in Sources */,
+				A5CC82581D1442370013310D /* AlertMessage.swift in Sources */,
 				A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */,
 				954335541D1413EF00276828 /* PhollowView.swift in Sources */,
 				84F0267C1D14083600083A0B /* SendPhoto.swift in Sources */,
@@ -411,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5DE469F1D11515E00047C73 /* PhlashUITests.swift in Sources */,
+				A5CC82561D143EAD0013310D /* PhollowUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,10 +584,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Phlash.app/Phlash";
 			};
 			name = Debug;
@@ -586,10 +599,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Phlash.app/Phlash";
 			};
 			name = Release;
@@ -597,10 +613,13 @@
 		A5DE46AA1D11515F00047C73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;
 			};
 			name = Debug;
@@ -608,10 +627,13 @@
 		A5DE46AB1D11515F00047C73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;
 			};
 			name = Release;
