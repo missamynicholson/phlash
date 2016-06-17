@@ -330,7 +330,7 @@
 					};
 					A5DE46991D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MMBSHBYFBS;
+						DevelopmentTeam = 24T7JPRRUH;
 						TestTargetID = A5DE467A1D11515E00047C73;
 					};
 				};
@@ -555,9 +555,9 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christestbundle.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chris.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6abb3ac4-4c63-47e2-9e4c-b6dc54c9fcf1";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -574,9 +574,9 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christestbundle.Phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chris.Phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6abb3ac4-4c63-47e2-9e4c-b6dc54c9fcf1";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -617,7 +617,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;
@@ -631,7 +631,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.PhlashUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = Phlash;

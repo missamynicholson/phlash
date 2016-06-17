@@ -35,18 +35,35 @@ class PhollowUITests: XCTestCase {
         sleep(1)
         app.buttons["login"].tap()
         app.textFields["username"].tap()
-        app.textFields["username"].typeText("test")
+        app.textFields["username"].typeText("testuser1")
         app.secureTextFields["password"].tap()
         app.secureTextFields["password"].typeText("password")
         app.buttons["submit"].tap()
         sleep(1)
         app.buttons["phollow"].tap()
-        sleep(2)
+        sleep(1)
         XCTAssert(app.staticTexts["PhollowView"].exists)
+        app.buttons["cancel"].tap()
+        sleep(1)
+        app.buttons["logout"].tap()
     }
     
     func testPhollowAUser() {
-        
+        sleep(1)
+        app.buttons["login"].tap()
+        app.textFields["username"].tap()
+        app.textFields["username"].typeText("testuser1")
+        app.secureTextFields["password"].tap()
+        app.secureTextFields["password"].typeText("password")
+        app.buttons["submit"].tap()
+        sleep(1)
+        app.buttons["phollow"].tap()
+        sleep(1)
+        app.textFields["phollowee"].tap()
+        app.textFields["phollowee"].typeText("testuser2")
+        app.buttons["pholloweesubmit"].tap()
+        XCTAssert(app.staticTexts["Successfully phollowed testuser2"].exists)
+        app.buttons["logout"].tap()
     }
     
     // Type in name that exists to follow

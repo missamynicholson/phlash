@@ -38,6 +38,7 @@ class CameraView: UIView {
         logoutButton.frame = CGRect(x: screenBounds.width*4/5, y: 20, width: screenBounds.width/5, height: 30)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.accessibilityLabel = "logout"
         addSubview(logoutButton)
     }
     
