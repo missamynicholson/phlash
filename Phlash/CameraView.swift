@@ -12,6 +12,7 @@ class CameraView: UIView {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     let logoutButton = UIButton()
+    let phollowButton = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
 
     
@@ -19,6 +20,7 @@ class CameraView: UIView {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addLogoutButton()
+        addPhollowButton()
         addRightSwipe()
         //add phollow, left swipe and right swipe
     }
@@ -38,6 +40,14 @@ class CameraView: UIView {
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
         addGestureRecognizer(swipeRight)
     }
+    
+    func addPhollowButton() {
+        phollowButton.frame = CGRect(x: 0, y: 20, width: screenBounds.width/5, height: 30)
+        phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
+        phollowButton.setTitle("Phollow", forState: .Normal)
+        addSubview(phollowButton)
+    }
+    
     
 }
 
