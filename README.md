@@ -113,8 +113,7 @@ I want to turn notification off for that phlasher
 ```
 
 ## Challenges
-This is a special team.  Not having enough with being challenged during 3+ months coding like crazy in Ruby and Javascript, they decided they wanted to know how to develop a "Phlashy app" to show off with their friends and family, and take pics of 
-
+This is a special team.  Not having enough with being challenged during 3+ months coding like crazy in Ruby and Javascript, they decided they wanted to know how to develop a "Phlashy app" to show off with their friends and family, and take pics of Dougal the Poodle and Mabel.
 
 ## Detailed plan
 Our detailed plan is [here](https://www.youtube.com/watch?v=LfmrHTdXgK4). 
