@@ -14,6 +14,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()
     private let phollowView = PhollowView()
+    var statusLabel = UILabel()
     
     private var picker = UIImagePickerController()
     
@@ -27,7 +28,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-        
+        statusLabel = cameraView.statusLabel
         
         //add targets for swipe gestures (left)
     }
@@ -39,6 +40,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadImagePicker()
+        AlertMessage().show(statusLabel, message: "Welcome")
     }
     
     func loadImagePicker() {
@@ -71,7 +73,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
         DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false)
-        SendPhoto().sendPhoto(resizedImage)
+        SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel)
     }
     
     func buttonAction(sender: UIButton!) {
@@ -103,7 +105,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton)
+        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel)
     }
     
     func cancelPhollowPage() {

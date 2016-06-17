@@ -13,6 +13,7 @@ class PhollowView: UIView {
     var usernameField = UITextField()
     var submitButton = UIButton()
     var cancelButton = UIButton()
+    var identificationLabel = UILabel()
     
     let screenBounds: CGSize = UIScreen.mainScreen().bounds.size
     let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
@@ -23,6 +24,7 @@ class PhollowView: UIView {
         addUsernameField()
         addSubmitButton()
         addCancelButton()
+        addIdLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,5 +55,13 @@ class PhollowView: UIView {
         cancelButton.setTitleColor(.whiteColor(), forState: .Normal)
         cancelButton.setTitle("Cancel", forState: .Normal)
         addSubview(cancelButton)
+    }
+    
+    func addIdLabel() {
+        identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+        identificationLabel.text = "PhollowView"
+        identificationLabel.textColor = UIColor.clearColor()
+        identificationLabel.userInteractionEnabled = false
+        addSubview(identificationLabel)
     }
 }

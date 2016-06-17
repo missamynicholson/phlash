@@ -15,6 +15,9 @@ class CameraView: UIView {
     let phollowButton = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
+    var identificationLabel = UILabel()
+    
+    var statusLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -23,6 +26,8 @@ class CameraView: UIView {
         addPhollowButton()
         addRightSwipe()
         addLeftSwipe()
+        addIdLabel()
+        addStatusLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,9 +55,24 @@ class CameraView: UIView {
         phollowButton.frame = CGRect(x: 0, y: 20, width: screenBounds.width/5, height: 30)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
         phollowButton.setTitle("Phollow", forState: .Normal)
+        phollowButton.accessibilityLabel = "phollow"
         addSubview(phollowButton)
     }
     
+    func addIdLabel() {
+        identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+        identificationLabel.text = "PhollowView"
+        identificationLabel.textColor = UIColor.clearColor()
+        identificationLabel.userInteractionEnabled = false
+        addSubview(identificationLabel)
+    }
     
+    func addStatusLabel() {
+        statusLabel.frame = CGRect(x: 0, y: screenBounds.height/2, width: screenBounds.width, height: 40)
+        statusLabel.textColor = UIColor.whiteColor()
+        statusLabel.textAlignment = .Center
+        statusLabel.userInteractionEnabled = false
+        addSubview(statusLabel)
+    }
 }
 

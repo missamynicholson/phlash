@@ -12,7 +12,7 @@ class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func phollow(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton) {
+    func phollow(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel) {
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             print ("Checked User  is nil")
@@ -25,7 +25,7 @@ class PhollowSomeone {
         phollow.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                print("succesful phollow!")
+                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
                 PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false)
             } else  {
                 print("Error: \(error!) \(error!.userInfo)")

@@ -11,7 +11,7 @@ import Parse
 
 class SendPhoto {
     
-    func sendPhoto(image: UIImage) {
+    func sendPhoto(image: UIImage, statusLabel: UILabel) {
         let currentUser = PFUser.currentUser()
         let currentUsername = currentUser!.username!
         
@@ -27,7 +27,7 @@ class SendPhoto {
         phlash["username"] = currentUsername
         phlash.saveInBackgroundWithBlock { (succeeded, error) -> Void in
             if succeeded {
-                print("Object Uploaded")
+                AlertMessage().show(statusLabel, message: "Nice phlash!")
                 //push takes place here
             } else {
                 print("Error: \(error)")
