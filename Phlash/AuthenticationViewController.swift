@@ -27,8 +27,7 @@ class AuthenticationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if PFUser.currentUser() != nil {
-            print("user signed in already")
-            //segue to camera
+            performSegueWithIdentifier("toCamera", sender: nil)
         }
         self.view = authenticationView
         submitButton = authenticationView.submitButton
@@ -81,6 +80,9 @@ class AuthenticationViewController: UIViewController {
     func reset() {
         let email = emailField.text
         UserAuthentication().getResetLink(email!)
+    }
+    
+    @IBAction func unwindToAuth(segue: UIStoryboardSegue) {
     }
 
 }
