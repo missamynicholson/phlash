@@ -13,6 +13,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()
+    private let phollowView = PhollowView()
     
     private var picker = UIImagePickerController()
     
@@ -20,8 +21,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
-        //add targets for phollow and swipe gestures
+        phollowView.frame = view.frame
+        phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        
+        //add targets for swipe gestures (left)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,7 +74,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         switch sender {
         case cameraView.logoutButton:
             logout()
-        //define actions for phollow button
+        case cameraView.phollowButton:
+            showPhollowPage()
+        case phollowView.submitButton:
+            phollow()
+        case phollowView.cancelButton:
+            cancelPhollowPage()
         default:
             break
         }
@@ -79,6 +90,20 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         picker.dismissViewControllerAnimated(false, completion: {
             self.performSegueWithIdentifier("toAuth", sender: nil)
         })
+    }
+    
+    func showPhollowPage() {
+        cameraView.addSubview(phollowView)
+        ButtonShowHide().hide(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
+    }
+    
+    func phollow() {
+        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView)
+    }
+    
+    func cancelPhollowPage() {
+        phollowView.removeFromSuperview()
+        ButtonShowHide().show(cameraView.logoutButton, phollowButton: cameraView.phollowButton)
     }
     
     //add phollow function, swipe gestures function and imagepickercontroller function
