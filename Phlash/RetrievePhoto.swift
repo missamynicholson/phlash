@@ -26,7 +26,8 @@ class RetrievePhoto {
                     if let imageData = imageData {
                         let chosenImage = UIImage(data:imageData)!
                         let username = "\(firstPhlash!["username"])"
-                        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username)
+                        let caption = "\(firstPhlash!["caption"])"
+                        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption)
                         //self.phlashesArray.removeAtIndex(0)
                     }
                 }

@@ -25,9 +25,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.swipeLeft.addTarget(self, action: #selector(respondToSwipeGesture))
+        cameraView.tap.addTarget(self, action: #selector(dismissKeyboard))
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        
         statusLabel = cameraView.statusLabel
         
         //add targets for swipe gestures (left)
@@ -41,6 +43,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidAppear(animated)
         loadImagePicker()
         AlertMessage().show(statusLabel, message: "Welcome")
+    }
+    
+    func dismissKeyboard() {
+        cameraView.endEditing(true)
     }
     
     func loadImagePicker() {
@@ -71,9 +77,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let captionField = cameraView.captionField
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "")
-        SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel)
+        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "")
+        SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel, captionField: captionField)
     }
     
     func buttonAction(sender: UIButton!) {
