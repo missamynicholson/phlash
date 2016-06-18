@@ -14,12 +14,14 @@ class PhlashView: UIImageView {
     private let whiteColor = UIColor.whiteColor()
     var identificationLabel = UILabel()
     let usernameLabel = UILabel()
+    let captionLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addIdLabel()
         addusernameLabel()
+        addcaptionLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,12 +37,20 @@ class PhlashView: UIImageView {
     }
     
     func addusernameLabel() {
-        // we need some clever maths here to work out the positioning of the usernameLabel below.
-        usernameLabel.frame = CGRect(x: 53, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
+        usernameLabel.frame = CGRect(x: 0, y: screenBounds.height/8, width: self.frame.width, height: screenBounds.height/15)
         usernameLabel.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         usernameLabel.textColor = UIColor.blackColor()
         usernameLabel.textAlignment = .Center
         usernameLabel.userInteractionEnabled = false
         addSubview(usernameLabel)
+    }
+    
+    func addcaptionLabel() {
+        captionLabel.frame = CGRect(x: 0, y: screenBounds.height/5, width: self.frame.width, height: screenBounds.height/15)
+        captionLabel.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
+        captionLabel.textColor = UIColor.blackColor()
+        captionLabel.textAlignment = .Center
+        captionLabel.userInteractionEnabled = false
+        addSubview(captionLabel)
     }
 }

@@ -16,8 +16,10 @@ class CameraView: UIView {
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
     var identificationLabel = UILabel()
-    
+    var captionField = UITextField()
+    private let whiteColor = UIColor.whiteColor()
     var statusLabel = UILabel()
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer()
 
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -28,6 +30,8 @@ class CameraView: UIView {
         addLeftSwipe()
         addIdLabel()
         addStatusLabel()
+        addCaptionField()
+        addGestureRecognizer(tap)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,6 +78,15 @@ class CameraView: UIView {
         statusLabel.textAlignment = .Center
         statusLabel.userInteractionEnabled = false
         addSubview(statusLabel)
+    }
+    
+    func addCaptionField(){
+        captionField.frame = CGRect(x: 0, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
+        captionField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
+        captionField.placeholder = "Caption..."
+        captionField.textAlignment = .Center
+        captionField.autocorrectionType = .No
+        addSubview(captionField)
     }
 }
 
