@@ -81,7 +81,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             })
         } else {
             showPhlash()
-            
         }
     }
     

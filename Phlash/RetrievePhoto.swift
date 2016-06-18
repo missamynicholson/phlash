@@ -11,8 +11,6 @@ import UIKit
 
 class RetrievePhoto {
     
-    var phlashesArray:[PFObject] = []
-    
     func showFirstPhlashImage(cameraView: UIView, firstPhlash: PFObject) {
         let userImageFile = firstPhlash["file"] as! PFFile
         userImageFile.getDataInBackgroundWithBlock {
