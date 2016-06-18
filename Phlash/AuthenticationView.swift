@@ -21,6 +21,7 @@ class AuthenticationView: UIView {
     let loginButton = UIButton()
     let signupButton = UIButton()
     let logoutButton = UIButton()
+    let resetPwdButton = UIButton()
     var statusLabel = UILabel()
     let goBackButton = UIButton()
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -88,6 +89,10 @@ class AuthenticationView: UIView {
         goBackButton.setTitle("Go back", forState: .Normal)
         goBackButton.accessibilityLabel = "goBack"
         
+        resetPwdButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*0.55, width: screenBounds.width/2, height: 30)
+        resetPwdButton.setTitleColor(.whiteColor(), forState: .Normal)
+        resetPwdButton.setTitle("Forgot Password", forState: .Normal)
+        resetPwdButton.accessibilityLabel = "resetPwd"
         
         addSubview(usernameField)
         addSubview(emailField)
@@ -97,6 +102,7 @@ class AuthenticationView: UIView {
         addSubview(signupButton)
         addSubview(statusLabel)
         addSubview(goBackButton)
+        addSubview(resetPwdButton)
         
         showLoginOrSignupScreen()
     }
@@ -119,6 +125,7 @@ class AuthenticationView: UIView {
         emailField.hidden = true
         loginButton.hidden = false
         signupButton.hidden = false
+        resetPwdButton.hidden = true
     }
     
     func showLoginView() {
@@ -129,6 +136,7 @@ class AuthenticationView: UIView {
         emailField.hidden = true
         loginButton.hidden = true
         signupButton.hidden = true
+        resetPwdButton.hidden = false
         usernameField.becomeFirstResponder()
     }
     
@@ -141,8 +149,21 @@ class AuthenticationView: UIView {
         emailField.hidden = false
         loginButton.hidden = true
         signupButton.hidden = true
+        resetPwdButton.hidden = true
         usernameField.becomeFirstResponder()
     }
     
+    func showResetPwdView() {
+        usernameField.hidden = true
+        passwordField.hidden = true
+        submitButton.hidden = false
+        submitButton.setTitle("Reset Password", forState: .Normal)
+        
+        emailField.hidden = false
+        loginButton.hidden = true
+        signupButton.hidden = true
+        resetPwdButton.hidden = true
+        emailField.becomeFirstResponder()
+    }
     
 }

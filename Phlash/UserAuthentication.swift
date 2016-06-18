@@ -43,8 +43,9 @@ class UserAuthentication {
         }
     }
     
-    func getResetLink(email: String) {
+    func getResetLink(email: String, statusLabel: UILabel) {
         PFUser.requestPasswordResetForEmailInBackground(email)
+        AlertMessage().show(statusLabel, message: "Please check your emails")
     }
     
 }

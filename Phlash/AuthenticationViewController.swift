@@ -21,6 +21,7 @@ class AuthenticationViewController: UIViewController {
     private var loginButton = UIButton()
     private var signupButton = UIButton()
     private var goBackButton = UIButton()
+    private var resetPwdButton = UIButton()
     var statusLabel = UILabel()
     
     private let defaults = NSUserDefaults.standardUserDefaults()
@@ -41,10 +42,12 @@ class AuthenticationViewController: UIViewController {
         passwordField = authenticationView.passwordField
         statusLabel = authenticationView.statusLabel
         goBackButton = authenticationView.goBackButton
+        resetPwdButton = authenticationView.resetPwdButton
         submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         loginButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         signupButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         goBackButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        resetPwdButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +61,7 @@ class AuthenticationViewController: UIViewController {
     }
     
     
-    func buttonAction(sender: UIButton!) {
+ /*   func buttonAction(sender: UIButton!) {
         if sender == submitButton && emailField.hidden {
             login()
         } else if sender == submitButton {
@@ -70,8 +73,29 @@ class AuthenticationViewController: UIViewController {
         } else if sender == goBackButton {
             authenticationView.showLoginOrSignupScreen()
         }
-    }
+    }  */
     
+    func buttonAction(sender: UIButton!) {
+        switch (sender, emailField.hidden, passwordField.hidden) {
+        case(submitButton, true, false):
+            login()
+        case(submitButton, false, false):
+            signUp()
+        case(submitButton, false, true):
+            resetPwd()
+        case(loginButton, _, _):
+            authenticationView.showLoginView()
+        case(signupButton, _, _):
+            authenticationView.showSignupView()
+        case(goBackButton, _, _):
+            authenticationView.showLoginOrSignupScreen()
+        case(resetPwdButton, _, _):
+            authenticationView.showResetPwdView()
+        default:
+            break
+        }
+    }
+        
     func login() {
         let username = usernameField.text
         let password = passwordField.text
@@ -85,9 +109,10 @@ class AuthenticationViewController: UIViewController {
         UserAuthentication().signUp(self, username: username!, email: email!, password: password!, statusLabel: statusLabel)
     }
     
-    func reset() {
+    func resetPwd() {
         let email = emailField.text
-        UserAuthentication().getResetLink(email!)
+        UserAuthentication().getResetLink(email!, statusLabel: statusLabel)
+        authenticationView.showLoginOrSignupScreen()
     }
     
     @IBAction func unwindToAuth(segue: UIStoryboardSegue) {
