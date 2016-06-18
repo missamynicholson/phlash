@@ -12,38 +12,39 @@ class DisplayImage {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool) {
+    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool, username: String) {
         let startXValue = ImageViewFrame().getXValue(chosenImage)
         var endXValue = CGFloat()
-        let imageView = UIImageView()
-        imageView.frame = CGRect(x: screenBounds.width * 2, y: 0, width: ImageViewFrame().getNewWidth(chosenImage), height: screenBounds.height)
-        cameraView.addSubview(imageView)
-        imageView.image = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
+        let phlashView = PhlashView(frame: CGRect(x: screenBounds.width * 2, y: 0, width: ImageViewFrame().getNewWidth(chosenImage), height: screenBounds.height))
+        phlashView.image = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
+        cameraView.addSubview(phlashView)
         
         if animate {
-            animateIn(imageView, xValue: startXValue)
+            phlashView.usernameLabel.text = username
+            animateIn(phlashView, xValue: startXValue)
             endXValue = -self.screenBounds.width * 2
         } else {
-            imageView.frame.origin.x = startXValue
+            phlashView.usernameLabel.hidden = true
+            phlashView.frame.origin.x = startXValue
             endXValue = self.screenBounds.width * 2
         }
         
         Delay().run(2.0) {
-            self.animateOut(imageView, xValue: endXValue)
+            self.animateOut(phlashView, xValue: endXValue)
         }
     }
     
-    func animateIn(imageView: UIImageView, xValue: CGFloat) {
+    func animateIn(phlashView: UIImageView, xValue: CGFloat) {
         UIView.animateWithDuration(1.0, delay: 1.0, options: .CurveEaseOut, animations: {
-            imageView.frame.origin.x = xValue
+            phlashView.frame.origin.x = xValue
             }, completion: nil)
     }
     
-    func animateOut(imageView: UIImageView, xValue: CGFloat) {
+    func animateOut(phlashView: UIImageView, xValue: CGFloat) {
         UIView.animateWithDuration(1.0, delay: 1.0, options: .CurveEaseOut, animations: {
-            imageView.frame.origin.x = xValue
+            phlashView.frame.origin.x = xValue
             }, completion: { finished in
-                imageView.removeFromSuperview()
+                phlashView.removeFromSuperview()
         })
     }
     

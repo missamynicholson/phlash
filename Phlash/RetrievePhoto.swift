@@ -19,12 +19,14 @@ class RetrievePhoto {
         } else {
             let firstPhlash = phlashesArray.first
             let userImageFile = firstPhlash!["file"] as! PFFile
+            print("The username is: \(firstPhlash!["username"])")
             userImageFile.getDataInBackgroundWithBlock {
                 (imageData: NSData?, error: NSError?) -> Void in
                 if error == nil {
                     if let imageData = imageData {
                         let chosenImage = UIImage(data:imageData)!
-                        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true)
+                        let username = "\(firstPhlash!["username"])"
+                        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username)
                         //self.phlashesArray.removeAtIndex(0)
                     }
                 }

@@ -72,7 +72,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false)
+        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "")
         SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel)
     }
     
