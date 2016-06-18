@@ -15,11 +15,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     private let cameraView = CameraView()
     private let phollowView = PhollowView()
     var statusLabel = UILabel()
+    var phlashesArray = [PFObject]()
     
     private var picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        phlashesArray = []
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
@@ -31,8 +33,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         
         statusLabel = cameraView.statusLabel
-        
-        //add targets for swipe gestures (left)
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,10 +66,30 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             case UISwipeGestureRecognizerDirection.Right:
                 picker.takePicture()
             case UISwipeGestureRecognizerDirection.Left:
-                RetrievePhoto().showFirstPhlashImage(cameraView)
+                checkForPhlashes()
             default:
                 break
             }
+        }
+    }
+    
+    func checkForPhlashes() {
+        if phlashesArray.count < 1 {
+            RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+                self.phlashesArray = phlashesFromDatabase!
+                self.showPhlash()
+            })
+        } else {
+            showPhlash()
+        }
+    }
+    
+    func showPhlash() {
+        if phlashesArray.count > 0 {
+            RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: phlashesArray.first!)
+            phlashesArray.removeAtIndex(0)
+        } else {
+            AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
     }
     
