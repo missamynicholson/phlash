@@ -144,7 +144,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField.text!, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func cancelPhollowPage() {
