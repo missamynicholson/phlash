@@ -10,6 +10,34 @@ import Foundation
 import UIKit
 import Parse
 
+extension String {
+    
+    var isAlphanumeric: Bool {
+        return rangeOfString("^[a-z0-9]+$", options: .RegularExpressionSearch) != nil
+    }
+    
+    func containsUpperCaseLetter() -> Bool {
+        let beginCodePoint = Character("A").unicodeScalarCodePoint()
+        let endCodePoint = Character("Z").unicodeScalarCodePoint()
+        
+        for scalar in self.unicodeScalars {
+            if case beginCodePoint...endCodePoint = scalar.value  {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+extension Character {
+    func unicodeScalarCodePoint() -> UInt32 {
+        let characterString = String(self)
+        let scalars = characterString.unicodeScalars
+        
+        return scalars[scalars.startIndex].value
+    }
+}
+
 class AuthenticationViewController: UIViewController {
     
     private let authenticationView = AuthenticationView()
@@ -60,21 +88,6 @@ class AuthenticationViewController: UIViewController {
         authenticationView.showLoginOrSignupScreen()
     }
     
-    
- /*   func buttonAction(sender: UIButton!) {
-        if sender == submitButton && emailField.hidden {
-            login()
-        } else if sender == submitButton {
-            signUp()
-        } else if sender == loginButton {
-            authenticationView.showLoginView()
-        } else if sender == signupButton {
-            authenticationView.showSignupView()
-        } else if sender == goBackButton {
-            authenticationView.showLoginOrSignupScreen()
-        }
-    }  */
-    
     func buttonAction(sender: UIButton!) {
         switch (sender, emailField.hidden, passwordField.hidden) {
         case(submitButton, true, false):
@@ -88,6 +101,7 @@ class AuthenticationViewController: UIViewController {
         case(signupButton, _, _):
             authenticationView.showSignupView()
         case(goBackButton, _, _):
+            clearTextFields()  // if goback button does not remove previous data, then remove this line
             authenticationView.showLoginOrSignupScreen()
         case(resetPwdButton, _, _):
             authenticationView.showResetPwdView()
@@ -99,20 +113,56 @@ class AuthenticationViewController: UIViewController {
     func login() {
         let username = usernameField.text
         let password = passwordField.text
+        if isInvalidInput(username!, password: password!) {
+            print("error in pre-DB check / login")
+            return
+        }
         UserAuthentication().login(self, username: username!, password: password!, statusLabel: statusLabel)
+        clearTextFields()
     }
     
     func signUp() {
         let username = usernameField.text
         let email = emailField.text
         let password = passwordField.text
+        if isInvalidInput(username!, email: email!, password: password!) {
+            print("error in pre-DB check / signup")
+            return
+        }
         UserAuthentication().signUp(self, username: username!, email: email!, password: password!, statusLabel: statusLabel)
+        clearTextFields()
     }
     
     func resetPwd() {
         let email = emailField.text
+        clearTextFields()
         UserAuthentication().getResetLink(email!, statusLabel: statusLabel)
         authenticationView.showLoginOrSignupScreen()
+    }
+    
+    func isInvalidInput(username: String, email:String="", password: String) -> Bool {
+        let MAX_LENGTH_USERNAME = 15
+        let MAX_LENGTH_PASSWORD = 35
+        var isInvalid = false
+        if username.characters.count > MAX_LENGTH_USERNAME ||
+           password.characters.count > MAX_LENGTH_PASSWORD ||
+           username.containsUpperCaseLetter() || username.isAlphanumeric {
+            isInvalid = true
+        } else if email == "" {    // login (no email address)
+            isInvalid = false
+            
+        } else {   // signup - email validation
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+            isInvalid = !emailTest.evaluateWithObject(email)
+        }
+        return isInvalid
+    }
+    
+    func clearTextFields() {
+        authenticationView.usernameField.text = ""
+        authenticationView.emailField.text = ""
+        authenticationView.passwordField.text = ""
     }
     
     @IBAction func unwindToAuth(segue: UIStoryboardSegue) {
