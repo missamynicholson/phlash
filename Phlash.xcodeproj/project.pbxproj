@@ -25,6 +25,7 @@
 		A5CC82541D141B8C0013310D /* PhollowViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */; };
 		A5CC82561D143EAD0013310D /* PhollowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82551D143EAD0013310D /* PhollowUITests.swift */; };
 		A5CC82581D1442370013310D /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82571D1442370013310D /* AlertMessage.swift */; };
+		A5CC825E1D16787F0013310D /* Installations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC825D1D16787F0013310D /* Installations.swift */; };
 		A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE467E1D11515E00047C73 /* AppDelegate.swift */; };
 		A5DE46841D11515E00047C73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46821D11515E00047C73 /* Main.storyboard */; };
 		A5DE46861D11515E00047C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46851D11515E00047C73 /* Assets.xcassets */; };
@@ -39,7 +40,6 @@
 		A5DE46BC1D1151A000047C73 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B21D1151A000047C73 /* libz.tbd */; };
 		A5DE46BD1D1151A000047C73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B31D1151A000047C73 /* QuartzCore.framework */; };
 		A5DE46BE1D1151A000047C73 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B41D1151A000047C73 /* Security.framework */; };
-		A5DE46BF1D1151A000047C73 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B51D1151A000047C73 /* StoreKit.framework */; };
 		A5DE46C01D1151A000047C73 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */; };
 		A5DE46C21D1151AC00047C73 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46C11D1151AC00047C73 /* Bolts.framework */; };
 		A5DE46C41D1151B700047C73 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46C31D1151B700047C73 /* Parse.framework */; };
@@ -81,6 +81,7 @@
 		A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowViewSetup.swift; sourceTree = "<group>"; };
 		A5CC82551D143EAD0013310D /* PhollowUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowUITests.swift; sourceTree = "<group>"; };
 		A5CC82571D1442370013310D /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		A5CC825D1D16787F0013310D /* Installations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installations.swift; sourceTree = "<group>"; };
 		A5DE467B1D11515E00047C73 /* Phlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE467E1D11515E00047C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DE46831D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		A5DE46B21D1151A000047C73 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A5DE46B31D1151A000047C73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A5DE46B41D1151A000047C73 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A5DE46B51D1151A000047C73 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A5DE46C11D1151AC00047C73 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		A5DE46C31D1151B700047C73 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -121,7 +121,6 @@
 				A5DE46BD1D1151A000047C73 /* QuartzCore.framework in Frameworks */,
 				A5DE46BE1D1151A000047C73 /* Security.framework in Frameworks */,
 				A5DE46C21D1151AC00047C73 /* Bolts.framework in Frameworks */,
-				A5DE46BF1D1151A000047C73 /* StoreKit.framework in Frameworks */,
 				A5DE46C41D1151B700047C73 /* Parse.framework in Frameworks */,
 				A5DE46C01D1151A000047C73 /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -178,6 +177,7 @@
 				A5CC82531D141B8C0013310D /* PhollowViewSetup.swift */,
 				8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */,
 				A5CC82571D1442370013310D /* AlertMessage.swift */,
+				A5CC825D1D16787F0013310D /* Installations.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -250,7 +250,6 @@
 				A5DE46B21D1151A000047C73 /* libz.tbd */,
 				A5DE46B31D1151A000047C73 /* QuartzCore.framework */,
 				A5DE46B41D1151A000047C73 /* Security.framework */,
-				A5DE46B51D1151A000047C73 /* StoreKit.framework */,
 				A5DE46B61D1151A000047C73 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
@@ -325,6 +324,11 @@
 					A5DE467A1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MMBSHBYFBS;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					A5DE468E1D11515E00047C73 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -396,6 +400,7 @@
 				A5CC82581D1442370013310D /* AlertMessage.swift in Sources */,
 				A5CC824C1D13EF230013310D /* AuthenticationViewController.swift in Sources */,
 				954335541D1413EF00276828 /* PhollowView.swift in Sources */,
+				A5CC825E1D16787F0013310D /* Installations.swift in Sources */,
 				84F0267C1D14083600083A0B /* SendPhoto.swift in Sources */,
 				84F026721D14003800083A0B /* ResizeImage.swift in Sources */,
 				8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */,
@@ -559,7 +564,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollienew.phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -578,7 +583,7 @@
 				INFOPLIST_FILE = Phlash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ollienew.phlash;
+				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

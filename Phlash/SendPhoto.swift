@@ -30,7 +30,13 @@ class SendPhoto {
             if succeeded {
                 captionField.text = ""
                 AlertMessage().show(statusLabel, message: "Nice phlash!")
-                //push takes place here
+                
+                //This will be moved into CloudCode
+//                let push = PFPush()
+//                push.setChannel(currentUsername)
+//                push.setMessage("\(currentUsername) has just phlashed!")
+//                push.sendPushInBackground()
+                //This will be moved into Cloud Code
             } else {
                 print("Error: \(error)")
             }

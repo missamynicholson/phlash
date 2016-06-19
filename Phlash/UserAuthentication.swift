@@ -26,6 +26,8 @@ class UserAuthentication {
                 AlertMessage().show(statusLabel, message: "\(errorMessage)")
             } else {
                 controller.performSegueWithIdentifier("toCamera", sender: nil)
+                Installations().updateInstallation("p\(username)")
+                
                 //self.defaults.setValue(twentyFourHoursSince, forKey: "lastSeen")
             }
         }

@@ -27,6 +27,15 @@ class PhollowSomeone {
             if (success) {
                 AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
                 PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
+                Installations().updateInstallation(toUsername)
+                
+                //This will be moved into Cloud Code
+//                let push = PFPush()
+//                push.setChannel("p\(toUsername)")
+//                push.setMessage("\(checkedUser.username) is now following you!")
+//                push.sendPushInBackground()
+                //This will be moved into Cloud Code
+                
             } else  {
                 print("Error: \(error!) \(error!.userInfo)")
             }
