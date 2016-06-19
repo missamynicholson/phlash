@@ -16,6 +16,7 @@ class CameraView: UIView {
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
     var identificationLabel = UILabel()
+    var pendingPhlashesLabel = UILabel()
     var captionField = UITextField()
     private let whiteColor = UIColor.whiteColor()
     var statusLabel = UILabel()
@@ -31,6 +32,7 @@ class CameraView: UIView {
         addIdLabel()
         addStatusLabel()
         addCaptionField()
+        addPendingPhlashesLabel()
         addGestureRecognizer(tap)
     }
     
@@ -44,6 +46,15 @@ class CameraView: UIView {
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.accessibilityLabel = "logout"
         addSubview(logoutButton)
+    }
+    
+    func addPendingPhlashesLabel() {
+        pendingPhlashesLabel.frame = CGRect(x: 0, y: 40, width: screenBounds.width, height: 30)
+        pendingPhlashesLabel.textColor = UIColor.whiteColor()
+        pendingPhlashesLabel.textAlignment = .Right
+        pendingPhlashesLabel.userInteractionEnabled = false
+        pendingPhlashesLabel.text = "Phlashes to View"
+        addSubview(pendingPhlashesLabel)
     }
     
     func addRightSwipe() {

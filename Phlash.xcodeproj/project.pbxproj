@@ -566,7 +566,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e6aa2cf7-7e7e-4d00-847a-4c78d4855443";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -585,7 +585,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e6aa2cf7-7e7e-4d00-847a-4c78d4855443";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
