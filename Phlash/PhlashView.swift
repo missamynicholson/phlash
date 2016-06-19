@@ -39,6 +39,7 @@ class PhlashView: UIImageView {
     
     func addUsernameLabel() {
         usernameLabel.frame = CGRect(x: 0, y: screenBounds.height*16/17, width: self.frame.width, height: screenBounds.height/17)
+        usernameLabel.font = UIFont.systemFontOfSize(screenBounds.height/35)
         usernameLabel.backgroundColor = UIColor.colorWithAlphaComponent(blackColor)(0.4)
         usernameLabel.textColor = whiteColor
         usernameLabel.textAlignment = .Center
