@@ -32,11 +32,12 @@ class SendPhoto {
                 AlertMessage().show(statusLabel, message: "Nice phlash!")
                 
                 //This will be moved into CloudCode
-//                let push = PFPush()
-//                push.setChannel(currentUsername)
-//                push.setMessage("\(currentUsername) has just phlashed!")
-//                push.sendPushInBackground()
+                //let push = PFPush()
+                //push.setChannel(currentUsername)
+                //push.setMessage("\(currentUsername) has just phlashed!")
+                //push.sendPushInBackground()
                 //This will be moved into Cloud Code
+                
             } else {
                 print("Error: \(error)")
             }

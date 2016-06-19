@@ -30,10 +30,10 @@ class PhollowSomeone {
                 Installations().updateInstallation(toUsername)
                 
                 //This will be moved into Cloud Code
-//                let push = PFPush()
-//                push.setChannel("p\(toUsername)")
-//                push.setMessage("\(checkedUser.username) is now following you!")
-//                push.sendPushInBackground()
+                //let push = PFPush()
+                //push.setChannel("p\(toUsername)")
+                //push.setMessage("\(checkedUser.username) is now following you!")
+                //push.sendPushInBackground()
                 //This will be moved into Cloud Code
                 
             } else  {

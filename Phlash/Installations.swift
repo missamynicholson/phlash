@@ -10,8 +10,8 @@ import Parse
 
 class Installations {
     func updateInstallation(channel: String) {
-        let currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.addUniqueObject(channel, forKey: "channels")
-        currentInstallation.saveInBackground()
+//        let currentInstallation = PFInstallation.currentInstallation()
+//        currentInstallation.addUniqueObject(channel, forKey: "channels")
+//        currentInstallation.saveInBackground()
     }
 }
