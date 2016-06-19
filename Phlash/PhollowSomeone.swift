@@ -12,13 +12,30 @@ class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func phollow(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+        let userValidation = PFQuery(className: "_User")
+        let toUsername = toUsernameField.text!
+        print(toUsername)
+        userValidation.whereKey("username", equalTo: toUsername)
+        userValidation.findObjectsInBackgroundWithBlock {
+            (results: [PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if results!.count < 1 {
+                    AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
+                    toUsernameField.text = ""
+                } else {
+                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                }
+            }
+        }
+    }
+
+    func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             print ("Checked User  is nil")
             return
         }
-        
         let phollow = PFObject(className:"Phollow")
         phollow["fromUsername"] = checkedUser.username
         phollow["toUsername"] = toUsername
@@ -41,4 +58,5 @@ class PhollowSomeone {
             }
         }
     }
+
 }
