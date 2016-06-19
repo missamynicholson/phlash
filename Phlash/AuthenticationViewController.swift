@@ -114,7 +114,7 @@ class AuthenticationViewController: UIViewController {
         let username = usernameField.text
         let password = passwordField.text
         if isInvalidInput(username!, password: password!) {
-            print("error in pre-DB check / login")
+            AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
         UserAuthentication().login(self, username: username!, password: password!, statusLabel: statusLabel)
@@ -126,7 +126,7 @@ class AuthenticationViewController: UIViewController {
         let email = emailField.text
         let password = passwordField.text
         if isInvalidInput(username!, email: email!, password: password!) {
-            print("error in pre-DB check / signup")
+            AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
         UserAuthentication().signUp(self, username: username!, email: email!, password: password!, statusLabel: statusLabel)
