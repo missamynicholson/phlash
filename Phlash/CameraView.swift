@@ -10,6 +10,8 @@ import UIKit
 
 class CameraView: UIView, UITextFieldDelegate {
     
+    private let mainScreen = UIScreen.mainScreen()
+    
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var logoutButton = UIButton()
     let phollowButton = UIButton()
@@ -89,6 +91,11 @@ class CameraView: UIView, UITextFieldDelegate {
         statusLabel.textColor = UIColor.whiteColor()
         statusLabel.textAlignment = .Center
         statusLabel.userInteractionEnabled = false
+        
+        statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
+        statusLabel.minimumScaleFactor = 0.5
+        statusLabel.adjustsFontSizeToFitWidth = true
+        statusLabel.numberOfLines = 1
         addSubview(statusLabel)
     }
     
