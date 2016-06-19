@@ -147,6 +147,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         loginButton.hidden = false
         signupButton.hidden = false
         resetPwdButton.hidden = true
+        goBackButton.hidden = true
     }
     
     func showLoginView() {
@@ -158,6 +159,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         loginButton.hidden = true
         signupButton.hidden = true
         resetPwdButton.hidden = false
+        goBackButton.hidden = false
         usernameField.becomeFirstResponder()
     }
     
@@ -171,6 +173,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         loginButton.hidden = true
         signupButton.hidden = true
         resetPwdButton.hidden = true
+        goBackButton.hidden = false
         usernameField.becomeFirstResponder()
     }
     
@@ -184,6 +187,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         loginButton.hidden = true
         signupButton.hidden = true
         resetPwdButton.hidden = true
+        goBackButton.hidden = false
         emailField.becomeFirstResponder()
     }
     

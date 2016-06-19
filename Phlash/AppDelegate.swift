@@ -20,20 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse.
         Parse.setApplicationId("QrcCzqiYvo9gvGGzAb0bhyRSgBmPryGKnXxRSwOL", clientKey: "HCpqRugTMkMvGW6su7JCmhzXnacCnY2ZyXQnuDRj")
         
-        if #available(iOS 8.0, *) {
-            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-            UIApplication.sharedApplication().registerForRemoteNotifications()
-        } else {
-            let settings = UIRemoteNotificationType.Alert.union(UIRemoteNotificationType.Badge).union(UIRemoteNotificationType.Sound)
-            UIApplication.sharedApplication().registerForRemoteNotificationTypes(settings)
-        }
-//        
-//        let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
-//        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-//        application.registerUserNotificationSettings(settings)
-//        application.registerForRemoteNotifications()
-        
+        let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
         return true
     }

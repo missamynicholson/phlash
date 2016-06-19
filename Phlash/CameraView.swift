@@ -16,11 +16,12 @@ class CameraView: UIView, UITextFieldDelegate {
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
     var identificationLabel = UILabel()
+    var pendingPhlashesLabel = UILabel()
     var captionField = UITextField()
     private let whiteColor = UIColor.whiteColor()
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
-    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/30
+    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
 
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -32,6 +33,7 @@ class CameraView: UIView, UITextFieldDelegate {
         addIdLabel()
         addStatusLabel()
         addCaptionField()
+        addPendingPhlashesLabel()
         addGestureRecognizer(tap)
     }
     
@@ -45,6 +47,15 @@ class CameraView: UIView, UITextFieldDelegate {
         logoutButton.setTitle("Logout", forState: .Normal)
         logoutButton.accessibilityLabel = "logout"
         addSubview(logoutButton)
+    }
+    
+    func addPendingPhlashesLabel() {
+        pendingPhlashesLabel.frame = CGRect(x: 0, y: 40, width: screenBounds.width, height: 30)
+        pendingPhlashesLabel.textColor = UIColor.whiteColor()
+        pendingPhlashesLabel.textAlignment = .Right
+        pendingPhlashesLabel.userInteractionEnabled = false
+        pendingPhlashesLabel.text = "Phlashes to View"
+        addSubview(pendingPhlashesLabel)
     }
     
     func addRightSwipe() {

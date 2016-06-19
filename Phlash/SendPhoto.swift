@@ -9,9 +9,12 @@
 import UIKit
 import Parse
 
+
 class SendPhoto {
+
     
-    func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField) {
+    func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
+        
         let currentUser = PFUser.currentUser()
         let currentUsername = currentUser!.username!
         

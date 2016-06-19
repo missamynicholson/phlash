@@ -15,13 +15,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     private let cameraView = CameraView()
     private let phollowView = PhollowView()
     var statusLabel = UILabel()
+    var pendingPhlashesLabel = UILabel()
     var phlashesArray = [PFObject]()
     
     private var picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        phlashesArray = []
+        //        phlashesArray = []
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
@@ -31,7 +32,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-        
+        checkPendingPhlashesStatus()
+        pendingPhlashesLabel = cameraView.pendingPhlashesLabel
         statusLabel = cameraView.statusLabel
     }
     
@@ -66,21 +68,29 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             case UISwipeGestureRecognizerDirection.Right:
                 picker.takePicture()
             case UISwipeGestureRecognizerDirection.Left:
-                checkForPhlashes()
+                showPhlash()
             default:
                 break
             }
         }
     }
     
-    func checkForPhlashes() {
-        if phlashesArray.count < 1 {
+    func checkPendingPhlashesStatus() {
+        if self.phlashesArray.count > 0 {
+            self.pendingPhlashesLabel.hidden = false
+        } else {
             RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
                 self.phlashesArray = phlashesFromDatabase!
-                self.showPhlash()
+                self.togglePhlashesLabel()
             })
+        }
+    }
+    
+    func togglePhlashesLabel() {
+        if self.phlashesArray.count < 1 {
+            self.pendingPhlashesLabel.hidden = true
         } else {
-            showPhlash()
+            self.pendingPhlashesLabel.hidden = false
         }
     }
     
@@ -91,6 +101,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
+        checkPendingPhlashesStatus()
     }
     
     func imagePickerController(picker: UIImagePickerController,
@@ -98,6 +109,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let captionField = cameraView.captionField
+        
+        guard captionField.text?.characters.count < 100 else {
+            AlertMessage().show(statusLabel, message: "Oops, caption cannot be more than 100 characters")
+            return
+        }
+        
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
         DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "")
         SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel, captionField: captionField)
@@ -137,7 +154,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func cancelPhollowPage() {
-       PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
+        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
 }
 
