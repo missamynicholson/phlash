@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()

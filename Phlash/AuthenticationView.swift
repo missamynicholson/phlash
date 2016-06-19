@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthenticationView: UIView {
+class AuthenticationView: UIView, UITextFieldDelegate {
     
     let usernameField = UITextField()
     let emailField = UITextField()
@@ -25,6 +25,8 @@ class AuthenticationView: UIView {
     var statusLabel = UILabel()
     let goBackButton = UIButton()
     let defaults = NSUserDefaults.standardUserDefaults()
+    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/30
+    let MAX_LENGTH_USERNAME = 15
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -46,6 +48,8 @@ class AuthenticationView: UIView {
         usernameField.textAlignment = .Center
         usernameField.accessibilityLabel = "username"
         usernameField.autocorrectionType = .No
+        usernameField.delegate = self
+        usernameField.userInteractionEnabled = true
         usernameField.autocapitalizationType = UITextAutocapitalizationType.None
         
         emailField.frame = CGRect(x: 0, y: screenBounds.height/4, width: screenBounds.width, height: screenBounds.height/15)
@@ -54,6 +58,7 @@ class AuthenticationView: UIView {
         emailField.textAlignment = .Center
         emailField.keyboardType = UIKeyboardType.EmailAddress
         emailField.accessibilityLabel = "email"
+        emailField.delegate = self
         
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
         passwordField.backgroundColor = UIColor.whiteColor()
@@ -61,6 +66,7 @@ class AuthenticationView: UIView {
         passwordField.placeholder = "Password"
         passwordField.textAlignment = .Center
         passwordField.secureTextEntry = true
+        passwordField.delegate = self
         passwordField.accessibilityLabel = "password"
         
         submitButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
@@ -107,15 +113,30 @@ class AuthenticationView: UIView {
         showLoginOrSignupScreen()
     }
     
-    //needs adjusting
-    func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
-        if let _ = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet()) {
-            // Do not allow upper case letters
-            return false
+//    //needs adjusting
+//    func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
+//        if let _ = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet()) {
+//            // Do not allow upper case letters
+//            return false
+//        }
+//        return true
+//    }
+    
+    @objc func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var shouldChange = true
+        let text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+        let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
+        let isUppercase = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet())
+        
+        if textField == usernameField && text.length > MAX_LENGTH_USERNAME && string.characters.count > 0 {
+            shouldChange = false
+        } else if textSize.width < textField.bounds.size.width {
+            shouldChange = false
+        } else if (isUppercase != nil) {
+            shouldChange = false
         }
-        return true
+        return shouldChange
     }
-    //needs adjusting
     
     
     func showLoginOrSignupScreen() {

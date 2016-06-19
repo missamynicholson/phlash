@@ -20,8 +20,8 @@ class PhlashView: UIImageView {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addIdLabel()
-        addusernameLabel()
-        addcaptionLabel()
+        addUsernameLabel()
+        addCaptionLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +36,7 @@ class PhlashView: UIImageView {
         addSubview(identificationLabel)
     }
     
-    func addusernameLabel() {
+    func addUsernameLabel() {
         usernameLabel.frame = CGRect(x: 0, y: screenBounds.height/8, width: self.frame.width, height: screenBounds.height/15)
         usernameLabel.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         usernameLabel.textColor = UIColor.blackColor()
@@ -45,12 +45,18 @@ class PhlashView: UIImageView {
         addSubview(usernameLabel)
     }
     
-    func addcaptionLabel() {
+    func addCaptionLabel() {
         captionLabel.frame = CGRect(x: 0, y: screenBounds.height/5, width: self.frame.width, height: screenBounds.height/15)
         captionLabel.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         captionLabel.textColor = UIColor.blackColor()
         captionLabel.textAlignment = .Center
         captionLabel.userInteractionEnabled = false
+        
+        captionLabel.font = UIFont.systemFontOfSize(screenBounds.height/35)
+        captionLabel.minimumScaleFactor = 0.75
+        captionLabel.adjustsFontSizeToFitWidth = true
+        captionLabel.numberOfLines = 1
+        
         addSubview(captionLabel)
     }
 }

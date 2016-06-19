@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CameraView: UIView {
+class CameraView: UIView, UITextFieldDelegate {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var logoutButton = UIButton()
@@ -20,6 +20,7 @@ class CameraView: UIView {
     private let whiteColor = UIColor.whiteColor()
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
+    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/30
 
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -83,10 +84,20 @@ class CameraView: UIView {
     func addCaptionField(){
         captionField.frame = CGRect(x: 0, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
         captionField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
+        captionField.font = UIFont.systemFontOfSize(FONT_SIZE)
         captionField.placeholder = "Caption..."
         captionField.textAlignment = .Center
         captionField.autocorrectionType = .No
+        captionField.delegate = self
         addSubview(captionField)
+    }
+    
+    
+    @objc func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+        let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
+
+        return textSize.width < textField.bounds.size.width
     }
 }
 
