@@ -26,6 +26,7 @@ class CameraView: UIView, UITextFieldDelegate {
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -97,10 +98,12 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addStatusLabel() {
-        statusLabel.frame = CGRect(x: 0, y: screenBounds.height/2, width: screenBounds.width, height: 40)
-        statusLabel.textColor = UIColor.whiteColor()
+        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.textColor = backgroundGreen
+        statusLabel.backgroundColor = whiteColor
         statusLabel.textAlignment = .Center
         statusLabel.userInteractionEnabled = false
+        statusLabel.hidden = true
         
         statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
         statusLabel.minimumScaleFactor = 0.5
