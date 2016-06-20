@@ -14,10 +14,8 @@ class PhollowSomeone {
     
     func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
         let userValidation = PFQuery(className: "_User")
-        
-        
+        let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
-        print(toUsername)
         userValidation.whereKey("username", equalTo: toUsername)
         userValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in
@@ -26,43 +24,39 @@ class PhollowSomeone {
                     AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    if self.AlreadyPhollowing(toUsername){
-
-                        AlertMessage().show(statusLabel, message: "already phollowing!")
-                    } else {
-                        self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
-                    }
+                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    
                 }
             }
         }
         
     }
     
-    func AlreadyPhollowing(toUsername: String) -> Bool {
-        var alreadyPhollows = false
-        let currentUser = PFUser.currentUser()
+    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+        
         let phollowValidation = PFQuery(className: "Phollow")
-        phollowValidation.whereKey("fromUsername", equalTo: currentUser!)
+        phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
         phollowValidation.whereKey("toUsername", equalTo: toUsername)
         phollowValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
-                    alreadyPhollows = false
+                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    
                 }
                 else {
-                    alreadyPhollows = true
+                    AlertMessage().show(statusLabel, message: "already phollowing!")
                 }
-            print("results", results)
             }
-        }
-        return alreadyPhollows
+            
+        } 
     }
+    
 
     func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
-            print ("Checked User  is nil")
+            //print ("Checked User  is nil")
             return
         }
         let phollow = PFObject(className:"Phollow")
