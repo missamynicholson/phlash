@@ -11,6 +11,8 @@ import Parse
 
 
 class SendPhoto {
+    
+    let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
 
     
     func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
@@ -29,6 +31,7 @@ class SendPhoto {
         phlash["file"] = imageFile
         phlash["username"] = currentUsername
         phlash["caption"] = captionField.text
+        phlash["yValue"] = captionField.frame.origin.y / screenBounds.height
         phlash.saveInBackgroundWithBlock { (succeeded, error) -> Void in
             if succeeded {
                 captionField.text = ""
