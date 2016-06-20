@@ -6,9 +6,21 @@
 //  Copyright © 2016 Phlashers. All rights reserved.
 //
 
+
 import UIKit
 
-class AuthenticationView: UIView {
+extension String {
+    func containsOnlyCharactersIn(matchCharacters: String) -> Bool {
+        let disallowedCharacterSet = NSCharacterSet(charactersInString: matchCharacters).invertedSet
+        return self.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+    }
+}
+
+class AuthenticationView: UIView, UITextFieldDelegate {
+
+    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
+    let MAX_LENGTH_USERNAME = 15
+    let MAX_LENGTH_PASSWORD = 35
     
     let usernameField = UITextField()
     let emailField = UITextField()
@@ -40,6 +52,7 @@ class AuthenticationView: UIView {
         frame = CGRect(x: 0, y: 0, width: screenBounds.width, height: screenBounds.height)
         backgroundColor = backgroundGreen
         
+        usernameField.delegate = self
         usernameField.frame = CGRect(x: 0, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
         usernameField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         usernameField.placeholder = "Username"
@@ -48,13 +61,16 @@ class AuthenticationView: UIView {
         usernameField.autocorrectionType = .No
         usernameField.autocapitalizationType = UITextAutocapitalizationType.None
         
+        emailField.delegate = self
         emailField.frame = CGRect(x: 0, y: screenBounds.height/4, width: screenBounds.width, height: screenBounds.height/15)
         emailField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         emailField.placeholder = "Email"
         emailField.textAlignment = .Center
         emailField.keyboardType = UIKeyboardType.EmailAddress
         emailField.accessibilityLabel = "email"
+        emailField.autocapitalizationType = UITextAutocapitalizationType.None
         
+        passwordField.delegate = self
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
         passwordField.backgroundColor = UIColor.whiteColor()
         passwordField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
@@ -107,16 +123,44 @@ class AuthenticationView: UIView {
         showLoginOrSignupScreen()
     }
     
-    //needs adjusting
-    func textField(textField: UITextField!, shouldChangeCharactersInRange range: NSRange, replacementString string: String!) -> Bool {
-        if let _ = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet()) {
-            // Do not allow upper case letters
-            return false
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let alphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789"
+        var shouldChange = true
+        let currentText = textField.text ?? ""
+        let text = (currentText as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+        let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
+        let isUppercase = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet())
+        let disallowedCharacterSet = NSCharacterSet(charactersInString: alphaNumeric).invertedSet
+        let isSymbol = string.rangeOfCharacterFromSet(disallowedCharacterSet)
+        
+        // username and emails must be lower case
+        if ((textField == usernameField || textField == emailField) && isUppercase != nil)  ||
+            (textField == usernameField && text.length > MAX_LENGTH_USERNAME && string.characters.count > 0) ||
+            (textField == passwordField && text.length > MAX_LENGTH_PASSWORD && string.characters.count > 0) ||
+            (textSize.width > textField.bounds.size.width) ||
+            (textField == usernameField && isSymbol != nil)
+            {
+                shouldChange = false
+            }
+
+        
+        // fields less than screenbounds
+        if textSize.width > textField.bounds.size.width {
+            shouldChange = false
         }
-        return true
+        // username only letters and numbers
+        if textField == usernameField && isSymbol != nil {
+            shouldChange = false
+        }
+        
+        return shouldChange
     }
-    //needs adjusting
-    
+
+
+
+
+
     
     func showLoginOrSignupScreen() {
         usernameField.hidden = true
