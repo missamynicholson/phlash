@@ -108,7 +108,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if picker.cameraDevice == UIImagePickerControllerCameraDevice.Front {
+            chosenImage =  UIImage(CGImage: chosenImage.CGImage!, scale: chosenImage.scale, orientation:.LeftMirrored)
+        }
+        
         let captionField = cameraView.captionField
         
         guard captionField.text?.characters.count < 100 else {
@@ -117,6 +121,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
+        
         DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "")
         SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel, captionField: captionField)
     }
