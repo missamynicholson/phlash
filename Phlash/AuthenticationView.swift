@@ -6,9 +6,21 @@
 //  Copyright © 2016 Phlashers. All rights reserved.
 //
 
+
 import UIKit
 
+extension String {
+    func containsOnlyCharactersIn(matchCharacters: String) -> Bool {
+        let disallowedCharacterSet = NSCharacterSet(charactersInString: matchCharacters).invertedSet
+        return self.rangeOfCharacterFromSet(disallowedCharacterSet) == nil
+    }
+}
+
 class AuthenticationView: UIView, UITextFieldDelegate {
+
+    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
+    let MAX_LENGTH_USERNAME = 15
+    let MAX_LENGTH_PASSWORD = 35
     
     let usernameField = UITextField()
     let emailField = UITextField()
@@ -25,8 +37,6 @@ class AuthenticationView: UIView, UITextFieldDelegate {
     var statusLabel = UILabel()
     let goBackButton = UIButton()
     let defaults = NSUserDefaults.standardUserDefaults()
-    let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/30
-    let MAX_LENGTH_USERNAME = 15
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -42,6 +52,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         frame = CGRect(x: 0, y: 0, width: screenBounds.width, height: screenBounds.height)
         backgroundColor = backgroundGreen
         
+        usernameField.delegate = self
         usernameField.frame = CGRect(x: 0, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
         usernameField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         usernameField.placeholder = "Username"
@@ -52,6 +63,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         usernameField.userInteractionEnabled = true
         usernameField.autocapitalizationType = UITextAutocapitalizationType.None
         
+        emailField.delegate = self
         emailField.frame = CGRect(x: 0, y: screenBounds.height/4, width: screenBounds.width, height: screenBounds.height/15)
         emailField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         emailField.placeholder = "Email"
@@ -60,6 +72,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         emailField.accessibilityLabel = "email"
         emailField.delegate = self
         
+        passwordField.delegate = self
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
         passwordField.backgroundColor = UIColor.whiteColor()
         passwordField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
@@ -118,6 +131,29 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         showLoginOrSignupScreen()
     }
     
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let alphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789"
+        var shouldChange = true
+        let currentText = textField.text ?? ""
+        let text = (currentText as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+        let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
+        let isUppercase = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet())
+        let disallowedCharacterSet = NSCharacterSet(charactersInString: alphaNumeric).invertedSet
+        let isSymbol = string.rangeOfCharacterFromSet(disallowedCharacterSet)
+        
+        // username and emails must be lower case
+        if ((textField == usernameField || textField == emailField) && isUppercase != nil)  ||
+            (textField == usernameField && text.length > MAX_LENGTH_USERNAME && string.characters.count > 0) ||
+            (textField == passwordField && text.length > MAX_LENGTH_PASSWORD && string.characters.count > 0) ||
+            (textSize.width > textField.bounds.size.width) ||
+            (textField == usernameField && isSymbol != nil)
+            {
+                shouldChange = false
+            }
+        return shouldChange
+    }
+
     func showLoginOrSignupScreen() {
         usernameField.hidden = true
         passwordField.hidden = true
