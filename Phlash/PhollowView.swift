@@ -10,6 +10,7 @@ import UIKit
 
 class PhollowView: UIView, UITextFieldDelegate {
     
+    let MAX_LENGTH_USERNAME = 15
     var usernameField = UITextField()
     var createPhollowButton = UIButton()
     var destroyPhollowButton = UIButton()
@@ -97,6 +98,26 @@ class PhollowView: UIView, UITextFieldDelegate {
         statusLabel.adjustsFontSizeToFitWidth = true
         statusLabel.numberOfLines = 1
         addSubview(statusLabel)
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let alphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789"
+        var shouldChange = true
+        let currentText = textField.text ?? ""
+        let text = (currentText as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
+        let isUppercase = string.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet())
+        let disallowedCharacterSet = NSCharacterSet(charactersInString: alphaNumeric).invertedSet
+        let isSymbol = string.rangeOfCharacterFromSet(disallowedCharacterSet)
+        
+        // username and emails must be lower case
+        if (textField == usernameField && isUppercase != nil)  ||
+            (textField == usernameField && text.length > MAX_LENGTH_USERNAME && string.characters.count > 0) ||
+            (textField == usernameField && isSymbol != nil)
+        {
+            shouldChange = false
+        }
+        
+        return shouldChange
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
