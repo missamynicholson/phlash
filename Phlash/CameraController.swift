@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()
@@ -109,6 +109,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let captionField = cameraView.captionField
+        
+        guard captionField.text?.characters.count < 100 else {
+            AlertMessage().show(statusLabel, message: "Oops, caption cannot be more than 100 characters")
+            return
+        }
+        
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
         DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "")
         SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel, captionField: captionField)

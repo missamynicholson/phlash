@@ -59,6 +59,8 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         usernameField.textAlignment = .Center
         usernameField.accessibilityLabel = "username"
         usernameField.autocorrectionType = .No
+        usernameField.delegate = self
+        usernameField.userInteractionEnabled = true
         usernameField.autocapitalizationType = UITextAutocapitalizationType.None
         
         emailField.delegate = self
@@ -68,7 +70,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         emailField.textAlignment = .Center
         emailField.keyboardType = UIKeyboardType.EmailAddress
         emailField.accessibilityLabel = "email"
-        emailField.autocapitalizationType = UITextAutocapitalizationType.None
+        emailField.delegate = self
         
         passwordField.delegate = self
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
@@ -77,6 +79,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         passwordField.placeholder = "Password"
         passwordField.textAlignment = .Center
         passwordField.secureTextEntry = true
+        passwordField.delegate = self
         passwordField.accessibilityLabel = "password"
         
         submitButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
@@ -99,6 +102,11 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         statusLabel.textColor = UIColor.whiteColor()
         statusLabel.textAlignment = .Center
         statusLabel.userInteractionEnabled = false
+        
+        statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
+        statusLabel.minimumScaleFactor = 0.5
+        statusLabel.adjustsFontSizeToFitWidth = true
+        statusLabel.numberOfLines = 1
         
         goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/5, height: 30)
         goBackButton.setTitleColor(.whiteColor(), forState: .Normal)
@@ -143,25 +151,9 @@ class AuthenticationView: UIView, UITextFieldDelegate {
             {
                 shouldChange = false
             }
-
-        
-        // fields less than screenbounds
-        if textSize.width > textField.bounds.size.width {
-            shouldChange = false
-        }
-        // username only letters and numbers
-        if textField == usernameField && isSymbol != nil {
-            shouldChange = false
-        }
-        
         return shouldChange
     }
 
-
-
-
-
-    
     func showLoginOrSignupScreen() {
         usernameField.hidden = true
         passwordField.hidden = true
