@@ -110,8 +110,12 @@ class CameraView: UIView, UITextFieldDelegate {
         addSubview(captionField)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return false
+    }
     
-    @objc func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
         let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
 

@@ -12,7 +12,7 @@ import Parse
 
 extension String {
     
-    var isNotAlphanumeric: Bool {
+    var isAlphanumeric: Bool {
         return rangeOfString("^[a-z0-9]+$", options: .RegularExpressionSearch) != nil
     }
     
@@ -51,6 +51,7 @@ class AuthenticationViewController: UIViewController {
     private var goBackButton = UIButton()
     private var resetPwdButton = UIButton()
     var statusLabel = UILabel()
+    let tap = UITapGestureRecognizer()
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -76,6 +77,7 @@ class AuthenticationViewController: UIViewController {
         signupButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         goBackButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         resetPwdButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        authenticationView.tap.addTarget(self, action: #selector(dismissKeyboard))
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,6 +88,10 @@ class AuthenticationViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         authenticationView.showLoginOrSignupScreen()
+    }
+    
+    func dismissKeyboard() {
+        authenticationView.endEditing(true)
     }
     
     func buttonAction(sender: UIButton!) {
@@ -146,7 +152,7 @@ class AuthenticationViewController: UIViewController {
         var isInvalid = false
         if username.characters.count > MAX_LENGTH_USERNAME ||
            password.characters.count > MAX_LENGTH_PASSWORD ||
-           username.containsUpperCaseLetter() || !username.isNotAlphanumeric {
+           username.containsUpperCaseLetter() || !username.isAlphanumeric {
             isInvalid = true
         } else if email == "" {    // login (no email address)
             isInvalid = false
