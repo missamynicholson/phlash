@@ -15,6 +15,7 @@ class CameraView: UIView, UITextFieldDelegate {
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var logoutButton = UIButton()
     let phollowButton = UIButton()
+    let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
     var identificationLabel = UILabel()
@@ -24,12 +25,13 @@ class CameraView: UIView, UITextFieldDelegate {
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
-
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addLogoutButton()
         addPhollowButton()
+        addFlipCamera()
         addRightSwipe()
         addLeftSwipe()
         addIdLabel()
@@ -41,6 +43,13 @@ class CameraView: UIView, UITextFieldDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func addFlipCamera() {
+        flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 100, width: screenBounds.width/5, height: 30)
+        flipCamera.setTitleColor(.whiteColor(), forState: .Normal)
+        flipCamera.setTitle("Flip", forState: .Normal)
+        addSubview(flipCamera)
     }
     
     func addLogoutButton() {

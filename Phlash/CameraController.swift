@@ -26,6 +26,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        cameraView.flipCamera.addTarget(self, action: #selector(buttonAction),forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.swipeLeft.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.tap.addTarget(self, action: #selector(dismissKeyboard))
@@ -130,9 +131,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             phollow()
         case phollowView.cancelButton:
             cancelPhollowPage()
+        case cameraView.flipCamera:
+            flipFrontBackCamera()
         default:
             break
         }
+    }
+    
+    func flipFrontBackCamera(){
+        picker.cameraDevice = picker.cameraDevice == UIImagePickerControllerCameraDevice.Front ? UIImagePickerControllerCameraDevice.Rear : UIImagePickerControllerCameraDevice.Front
     }
     
     func logout() {
