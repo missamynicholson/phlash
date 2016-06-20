@@ -19,14 +19,18 @@ class DisplayImage {
         phlashView.image = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
         cameraView.addSubview(phlashView)
         
+        if caption.characters.count > 0 && caption != "nil" {
+            phlashView.captionLabel.text = caption
+        } else {
+            phlashView.captionLabel.hidden = true
+        }
+        
         if animate {
             phlashView.usernameLabel.text = username
-            phlashView.captionLabel.text = caption
             animateIn(phlashView, xValue: startXValue)
             endXValue = -self.screenBounds.width * 2
         } else {
             phlashView.usernameLabel.hidden = true
-            phlashView.captionLabel.hidden = true
             phlashView.frame.origin.x = startXValue
             endXValue = self.screenBounds.width * 2
         }
