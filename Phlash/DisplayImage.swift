@@ -12,7 +12,7 @@ class DisplayImage {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool, username: String, caption: String) {
+    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool, username: String, caption: String, yValue: String) {
         let startXValue = ImageViewFrame().getXValue(chosenImage)
         var endXValue = CGFloat()
         let phlashView = PhlashView(frame: CGRect(x: screenBounds.width * 2, y: 0, width: ImageViewFrame().getNewWidth(chosenImage), height: screenBounds.height))
@@ -21,6 +21,8 @@ class DisplayImage {
         
         if caption.characters.count > 0 && caption != "nil" {
             phlashView.captionLabel.text = caption
+            let f = CGFloat(NSNumberFormatter().numberFromString(yValue)!)
+            phlashView.captionLabel.frame.origin.y = f * screenBounds.height
         } else {
             phlashView.captionLabel.hidden = true
         }

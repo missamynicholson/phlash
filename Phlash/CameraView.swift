@@ -17,6 +17,7 @@ class CameraView: UIView, UITextFieldDelegate {
     let phollowButton = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
+    let panGesture = UIPanGestureRecognizer()
     var identificationLabel = UILabel()
     var pendingPhlashesLabel = UILabel()
     var captionField = UITextField()
@@ -107,6 +108,9 @@ class CameraView: UIView, UITextFieldDelegate {
         captionField.textAlignment = .Center
         captionField.autocorrectionType = .No
         captionField.delegate = self
+        captionField.addGestureRecognizer(panGesture)
+        captionField.userInteractionEnabled = true
+       
         addSubview(captionField)
     }
     
@@ -117,5 +121,8 @@ class CameraView: UIView, UITextFieldDelegate {
 
         return textSize.width < textField.bounds.size.width
     }
+
+    
+    
 }
 

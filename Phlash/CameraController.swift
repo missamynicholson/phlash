@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()
@@ -17,6 +17,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var statusLabel = UILabel()
     var pendingPhlashesLabel = UILabel()
     var phlashesArray = [PFObject]()
+    
     
     private var picker = UIImagePickerController()
     
@@ -28,6 +29,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.swipeLeft.addTarget(self, action: #selector(respondToSwipeGesture))
+        cameraView.panGesture.addTarget(self, action: #selector(handlePanGesture))
+        
+        
         cameraView.tap.addTarget(self, action: #selector(dismissKeyboard))
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
@@ -116,7 +120,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "")
+        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "")
         SendPhoto().sendPhoto(resizedImage, statusLabel: cameraView.statusLabel, captionField: captionField)
     }
     
@@ -156,5 +160,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func cancelPhollowPage() {
         PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
+    
+   func handlePanGesture(panGesture: UIPanGestureRecognizer) {
+        
+        let translation = panGesture.translationInView(cameraView)
+        let newCenter = CGPoint(x: screenBounds.width/2, y: panGesture.view!.center.y + translation.y)
+        
+        if newCenter.y <= (screenBounds.height*16/17 - screenBounds.height/30) && newCenter.y >= screenBounds.height/30 {
+            panGesture.view!.center = newCenter
+            panGesture.setTranslation(CGPointZero, inView: cameraView)
+        }
+        
+    }
 }
-
