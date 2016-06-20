@@ -51,6 +51,7 @@ class AuthenticationViewController: UIViewController {
     private var goBackButton = UIButton()
     private var resetPwdButton = UIButton()
     var statusLabel = UILabel()
+    let tap = UITapGestureRecognizer()
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -76,6 +77,7 @@ class AuthenticationViewController: UIViewController {
         signupButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         goBackButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         resetPwdButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        authenticationView.tap.addTarget(self, action: #selector(dismissKeyboard))
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,6 +88,10 @@ class AuthenticationViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         authenticationView.showLoginOrSignupScreen()
+    }
+    
+    func dismissKeyboard() {
+        authenticationView.endEditing(true)
     }
     
     func buttonAction(sender: UIButton!) {

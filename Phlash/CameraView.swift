@@ -18,6 +18,7 @@ class CameraView: UIView, UITextFieldDelegate {
     let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
+    let panGesture = UIPanGestureRecognizer()
     var identificationLabel = UILabel()
     var pendingPhlashesLabel = UILabel()
     var captionField = UITextField()
@@ -116,15 +117,25 @@ class CameraView: UIView, UITextFieldDelegate {
         captionField.textAlignment = .Center
         captionField.autocorrectionType = .No
         captionField.delegate = self
+        captionField.addGestureRecognizer(panGesture)
+        captionField.userInteractionEnabled = true
+       
         addSubview(captionField)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return false
+    }
     
-    @objc func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string) as NSString
         let textSize:CGSize = text.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(FONT_SIZE)])
 
         return textSize.width < textField.bounds.size.width
     }
+
+    
+    
 }
 

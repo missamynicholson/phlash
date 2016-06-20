@@ -20,7 +20,8 @@ class RetrievePhoto {
                     let chosenImage = UIImage(data:imageData)!
                     let username = "\(firstPhlash["username"])"
                     let caption = "\(firstPhlash["caption"])"
-                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption)
+                    let yValue = "\(firstPhlash["yValue"])"
+                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue)
                 }
             }
         }

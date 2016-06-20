@@ -37,6 +37,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
     var statusLabel = UILabel()
     let goBackButton = UIButton()
     let defaults = NSUserDefaults.standardUserDefaults()
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -127,6 +128,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         addSubview(statusLabel)
         addSubview(goBackButton)
         addSubview(resetPwdButton)
+        addGestureRecognizer(tap)
         
         showLoginOrSignupScreen()
     }
@@ -152,6 +154,11 @@ class AuthenticationView: UIView, UITextFieldDelegate {
                 shouldChange = false
             }
         return shouldChange
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return false
     }
 
     func showLoginOrSignupScreen() {
