@@ -11,7 +11,8 @@ import UIKit
 class PhollowView: UIView, UITextFieldDelegate {
     
     var usernameField = UITextField()
-    var submitButton = UIButton()
+    var createPhollowButton = UIButton()
+    var destroyPhollowButton = UIButton()
     var cancelButton = UIButton()
     var identificationLabel = UILabel()
     var statusLabel = UILabel()
@@ -26,8 +27,9 @@ class PhollowView: UIView, UITextFieldDelegate {
         super.init(frame:frame)
         buildPhollowView()
         addUsernameField()
-        addSubmitButton()
-        addCancelButton()
+        addCreatePhollowButton()
+        addDestroyPhollowButton()
+        addCancelButton() //we have added this back as if you fail validations for add/unphollow someone you'll get stuck there (probably for life)!
         addIdLabel()
         addStatusLabel()
     }
@@ -50,12 +52,20 @@ class PhollowView: UIView, UITextFieldDelegate {
         addSubview(usernameField)
     }
     
-    func addSubmitButton() {
-        submitButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
-        submitButton.setTitleColor(.whiteColor(), forState: .Normal)
-        submitButton.setTitle("Submit", forState: .Normal)
-        submitButton.accessibilityLabel = "pholloweesubmit"
-        addSubview(submitButton)
+    func addCreatePhollowButton() {
+        createPhollowButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*3/8, width: screenBounds.width/2, height: 30)
+        createPhollowButton.setTitleColor(.whiteColor(), forState: .Normal)
+        createPhollowButton.setTitle("Phollow", forState: .Normal)
+        createPhollowButton.accessibilityLabel = "pholloweesubmit"
+        addSubview(createPhollowButton)
+    }
+    
+    func addDestroyPhollowButton() {
+        destroyPhollowButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
+        destroyPhollowButton.setTitleColor(.whiteColor(), forState: .Normal)
+        destroyPhollowButton.setTitle("UnPhollow", forState: .Normal)
+        destroyPhollowButton.accessibilityLabel = "unpholloweesubmit"
+        addSubview(destroyPhollowButton)
     }
     
     func addCancelButton() {

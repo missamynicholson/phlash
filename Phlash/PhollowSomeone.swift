@@ -25,7 +25,6 @@ class PhollowSomeone {
                     toUsernameField.text = ""
                 } else {
                     self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
-                    
                 }
             }
         }
@@ -49,10 +48,10 @@ class PhollowSomeone {
                 }
             }
             
-        } 
+        }
+        
     }
     
-
     func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
@@ -81,5 +80,5 @@ class PhollowSomeone {
             }
         }
     }
-
+    
 }

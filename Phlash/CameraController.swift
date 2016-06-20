@@ -34,7 +34,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         cameraView.tap.addTarget(self, action: #selector(dismissKeyboard))
         phollowView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
-        phollowView.submitButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        phollowView.createPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        phollowView.destroyPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         checkPendingPhlashesStatus()
         pendingPhlashesLabel = cameraView.pendingPhlashesLabel
@@ -136,8 +137,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             logout()
         case cameraView.phollowButton:
             showPhollowPage()
-        case phollowView.submitButton:
+        case phollowView.createPhollowButton:
             phollow()
+        case phollowView.destroyPhollowButton:
+            unphollow()
         case phollowView.cancelButton:
             cancelPhollowPage()
         case cameraView.flipCamera:
@@ -167,6 +170,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func phollow() {
         PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+    }
+    
+    func unphollow() {
+        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func cancelPhollowPage() {
