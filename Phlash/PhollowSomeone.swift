@@ -15,7 +15,6 @@ class PhollowSomeone {
     func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
         let userValidation = PFQuery(className: "_User")
         let toUsername = toUsernameField.text!
-        print(toUsername)
         userValidation.whereKey("username", equalTo: toUsername)
         userValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in

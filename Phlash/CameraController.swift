@@ -23,7 +23,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        phlashesArray = []
         cameraView.frame = view.frame
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
@@ -101,8 +100,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func showPhlash() {
         if phlashesArray.count > 0 {
-            RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: phlashesArray.first!)
+            let firstPhlash = phlashesArray.first!
+            NSUserDefaults.standardUserDefaults().setObject(firstPhlash.createdAt, forKey: "lastSeen")
             phlashesArray.removeAtIndex(0)
+            RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash)
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
