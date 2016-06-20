@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhollowView: UIView {
+class PhollowView: UIView, UITextFieldDelegate {
     
     var usernameField = UITextField()
     var submitButton = UIButton()
@@ -41,6 +41,7 @@ class PhollowView: UIView {
         usernameField.placeholder = "Username"
         usernameField.textAlignment = .Center
         usernameField.accessibilityLabel = "phollowee"
+        usernameField.delegate = self
         addSubview(usernameField)
     }
     
@@ -66,5 +67,10 @@ class PhollowView: UIView {
         identificationLabel.textColor = UIColor.clearColor()
         identificationLabel.userInteractionEnabled = false
         addSubview(identificationLabel)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return false
     }
 }
