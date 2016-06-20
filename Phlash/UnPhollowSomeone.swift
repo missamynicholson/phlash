@@ -51,50 +51,25 @@ class UnPhollowSomeone {
         }
     }
     
-    
     func removePhollowFromDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
         let currentUser = PFUser.currentUser()
-        guard let checkedUser = currentUser else {
-            return
-        }
-//        let unPhollow = PFObject(className:"Phollow")
-//        unPhollow["fromUsername"] = checkedUser.username
-//        unPhollow["toUsername"] = toUsername
         let unPhollow = PFQuery(className:"Phollow")
         unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
         unPhollow.whereKey("toUsername", equalTo: toUsername)
-        unPhollow.findObjectsInBackgroundWithBlock {
-            (results: [PFObject]?, error: NSError?) -> Void in
-//            if (success) {
-//                AlertMessage().show(statusLabel, message: "Successfully unphollowed \(toUsername)")
-//                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
-//                Installations().updateInstallation(toUsername)
-            
-            if error == nil  {
-                if results!.count < 1 {
-                    AlertMessage().show(statusLabel, message: "You are not following this user")
-                } else  {
-                    results.deleteInBackgroundWithBlock {
-                        (success: Bool, error: NSError?) -> Void in
-                        if (success) {
-                            AlertMessage().show(statusLabel, message: "Successfully unphollowed \(toUsername)")
-                            PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
-                            Installations().updateInstallation(toUsername)
-
-                }
-            
-            
-                //This will be moved into Cloud Code
-                //let push = PFPush()
-                //push.setChannel("p\(toUsername)")
-                //push.setMessage("\(checkedUser.username) is now following you!")
-                //push.sendPushInBackground()
-                //This will be moved into Cloud Code
-                
+        unPhollow.getFirstObjectInBackgroundWithBlock {
+            (object: PFObject?, error: NSError?) -> Void in
+            if error != nil || object == nil  {
+                AlertMessage().show(statusLabel, message: "You are not following this user")
             } else  {
-                print("Error: \(error!) \(error!.userInfo)")
+                object!.deleteInBackground()
+                AlertMessage().show(statusLabel, message: "You are now unfollowing this user")
             }
+            //This will be moved into Cloud Code
+            //let push = PFPush()
+            //push.setChannel("p\(toUsername)")
+            //push.setMessage("\(checkedUser.username) is now following you!")
+            //push.sendPushInBackground()
+            //This will be moved into Cloud Code
         }
     }
-    
 }
