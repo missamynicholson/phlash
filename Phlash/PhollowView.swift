@@ -25,6 +25,7 @@ class PhollowView: UIView, UITextFieldDelegate {
         addUsernameField()
         addCreatePhollowButton()
         addDestroyPhollowButton()
+        addCancelButton() //we have added this back as if you fail validations for add/unphollow someone you'll get stuck there (probably for life)!
         addIdLabel()
     }
     

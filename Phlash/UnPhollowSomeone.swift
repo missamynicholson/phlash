@@ -41,11 +41,10 @@ class UnPhollowSomeone {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
-                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
-                    
+                    AlertMessage().show(statusLabel, message: "You are not following this user")
                 }
                 else {
-                    AlertMessage().show(statusLabel, message: "already phollowing!")
+                    self.removePhollowFromDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
                 }
             }
             
@@ -53,22 +52,38 @@ class UnPhollowSomeone {
     }
     
     
-    func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
+    func removePhollowFromDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
-            //print ("Checked User  is nil")
             return
         }
-        let phollow = PFObject(className:"Phollow")
-        phollow["fromUsername"] = checkedUser.username
-        phollow["toUsername"] = toUsername
-        phollow.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
-                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
-                Installations().updateInstallation(toUsername)
-                
+//        let unPhollow = PFObject(className:"Phollow")
+//        unPhollow["fromUsername"] = checkedUser.username
+//        unPhollow["toUsername"] = toUsername
+        let unPhollow = PFQuery(className:"Phollow")
+        unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
+        unPhollow.whereKey("toUsername", equalTo: toUsername)
+        unPhollow.findObjectsInBackgroundWithBlock {
+            (results: [PFObject]?, error: NSError?) -> Void in
+//            if (success) {
+//                AlertMessage().show(statusLabel, message: "Successfully unphollowed \(toUsername)")
+//                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
+//                Installations().updateInstallation(toUsername)
+            
+            if error == nil  {
+                if results!.count < 1 {
+                    AlertMessage().show(statusLabel, message: "You are not following this user")
+                } else  {
+                    results.deleteInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                        if (success) {
+                            AlertMessage().show(statusLabel, message: "Successfully unphollowed \(toUsername)")
+                            PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
+                            Installations().updateInstallation(toUsername)
+
+                }
+            
+            
                 //This will be moved into Cloud Code
                 //let push = PFPush()
                 //push.setChannel("p\(toUsername)")
