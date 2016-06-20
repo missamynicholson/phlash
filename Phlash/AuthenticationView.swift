@@ -99,15 +99,21 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         signupButton.setTitle("Signup", forState: .Normal)
         signupButton.accessibilityLabel = "signup"
         
-        statusLabel.frame = CGRect(x: 0, y: 5, width: screenBounds.width, height: 40)
-        statusLabel.textColor = UIColor.whiteColor()
+        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.textColor = backgroundGreen
+        statusLabel.backgroundColor = whiteColor
         statusLabel.textAlignment = .Center
+        statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
+        statusLabel.minimumScaleFactor = 0.5
+        statusLabel.adjustsFontSizeToFitWidth = true
+        statusLabel.numberOfLines = 1
         statusLabel.userInteractionEnabled = false
         
         statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
         statusLabel.minimumScaleFactor = 0.5
         statusLabel.adjustsFontSizeToFitWidth = true
         statusLabel.numberOfLines = 1
+        statusLabel.hidden = true
         
         goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/5, height: 30)
         goBackButton.setTitleColor(.whiteColor(), forState: .Normal)

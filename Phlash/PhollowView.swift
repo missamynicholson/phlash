@@ -15,9 +15,13 @@ class PhollowView: UIView, UITextFieldDelegate {
     var destroyPhollowButton = UIButton()
     var cancelButton = UIButton()
     var identificationLabel = UILabel()
+    var statusLabel = UILabel()
+    private let whiteColor = UIColor.whiteColor()
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
+
     
     let screenBounds: CGSize = UIScreen.mainScreen().bounds.size
-    let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -27,6 +31,7 @@ class PhollowView: UIView, UITextFieldDelegate {
         addDestroyPhollowButton()
         addCancelButton() //we have added this back as if you fail validations for add/unphollow someone you'll get stuck there (probably for life)!
         addIdLabel()
+        addStatusLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,6 +82,21 @@ class PhollowView: UIView, UITextFieldDelegate {
         identificationLabel.textColor = UIColor.clearColor()
         identificationLabel.userInteractionEnabled = false
         addSubview(identificationLabel)
+    }
+    
+    func addStatusLabel() {
+        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.textColor = backgroundGreen
+        statusLabel.backgroundColor = whiteColor
+        statusLabel.textAlignment = .Center
+        statusLabel.userInteractionEnabled = false
+        statusLabel.hidden = true
+        
+        statusLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
+        statusLabel.minimumScaleFactor = 0.5
+        statusLabel.adjustsFontSizeToFitWidth = true
+        statusLabel.numberOfLines = 1
+        addSubview(statusLabel)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
