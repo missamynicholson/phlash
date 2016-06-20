@@ -146,7 +146,7 @@ class AuthenticationViewController: UIViewController {
         var isInvalid = false
         if username.characters.count > MAX_LENGTH_USERNAME ||
            password.characters.count > MAX_LENGTH_PASSWORD ||
-           username.containsUpperCaseLetter() || username.isNotAlphanumeric {
+           username.containsUpperCaseLetter() || !username.isNotAlphanumeric {
             isInvalid = true
         } else if email == "" {    // login (no email address)
             isInvalid = false
