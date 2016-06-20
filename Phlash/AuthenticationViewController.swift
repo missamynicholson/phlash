@@ -12,7 +12,7 @@ import Parse
 
 extension String {
     
-    var isNotAlphanumeric: Bool {
+    var isAlphanumeric: Bool {
         return rangeOfString("^[a-z0-9]+$", options: .RegularExpressionSearch) != nil
     }
     
@@ -146,7 +146,7 @@ class AuthenticationViewController: UIViewController {
         var isInvalid = false
         if username.characters.count > MAX_LENGTH_USERNAME ||
            password.characters.count > MAX_LENGTH_PASSWORD ||
-           username.containsUpperCaseLetter() || !username.isNotAlphanumeric {
+           username.containsUpperCaseLetter() || !username.isAlphanumeric {
             isInvalid = true
         } else if email == "" {    // login (no email address)
             isInvalid = false

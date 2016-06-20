@@ -14,6 +14,8 @@ class PhollowSomeone {
     
     func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
         let userValidation = PFQuery(className: "_User")
+        
+        
         let toUsername = toUsernameField.text!
         print(toUsername)
         userValidation.whereKey("username", equalTo: toUsername)
@@ -24,10 +26,37 @@ class PhollowSomeone {
                     AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    if self.AlreadyPhollowing(toUsername){
+
+                        AlertMessage().show(statusLabel, message: "already phollowing!")
+                    } else {
+                        self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    }
                 }
             }
         }
+        
+    }
+    
+    func AlreadyPhollowing(toUsername: String) -> Bool {
+        var alreadyPhollows = false
+        let currentUser = PFUser.currentUser()
+        let phollowValidation = PFQuery(className: "Phollow")
+        phollowValidation.whereKey("fromUsername", equalTo: currentUser!)
+        phollowValidation.whereKey("toUsername", equalTo: toUsername)
+        phollowValidation.findObjectsInBackgroundWithBlock {
+            (results: [PFObject]?, error: NSError?) -> Void in
+            if error == nil  {
+                if results!.count < 1 {
+                    alreadyPhollows = false
+                }
+                else {
+                    alreadyPhollows = true
+                }
+            print("results", results)
+            }
+        }
+        return alreadyPhollows
     }
 
     func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
