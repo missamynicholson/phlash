@@ -192,7 +192,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func phollow() {
         if isInvalidInput(phollowView.usernameField.text!) {
-            AlertMessage().show(statusLabel, message: "error: please review your input")
+            AlertMessage().show(phollowView.statusLabel, message: "Error: please review your input")
             return
         }
 
@@ -201,7 +201,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func unphollow() {
         if isInvalidInput(phollowView.usernameField.text!) {
-            AlertMessage().show(statusLabel, message: "error: please review your input")
+            AlertMessage().show(phollowView.statusLabel, message: "Error: please review your input")
             return
         }
 
