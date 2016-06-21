@@ -15,6 +15,7 @@ class CameraView: UIView, UITextFieldDelegate {
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var settingsButton = UIButton()
     var phollowButton = UIButton()
+    var helpButton = UIButton()
     var logoutButton = UIButton()
     let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
@@ -41,6 +42,7 @@ class CameraView: UIView, UITextFieldDelegate {
         addCaptionField()
         addPendingPhlashesButton()
         addPhollowButton()
+        addHelpButton()
         addLogoutButton()
         addGestureRecognizer(tap)
         addContainerView()
@@ -53,22 +55,19 @@ class CameraView: UIView, UITextFieldDelegate {
     
     func addFlipCamera() {
         flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
-        //flipCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
-        flipCamera.setTitle("Flip", forState: .Normal)
+        flipCamera.setImage(UIImage(named: "camera.png"), forState: UIControlState.Normal)
+        settingsButton.accessibilityLabel = "camera"
     }
     
     func addSettingsButton() {
-        settingsButton.frame = CGRect(x: 0, y: 0, width: screenBounds.width/2, height: screenBounds.width/5)
-        //settingsCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
-        settingsButton.setTitle("Settings", forState: .Normal)
-        settingsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        settingsButton.accessibilityLabel = "logout"
+        settingsButton.frame = CGRect(x: 0, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
+        settingsButton.setImage(UIImage(named: "cog.png"), forState: UIControlState.Normal)
+        settingsButton.accessibilityLabel = "settings"
     }
     
     func addPendingPhlashesButton() {
         pendingPhlashesButton.frame = CGRect(x: screenBounds.width*2/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
-        //pendingPhlashesButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
-        pendingPhlashesButton.setTitle("Phlashes", forState: .Normal)
+        pendingPhlashesButton.setImage(UIImage(named: "envelope.png"), forState: UIControlState.Normal)
         pendingPhlashesButton.userInteractionEnabled = false
     }
     
@@ -85,22 +84,33 @@ class CameraView: UIView, UITextFieldDelegate {
     func addPhollowButton() {
         phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/2, height: 30)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
-        phollowButton.setTitle("Phollow", forState: .Normal)
+        phollowButton.setTitle(" Phollow", forState: .Normal)
         phollowButton.accessibilityLabel = "phollow"
+         phollowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
     }
+    
+    func addHelpButton() {
+        helpButton.frame = CGRect(x: 0, y: -screenBounds.width*3/10, width: screenBounds.width/5, height: 30)
+        helpButton.setTitleColor(.whiteColor(), forState: .Normal)
+        helpButton.setTitle(" Help", forState: .Normal)
+        helpButton.accessibilityLabel = "help"
+        helpButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+    }
+    
     
     func addLogoutButton() {
         logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/2, height: 30)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
-        logoutButton.setTitle("Logout", forState: .Normal)
-        
+        logoutButton.setTitle(" Logout", forState: .Normal)
         logoutButton.accessibilityLabel = "logout"
+        logoutButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
     }
     
     func addContainerView() {
         containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width)
         containerView.userInteractionEnabled = true
         containerView.addSubview(phollowButton)
+        containerView.addSubview(helpButton)
         containerView.addSubview(logoutButton)
         containerView.addSubview(flipCamera)
         containerView.addSubview(pendingPhlashesButton)

@@ -53,7 +53,6 @@ class PhollowSomeone {
                     AlertMessage().show(statusLabel, message: "Already phollowing \(toUsername)!")
                 }
             }
-            
         }
         
     }

@@ -14,6 +14,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let cameraView = CameraView()
     private let phollowView = PhollowView()
+    private let helpView = HelpView()
     private var settingsView = UIView()
     var statusLabel = UILabel()
     var pendingPhlashesButton = UIButton()
@@ -27,6 +28,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.frame = view.frame
         cameraView.settingsButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        cameraView.helpButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.flipCamera.addTarget(self, action: #selector(buttonAction),forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
@@ -39,6 +41,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         phollowView.createPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.destroyPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        
+        helpView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
+        helpView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+
         checkPendingPhlashesStatus()
         pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
@@ -141,6 +147,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         switch sender {
         case cameraView.logoutButton:
             logout()
+        case cameraView.helpButton:
+            help()
+        case helpView.cancelButton:
+            hideHelpView()
         case cameraView.phollowButton:
             showPhollowPage()
         case phollowView.createPhollowButton:
@@ -161,13 +171,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func showSettings() {
         if cameraView.logoutButton.frame.origin.y < 0 {
             UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-                self.cameraView.logoutButton.frame.origin.y = self.screenBounds.width/5
-                self.cameraView.phollowButton.frame.origin.y = self.screenBounds.width*2/5
+                self.cameraView.logoutButton.frame.origin.y = self.screenBounds.width*2/5
+                self.cameraView.helpButton.frame.origin.y = self.screenBounds.width*3/10
+                self.cameraView.phollowButton.frame.origin.y = self.screenBounds.width/5
                 }, completion: nil)
         } else {
             UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.cameraView.logoutButton.frame.origin.y = -self.screenBounds.width/5
-            self.cameraView.phollowButton.frame.origin.y = -self.screenBounds.width*2/5
+                self.cameraView.logoutButton.frame.origin.y = -self.screenBounds.width*2/5
+                self.cameraView.helpButton.frame.origin.y = -self.screenBounds.width*3/10
+                self.cameraView.phollowButton.frame.origin.y = -self.screenBounds.width/5
             }, completion: nil)
         }
     }
@@ -183,6 +195,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         })
     }
     
+    func help() {
+        cameraView.addSubview(helpView)
+        cameraView.containerView.hidden = true
+        HelpViewSetup().animate(helpView, yValue: 0, appear: true)
+    }
+    
+    func hideHelpView() {
+        cameraView.containerView.hidden = false
+        HelpViewSetup().animate(helpView, yValue: screenBounds.height, appear: false)
+    }
+    
     func showPhollowPage() {
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
@@ -192,7 +215,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func phollow() {
         if isInvalidInput(phollowView.usernameField.text!) {
-            AlertMessage().show(statusLabel, message: "error: please review your input")
+            AlertMessage().show(phollowView.statusLabel, message: "Error: please review your input")
             return
         }
 
@@ -201,7 +224,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func unphollow() {
         if isInvalidInput(phollowView.usernameField.text!) {
-            AlertMessage().show(statusLabel, message: "error: please review your input")
+            AlertMessage().show(phollowView.statusLabel, message: "Error: please review your input")
             return
         }
 
