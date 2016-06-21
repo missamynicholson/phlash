@@ -29,14 +29,12 @@ class RetrievePhoto {
     
     func queryDatabaseForPhotos(getPhlashes: (phlashesFromDatabase : [PFObject]?, error : NSError?) -> Void) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        var lastSeenDate = NSDate()
+        let dateInPast = NSDate(timeIntervalSinceReferenceDate: 0)
+        var lastSeenDate = dateInPast
         
-        if defaults.objectForKey("lastSeen") == nil {
-            lastSeenDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Month, value: -1, toDate: NSDate(), options: NSCalendarOptions.init(rawValue: 0))!
-        } else {
+        if defaults.objectForKey("lastSeen") != nil {
             lastSeenDate = defaults.objectForKey("lastSeen") as! NSDate
         }
-        
         
         let currentUser = PFUser.currentUser()
         let currentUsername = currentUser!.username!
@@ -54,6 +52,11 @@ class RetrievePhoto {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 getPhlashes(phlashesFromDatabase: results, error: error)
+                if results!.count > 0 {
+                    NSUserDefaults.standardUserDefaults().setObject(results!.last!.createdAt, forKey: "lastSeen")
+                } else {
+                    NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "lastSeen")
+                }
             }
         }
     }

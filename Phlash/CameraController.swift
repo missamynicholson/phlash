@@ -102,9 +102,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func showPhlash() {
         if phlashesArray.count > 0 {
             let firstPhlash = phlashesArray.first!
-            NSUserDefaults.standardUserDefaults().setObject(firstPhlash.createdAt, forKey: "lastSeen")
-            phlashesArray.removeAtIndex(0)
             RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash)
+            phlashesArray.removeAtIndex(0)
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
