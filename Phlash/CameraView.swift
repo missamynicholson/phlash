@@ -29,6 +29,7 @@ class CameraView: UIView, UITextFieldDelegate {
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
     private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
     let settingsView = UIView()
+    let containerView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -42,8 +43,8 @@ class CameraView: UIView, UITextFieldDelegate {
         addPendingPhlashesButton()
         addSettingsView()
         addGestureRecognizer(tap)
-         addStatusLabel()
-    }
+        addStatusLabel()
+        addContainerView()    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -53,7 +54,6 @@ class CameraView: UIView, UITextFieldDelegate {
         flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
         //flipCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
         flipCamera.setTitle("Flip", forState: .Normal)
-        addSubview(flipCamera)
     }
     
     func addSettingsButton() {
@@ -69,7 +69,6 @@ class CameraView: UIView, UITextFieldDelegate {
         //pendingPhlashesButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
         pendingPhlashesButton.setTitle("Phlashes", forState: .Normal)
         pendingPhlashesButton.userInteractionEnabled = false
-        addSubview(pendingPhlashesButton)
     }
     
     func addRightSwipe() {
@@ -98,8 +97,16 @@ class CameraView: UIView, UITextFieldDelegate {
         phollowButton.frame = CGRect(x: 0, y: 0, width:screenBounds.width/5, height: screenBounds.width/5)
         settingsView.addSubview(logoutButton)
         settingsView.addSubview(phollowButton)
-        addSubview(settingsView)
     }
+    
+    func addContainerView() {
+        containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width/5)
+        containerView.addSubview(settingsView)
+        containerView.addSubview(flipCamera)
+        containerView.addSubview(pendingPhlashesButton)
+        addSubview(containerView)
+    }
+    
     func addIdLabel() {
         identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
         identificationLabel.text = "CameraView"
