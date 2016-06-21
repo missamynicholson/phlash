@@ -102,9 +102,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func showPhlash() {
         if phlashesArray.count > 0 {
             let firstPhlash = phlashesArray.first!
-            NSUserDefaults.standardUserDefaults().setObject(firstPhlash.createdAt, forKey: "lastSeen")
-            phlashesArray.removeAtIndex(0)
             RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash)
+            phlashesArray.removeAtIndex(0)
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
@@ -182,18 +181,37 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.settingsButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        if isInvalidInput(phollowView.usernameField.text!) {
+            AlertMessage().show(statusLabel, message: "error: please review your input")
+            return
+        }
+        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func unphollow() {
-        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.settingsButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        if isInvalidInput(phollowView.usernameField.text!) {
+            AlertMessage().show(statusLabel, message: "error: please review your input")
+            return
+        }
+        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func cancelPhollowPage() {
         PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.settingsButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
     
-   func handlePanGesture(panGesture: UIPanGestureRecognizer) {
+    
+    func isInvalidInput(username: String) -> Bool {
+        let MAX_LENGTH_USERNAME = 15
+        var isInvalid = false
+        if username.characters.count > MAX_LENGTH_USERNAME ||
+            username.containsUpperCaseLetter() || !username.isAlphanumeric {
+            isInvalid = true
+        }
+        return isInvalid
+    }
+    
+    func handlePanGesture(panGesture: UIPanGestureRecognizer) {
         
         let translation = panGesture.translationInView(cameraView)
         let newCenter = CGPoint(x: screenBounds.width/2, y: panGesture.view!.center.y + translation.y)
