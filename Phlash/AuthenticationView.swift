@@ -72,6 +72,8 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         emailField.keyboardType = UIKeyboardType.EmailAddress
         emailField.accessibilityLabel = "email"
         emailField.delegate = self
+        emailField.autocorrectionType = .No
+        emailField.autocapitalizationType = UITextAutocapitalizationType.None
         
         passwordField.delegate = self
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
