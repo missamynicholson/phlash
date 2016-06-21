@@ -29,6 +29,7 @@ class RetrievePhoto {
     
     func queryDatabaseForPhotos(getPhlashes: (phlashesFromDatabase : [PFObject]?, error : NSError?) -> Void) {
         let defaults = NSUserDefaults.standardUserDefaults()
+        // let twentyFourHoursSince = NSDate(timeIntervalSinceReferenceDate: -86400.0)
         var lastSeenDate = NSDate()
         
         if defaults.objectForKey("lastSeen") == nil {
@@ -38,25 +39,12 @@ class RetrievePhoto {
         }
         
         
-        let currentUser = PFUser.currentUser()
-        let currentUsername = currentUser!.username!
-        
-        let phollowing = PFQuery(className:"Phollow")
-        phollowing.whereKey("fromUsername", equalTo:currentUsername)
-        
-        let phlashes = PFQuery(className: "Phlash")
-        phlashes.whereKey("username", matchesKey: "toUsername", inQuery: phollowing)
-        phlashes.whereKey("createdAt", greaterThan: lastSeenDate)
-        phlashes.orderByAscending("createdAt")
-        
-        
-        phlashes.findObjectsInBackgroundWithBlock {
-            (results: [PFObject]?, error: NSError?) -> Void in
+        PFCloud.callFunctionInBackground("query", withParameters: ["lastSeen": lastSeenDate]) {
+            (response: AnyObject?, error: NSError?) -> Void in
+
             if error == nil {
-                getPhlashes(phlashesFromDatabase: results, error: error)
+                getPhlashes(phlashesFromDatabase: response as? [PFObject], error: error)
             }
         }
     }
 }
-
-

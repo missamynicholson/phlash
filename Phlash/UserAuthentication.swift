@@ -12,8 +12,6 @@ class UserAuthentication {
     
     func signUp(controller: UIViewController, username: String, email: String, password: String, statusLabel: UILabel) {
         
-       // let twentyFourHoursSince = NSDate(timeIntervalSinceReferenceDate: -86400.0)
-        
         let user = PFUser()
         user.username = username
         user.password = password
@@ -26,7 +24,7 @@ class UserAuthentication {
                 AlertMessage().show(statusLabel, message: "\(errorMessage)")
             } else {
                 controller.performSegueWithIdentifier("toCamera", sender: nil)
-                Installations().updateInstallation("p\(username)")
+                Installations().addInstallation("p\(username)")
             }
         }
     }
