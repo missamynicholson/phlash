@@ -12,7 +12,7 @@ class DisplayImage {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool, username: String, caption: String, yValue: String) {
+    func setup(chosenImage: UIImage, cameraView: UIView, animate: Bool, username: String, caption: String, yValue: String, swipeLeft: UIGestureRecognizer, swipeRight: UIGestureRecognizer) {
         let startXValue = ImageViewFrame().getXValue(chosenImage)
         var endXValue = CGFloat()
         let phlashView = PhlashView(frame: CGRect(x: screenBounds.width * 2, y: 0, width: ImageViewFrame().getNewWidth(chosenImage), height: screenBounds.height))
@@ -38,7 +38,7 @@ class DisplayImage {
         }
         
         Delay().run(2.0) {
-            self.animateOut(phlashView, xValue: endXValue)
+            self.animateOut(phlashView, xValue: endXValue, swipeLeft: swipeLeft, swipeRight: swipeRight)
         }
     }
     
@@ -48,11 +48,13 @@ class DisplayImage {
             }, completion: nil)
     }
     
-    func animateOut(phlashView: UIImageView, xValue: CGFloat) {
+    func animateOut(phlashView: UIImageView, xValue: CGFloat, swipeLeft: UIGestureRecognizer, swipeRight: UIGestureRecognizer) {
         UIView.animateWithDuration(1.0, delay: 1.0, options: .CurveEaseOut, animations: {
             phlashView.frame.origin.x = xValue
             }, completion: { finished in
                 phlashView.removeFromSuperview()
+                swipeLeft.enabled = true
+                swipeRight.enabled = true
         })
     }
     

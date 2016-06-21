@@ -11,7 +11,7 @@ import UIKit
 
 class RetrievePhoto {
     
-    func showFirstPhlashImage(cameraView: UIView, firstPhlash: PFObject) {
+    func showFirstPhlashImage(cameraView: UIView, firstPhlash: PFObject, swipeLeft: UIGestureRecognizer, swipeRight: UIGestureRecognizer) {
         let userImageFile = firstPhlash["file"] as! PFFile
         userImageFile.getDataInBackgroundWithBlock {
             (imageData: NSData?, error: NSError?) -> Void in
@@ -21,7 +21,7 @@ class RetrievePhoto {
                     let username = "\(firstPhlash["username"])"
                     let caption = "\(firstPhlash["caption"])"
                     let yValue = "\(firstPhlash["yValue"])"
-                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue)
+                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue, swipeLeft: swipeLeft, swipeRight: swipeRight)
                 }
             }
         }
