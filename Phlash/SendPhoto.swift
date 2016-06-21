@@ -16,7 +16,6 @@ class SendPhoto {
 
     
     func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
-        AlertMessage().show(statusLabel, message: "Nice phlash!")
  
         let imageData = UIImagePNGRepresentation(image)
         guard let checkedImage = imageData else {

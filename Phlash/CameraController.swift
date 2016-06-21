@@ -45,21 +45,38 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         helpView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         helpView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
 
-        checkPendingPhlashesStatus()
         pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pushQuery), name: "pushQuery", object: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        reset()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadImagePicker()
-        AlertMessage().show(statusLabel, message: "Welcome")
+        reset()
     }
     
+    func reset() {
+        loadImagePicker()
+        togglePhlashesLabel()
+        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+            pushQuery()
+        }
+    }
+    
+    func pushQuery() {
+        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+            self.phlashesArray = phlashesFromDatabase!
+            self.togglePhlashesLabel()
+        })
+    }
     
     func dismissKeyboard() {
         cameraView.endEditing(true)
@@ -89,17 +106,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-    func checkPendingPhlashesStatus() {
-        if self.phlashesArray.count > 0 {
-            self.pendingPhlashesButton.hidden = false
-        } else {
-            RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-                self.phlashesArray = phlashesFromDatabase!
-                self.togglePhlashesLabel()
-            })
-        }
-    }
-    
+   
     func togglePhlashesLabel() {
         if self.phlashesArray.count < 1 {
             self.pendingPhlashesButton.hidden = true
@@ -115,10 +122,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let firstPhlash = phlashesArray.first!
             RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash, swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
             phlashesArray.removeAtIndex(0)
+            reset()
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
-        checkPendingPhlashesStatus()
     }
     
     func imagePickerController(picker: UIImagePickerController,

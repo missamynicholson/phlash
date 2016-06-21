@@ -44,6 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
     }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo:[NSObject : AnyObject]) {
+        print("push received")
+        print(userInfo)
+        application.applicationIconBadgeNumber = 0
+        
+        //post notification.
+        NSNotificationCenter.defaultCenter().postNotificationName("pushQuery", object: nil, userInfo: userInfo)
+    }
 
 
     func applicationWillResignActive(application: UIApplication) {
