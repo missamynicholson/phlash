@@ -12,7 +12,7 @@ class UnPhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func unPhollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func unPhollow(toUsernameField: UITextField, statusLabel: UILabel) {
         let userValidation = PFQuery(className: "_User")
         let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
@@ -24,7 +24,7 @@ class UnPhollowSomeone {
                     AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel)
                     
                 }
             }
@@ -32,11 +32,11 @@ class UnPhollowSomeone {
         
     }
     
-    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel) {
         
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
-        phollowValidation.whereKey("toUsername", equalTo: toUsername)
+        phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
         phollowValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
@@ -44,18 +44,18 @@ class UnPhollowSomeone {
                     AlertMessage().show(statusLabel, message: "You are not following this user")
                 }
                 else {
-                    self.removePhollowFromDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    self.removePhollowFromDatabase(toUsernameField, statusLabel: statusLabel)
                 }
             }
             
         }
     }
     
-    func removePhollowFromDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
+    func removePhollowFromDatabase(toUsernameField: UITextField, statusLabel: UILabel){
         let currentUser = PFUser.currentUser()
         let unPhollow = PFQuery(className:"Phollow")
         unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
-        unPhollow.whereKey("toUsername", equalTo: toUsername)
+        unPhollow.whereKey("toUsername", equalTo: toUsernameField.text!)
         unPhollow.getFirstObjectInBackgroundWithBlock {
             (object: PFObject?, error: NSError?) -> Void in
             if error != nil || object == nil  {
@@ -63,6 +63,7 @@ class UnPhollowSomeone {
             } else  {
                 object!.deleteInBackground()
                 AlertMessage().show(statusLabel, message: "You are now unfollowing this user")
+                toUsernameField.text = ""
             }
             //This will be moved into Cloud Code
             //let push = PFPush()

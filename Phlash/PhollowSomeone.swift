@@ -12,7 +12,7 @@ class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func phollow(toUsernameField: UITextField, statusLabel: UILabel) {
         let userValidation = PFQuery(className: "_User")
         let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
@@ -24,23 +24,23 @@ class PhollowSomeone {
                     AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel)
                 }
             }
         }
         
     }
     
-    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel) {
         
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
-        phollowValidation.whereKey("toUsername", equalTo: toUsername)
+        phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
         phollowValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
-                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    self.addPhollowToDatabase(toUsernameField, statusLabel: statusLabel)
                     
                 }
                 else {
@@ -52,7 +52,7 @@ class PhollowSomeone {
         
     }
     
-    func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
+    func addPhollowToDatabase(toUsernameField: UITextField, statusLabel: UILabel){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             //print ("Checked User  is nil")
@@ -60,14 +60,13 @@ class PhollowSomeone {
         }
         let phollow = PFObject(className:"Phollow")
         phollow["fromUsername"] = checkedUser.username
-        phollow["toUsername"] = toUsername
+        phollow["toUsername"] = toUsernameField.text
         phollow.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
-                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
-                Installations().updateInstallation(toUsername)
-                
+                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsernameField.text)")
+                Installations().updateInstallation(toUsernameField.text!)
+                toUsernameField.text = ""
                 //This will be moved into Cloud Code
                 //let push = PFPush()
                 //push.setChannel("p\(toUsername)")

@@ -11,26 +11,24 @@ import UIKit
 
 class PhollowViewSetup {
     
-    func hide(logoutButton: UIButton, phollowButton: UIButton) {
-        logoutButton.hidden = true
-        phollowButton.hidden = true
+    func hide(cameraView: UIView) {
+        cameraView.hidden = true
     }
     
-    func show(logoutButton: UIButton, phollowButton: UIButton) {
-        logoutButton.hidden = false
-        phollowButton.hidden = false
+    func show(cameraView: UIView) {
+        cameraView.hidden = false
     }
     
-    func animate(phollowView: UIView, phollowButton: UIButton, logoutButton: UIButton, yValue: CGFloat, appear: Bool, cameraViewId: UILabel) {
+    func animate(phollowView: UIView,  yValue: CGFloat, appear: Bool, cameraViewId: UILabel) {
         UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
             phollowView.frame.origin.y = yValue
             }, completion: { finished in
                 if appear {
-                    self.hide(logoutButton, phollowButton: phollowButton)
+                    //self.hide(cameraView)
                 } else {
                     phollowView.removeFromSuperview()
                     cameraViewId.text = "CameraView"
-                    self.show(logoutButton, phollowButton: phollowButton)
+                    //self.show(cameraView)
                 }
         })
     }

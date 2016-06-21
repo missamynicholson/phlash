@@ -14,7 +14,8 @@ class CameraView: UIView, UITextFieldDelegate {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var settingsButton = UIButton()
-    let phollowButton = UIButton()
+    var phollowButton = UIButton()
+    var logoutButton = UIButton()
     let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
@@ -33,7 +34,6 @@ class CameraView: UIView, UITextFieldDelegate {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
         addSettingsButton()
-        //addPhollowButton()
         addFlipCamera()
         addRightSwipe()
         addLeftSwipe()
@@ -92,12 +92,10 @@ class CameraView: UIView, UITextFieldDelegate {
     
     func addSettingsView() {
         settingsView.frame = CGRect(x: 0, y: -screenBounds.width, width:screenBounds.width/5, height:screenBounds.width/2)
-        let logoutButton = UIButton()
-        logoutButton.setTitle("Phollow", forState: .Normal)
-        logoutButton.frame = CGRect(x: 0, y: 0, width:screenBounds.width/5, height: screenBounds.width/5)
-        let phollowButton = UIButton()
-        phollowButton.setTitle("Logout", forState: .Normal)
-        phollowButton.frame = CGRect(x: 0, y: screenBounds.width/5, width:screenBounds.width/5, height: screenBounds.width/5)
+        logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.frame = CGRect(x: 0, y: screenBounds.width/5, width:screenBounds.width/5, height: screenBounds.width/5)
+        phollowButton.setTitle("Phollow", forState: .Normal)
+        phollowButton.frame = CGRect(x: 0, y: 0, width:screenBounds.width/5, height: screenBounds.width/5)
         settingsView.addSubview(logoutButton)
         settingsView.addSubview(phollowButton)
         addSubview(settingsView)
