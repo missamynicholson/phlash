@@ -58,9 +58,10 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addSettingsButton() {
-        settingsButton.frame = CGRect(x: 0, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
+        settingsButton.frame = CGRect(x: 0, y: 0, width: screenBounds.width/2, height: screenBounds.width/5)
         //settingsCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
         settingsButton.setTitle("Settings", forState: .Normal)
+        settingsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         settingsButton.accessibilityLabel = "logout"
     }
     

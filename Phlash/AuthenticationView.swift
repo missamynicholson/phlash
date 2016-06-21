@@ -117,10 +117,11 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         statusLabel.numberOfLines = 1
         statusLabel.hidden = true
         
-        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/5, height: 30)
+        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/2, height: 30)
         goBackButton.setTitleColor(.whiteColor(), forState: .Normal)
         goBackButton.setTitle("Go back", forState: .Normal)
         goBackButton.accessibilityLabel = "goBack"
+        goBackButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         
         resetPwdButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*0.55, width: screenBounds.width/2, height: 30)
         resetPwdButton.setTitleColor(.whiteColor(), forState: .Normal)
