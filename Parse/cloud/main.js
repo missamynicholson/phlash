@@ -104,8 +104,8 @@ Parse.Cloud.define("query", function(request, response) {
   var phlashQuery = new Parse.Query(Phlash);
 
   phollowQuery.equalTo("fromUsername", Parse.User.current().getUsername());
-	phollowQuery.greaterThan("createdAt", request.params.lastSeen);
   phlashQuery.matchesKeyInQuery("username", "toUsername", phollowQuery);
+	phlashQuery.greaterThan("createdAt", request.params.lastSeen);
   phlashQuery.ascending("createdAt");
 
   phlashQuery.find({
