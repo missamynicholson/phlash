@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "Phlash": {
+      "applicationId": "QrcCzqiYvo9gvGGzAb0bhyRSgBmPryGKnXxRSwOL"
+    },
+    "_default": {
+      "link": "Phlash"
+    }
+  }
+}
