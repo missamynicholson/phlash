@@ -28,7 +28,6 @@ class CameraView: UIView, UITextFieldDelegate {
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
     private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
-    let settingsView = UIView()
     let containerView = UIView()
     
     override init(frame: CGRect) {
@@ -41,10 +40,12 @@ class CameraView: UIView, UITextFieldDelegate {
         addIdLabel()
         addCaptionField()
         addPendingPhlashesButton()
-        addSettingsView()
+        addPhollowButton()
+        addLogoutButton()
         addGestureRecognizer(tap)
+        addContainerView()
         addStatusLabel()
-        addContainerView()    }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -61,7 +62,6 @@ class CameraView: UIView, UITextFieldDelegate {
         //settingsCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
         settingsButton.setTitle("Settings", forState: .Normal)
         settingsButton.accessibilityLabel = "logout"
-        addSubview(settingsButton)
     }
     
     func addPendingPhlashesButton() {
@@ -82,28 +82,27 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addPhollowButton() {
-        phollowButton.frame = CGRect(x: 0, y: 20, width: screenBounds.width/5, height: 30)
+        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/5, height: 30)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
         phollowButton.setTitle("Phollow", forState: .Normal)
         phollowButton.accessibilityLabel = "phollow"
-        addSubview(phollowButton)
     }
     
-    func addSettingsView() {
-        settingsView.frame = CGRect(x: 0, y: -screenBounds.width, width:screenBounds.width/5, height:screenBounds.width/2)
+    func addLogoutButton() {
+        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/5, height: 30)
+        logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.frame = CGRect(x: 0, y: screenBounds.width/5, width:screenBounds.width/5, height: screenBounds.width/5)
-        phollowButton.setTitle("Phollow", forState: .Normal)
-        phollowButton.frame = CGRect(x: 0, y: 0, width:screenBounds.width/5, height: screenBounds.width/5)
-        settingsView.addSubview(logoutButton)
-        settingsView.addSubview(phollowButton)
+        logoutButton.accessibilityLabel = "logout"
     }
     
     func addContainerView() {
-        containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width/5)
-        containerView.addSubview(settingsView)
+        containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width)
+        containerView.addSubview(phollowButton)
+        containerView.addSubview(logoutButton)
         containerView.addSubview(flipCamera)
         containerView.addSubview(pendingPhlashesButton)
+        containerView.addSubview(settingsButton)
+        containerView.addSubview(captionField)
         addSubview(containerView)
     }
     
@@ -140,8 +139,6 @@ class CameraView: UIView, UITextFieldDelegate {
         captionField.delegate = self
         captionField.addGestureRecognizer(panGesture)
         captionField.userInteractionEnabled = true
-       
-        addSubview(captionField)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -155,8 +152,5 @@ class CameraView: UIView, UITextFieldDelegate {
 
         return textSize.width < textField.bounds.size.width
     }
-
-    
-    
 }
 

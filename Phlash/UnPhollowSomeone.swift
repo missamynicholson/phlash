@@ -12,7 +12,8 @@ class UnPhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func unPhollow(toUsernameField: UITextField, statusLabel: UILabel) {
+    func unPhollow(toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton) {
+         destroyPhollowButton.userInteractionEnabled = false
         let userValidation = PFQuery(className: "_User")
         let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
@@ -21,19 +22,22 @@ class UnPhollowSomeone {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 if results!.count < 1 {
+                    destroyPhollowButton.userInteractionEnabled = true
                     AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel)
-                    
+                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel, destroyPhollowButton: destroyPhollowButton)
                 }
             }
         }
         
+        Delay().run(5.0) {
+            destroyPhollowButton.userInteractionEnabled = true
+        }
+        
     }
     
-    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel) {
-        
+    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton) {
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
         phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
@@ -41,17 +45,18 @@ class UnPhollowSomeone {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
-                    AlertMessage().show(statusLabel, message: "You are not following this user")
+                    destroyPhollowButton.userInteractionEnabled = true
+                    AlertMessage().show(statusLabel, message: "You are not following \(toUsernameField.text)")
                 }
                 else {
-                    self.removePhollowFromDatabase(toUsernameField, statusLabel: statusLabel)
+                    self.removePhollowFromDatabase(toUsernameField, statusLabel: statusLabel, destroyPhollowButton: destroyPhollowButton)
                 }
             }
             
         }
     }
     
-    func removePhollowFromDatabase(toUsernameField: UITextField, statusLabel: UILabel){
+    func removePhollowFromDatabase(toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton){
         let currentUser = PFUser.currentUser()
         let unPhollow = PFQuery(className:"Phollow")
         unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
@@ -59,18 +64,15 @@ class UnPhollowSomeone {
         unPhollow.getFirstObjectInBackgroundWithBlock {
             (object: PFObject?, error: NSError?) -> Void in
             if error != nil || object == nil  {
-                AlertMessage().show(statusLabel, message: "You are not following this user")
+                destroyPhollowButton.userInteractionEnabled = true
+                AlertMessage().show(statusLabel, message: "You are not following \(toUsernameField.text)")
             } else  {
                 object!.deleteInBackground()
                 AlertMessage().show(statusLabel, message: "You are now unfollowing this user")
                 toUsernameField.text = ""
+                destroyPhollowButton.userInteractionEnabled = true
             }
-            //This will be moved into Cloud Code
-            //let push = PFPush()
-            //push.setChannel("p\(toUsername)")
-            //push.setMessage("\(checkedUser.username) is now following you!")
-            //push.sendPushInBackground()
-            //This will be moved into Cloud Code
         }
     }
+    
 }
