@@ -11,7 +11,7 @@ import UIKit
 
 class RetrievePhoto {
     
-    func showFirstPhlashImage(cameraView: UIView, firstPhlash: PFObject) {
+    func showFirstPhlashImage(cameraView: UIView, firstPhlash: PFObject, swipeLeft: UIGestureRecognizer, swipeRight: UIGestureRecognizer) {
         let userImageFile = firstPhlash["file"] as! PFFile
         userImageFile.getDataInBackgroundWithBlock {
             (imageData: NSData?, error: NSError?) -> Void in
@@ -21,7 +21,7 @@ class RetrievePhoto {
                     let username = "\(firstPhlash["username"])"
                     let caption = "\(firstPhlash["caption"])"
                     let yValue = "\(firstPhlash["yValue"])"
-                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue)
+                    DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue, swipeLeft: swipeLeft, swipeRight: swipeRight)
                 }
             }
         }
@@ -29,21 +29,24 @@ class RetrievePhoto {
     
     func queryDatabaseForPhotos(getPhlashes: (phlashesFromDatabase : [PFObject]?, error : NSError?) -> Void) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        // let twentyFourHoursSince = NSDate(timeIntervalSinceReferenceDate: -86400.0)
-        var lastSeenDate = NSDate()
+        let dateInPast = NSDate(timeIntervalSinceReferenceDate: 0)
+        var lastSeenDate = dateInPast
         
-        if defaults.objectForKey("lastSeen") == nil {
-            lastSeenDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Month, value: -1, toDate: NSDate(), options: NSCalendarOptions.init(rawValue: 0))!
-        } else {
+        if defaults.objectForKey("lastSeen") != nil {
             lastSeenDate = defaults.objectForKey("lastSeen") as! NSDate
         }
         
-        
         PFCloud.callFunctionInBackground("query", withParameters: ["lastSeen": lastSeenDate]) {
             (response: AnyObject?, error: NSError?) -> Void in
-
+            
             if error == nil {
-                getPhlashes(phlashesFromDatabase: response as? [PFObject], error: error)
+                let results = response as? [PFObject]
+                getPhlashes(phlashesFromDatabase: results, error: error)
+                if results!.count > 0 {
+                    NSUserDefaults.standardUserDefaults().setObject(results!.last!.createdAt, forKey: "lastSeen")
+                } else {
+                    NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "lastSeen")
+                }
             }
         }
     }

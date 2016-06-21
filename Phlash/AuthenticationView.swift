@@ -72,6 +72,8 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         emailField.keyboardType = UIKeyboardType.EmailAddress
         emailField.accessibilityLabel = "email"
         emailField.delegate = self
+        emailField.autocorrectionType = .No
+        emailField.autocapitalizationType = UITextAutocapitalizationType.None
         
         passwordField.delegate = self
         passwordField.frame = CGRect(x: 0, y: screenBounds.height * 3/8, width: screenBounds.width, height: screenBounds.height/15)
@@ -99,7 +101,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         signupButton.setTitle("Signup", forState: .Normal)
         signupButton.accessibilityLabel = "signup"
         
-        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.frame = CGRect(x: 0, y: -60, width: screenBounds.width, height: 60)
         statusLabel.textColor = backgroundGreen
         statusLabel.backgroundColor = whiteColor
         statusLabel.textAlignment = .Center
@@ -115,10 +117,11 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         statusLabel.numberOfLines = 1
         statusLabel.hidden = true
         
-        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/5, height: 30)
+        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/2, height: 30)
         goBackButton.setTitleColor(.whiteColor(), forState: .Normal)
         goBackButton.setTitle("Go back", forState: .Normal)
         goBackButton.accessibilityLabel = "goBack"
+        goBackButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         
         resetPwdButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*0.55, width: screenBounds.width/2, height: 30)
         resetPwdButton.setTitleColor(.whiteColor(), forState: .Normal)

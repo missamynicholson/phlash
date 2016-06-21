@@ -23,7 +23,7 @@ class AlertMessage {
     
     func dismissAlert(statusLabel: UILabel) {
         UIView.animateWithDuration(1.0, delay: 0, options: .CurveEaseOut, animations: {
-            statusLabel.frame.origin.y = -40
+            statusLabel.frame.origin.y = -60
             }, completion: { finished in
                 statusLabel.text = ""
                 statusLabel.hidden = true

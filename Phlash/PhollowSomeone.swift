@@ -11,21 +11,26 @@ import Parse
 class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
-    
-    func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+
+    func phollow(toUsernameField: UITextField, statusLabel: UILabel, phollowButton: UIButton, type: String) {
         
         let toUsername = toUsernameField.text!
         
-        PFCloud.callFunctionInBackground("phollow", withParameters: ["toUsername": toUsername]) {
+        PFCloud.callFunctionInBackground(type, withParameters: ["toUsername": toUsername]) {
             (response: AnyObject?, error: NSError?) -> Void in
             if error === nil {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
-                PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
+                AlertMessage().show(statusLabel, message: "Successfully \(type)ed \(toUsername)")
                 Installations().addInstallation(toUsername)
+                toUsernameField.text = ""
+                phollowButton.userInteractionEnabled = true
             } else {
                 let message = error!.userInfo["error"] as! NSString
-                AlertMessage().show(statusLabel, message: "Unsuccessfully phollowed: \(message)")
+                AlertMessage().show(statusLabel, message: "Unsuccessfully \(type)ed: \(message)")
+                phollowButton.userInteractionEnabled = true
             }
+        }
+        Delay().run(5.0) {
+            phollowButton.userInteractionEnabled = true
         }
     }
 }

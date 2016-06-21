@@ -16,7 +16,8 @@ class SendPhoto {
 
     
     func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
-        
+        AlertMessage().show(statusLabel, message: "Nice phlash!")
+ 
         let imageData = UIImagePNGRepresentation(image)
         guard let checkedImage = imageData else {
             print ("Checked Image  is nil")
@@ -29,7 +30,6 @@ class SendPhoto {
             (response: AnyObject?, error: NSError?) -> Void in
             if error === nil {
                 captionField.text = ""
-                AlertMessage().show(statusLabel, message: "Nice phlash!")
             } else {
                 AlertMessage().show(statusLabel, message: "Uh oh, phlash unsuccessful")
             }
