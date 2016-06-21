@@ -82,7 +82,7 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addPhollowButton() {
-        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/2, height: 30)
+        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/2, height: screenBounds.width/10)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
         phollowButton.setTitle(" Phollow", forState: .Normal)
         phollowButton.accessibilityLabel = "phollow"
@@ -90,7 +90,7 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addHelpButton() {
-        helpButton.frame = CGRect(x: 0, y: -screenBounds.width*3/10, width: screenBounds.width/5, height: 30)
+        helpButton.frame = CGRect(x: 0, y: -screenBounds.width*3/10, width: screenBounds.width/2, height: screenBounds.width/10)
         helpButton.setTitleColor(.whiteColor(), forState: .Normal)
         helpButton.setTitle(" Help", forState: .Normal)
         helpButton.accessibilityLabel = "help"
@@ -99,7 +99,7 @@ class CameraView: UIView, UITextFieldDelegate {
     
     
     func addLogoutButton() {
-        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/2, height: 30)
+        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/2, height: screenBounds.width/10)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle(" Logout", forState: .Normal)
         logoutButton.accessibilityLabel = "logout"
@@ -107,7 +107,7 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addContainerView() {
-        containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width)
+        containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.height)
         containerView.userInteractionEnabled = true
         containerView.addSubview(phollowButton)
         containerView.addSubview(helpButton)
