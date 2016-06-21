@@ -83,21 +83,23 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addPhollowButton() {
-        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/5, height: 30)
+        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/2, height: 30)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
         phollowButton.setTitle("Phollow", forState: .Normal)
         phollowButton.accessibilityLabel = "phollow"
     }
     
     func addLogoutButton() {
-        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/5, height: 30)
+        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/2, height: 30)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
         logoutButton.setTitle("Logout", forState: .Normal)
+        
         logoutButton.accessibilityLabel = "logout"
     }
     
     func addContainerView() {
         containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width)
+        containerView.userInteractionEnabled = true
         containerView.addSubview(phollowButton)
         containerView.addSubview(logoutButton)
         containerView.addSubview(flipCamera)
