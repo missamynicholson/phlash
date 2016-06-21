@@ -15,7 +15,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     private let cameraView = CameraView()
     private let phollowView = PhollowView()
     var statusLabel = UILabel()
-    var pendingPhlashesLabel = UILabel()
+    var pendingPhlashesButton = UIButton()
     var phlashesArray = [PFObject]()
     
     
@@ -24,7 +24,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.frame = view.frame
-        cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        cameraView.settingsButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.phollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.flipCamera.addTarget(self, action: #selector(buttonAction),forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
@@ -37,8 +37,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         phollowView.createPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.destroyPhollowButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         phollowView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-        checkPendingPhlashesStatus()
-        pendingPhlashesLabel = cameraView.pendingPhlashesLabel
+        //checkPendingPhlashesStatus()
+        //pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
     }
     
@@ -82,7 +82,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func checkPendingPhlashesStatus() {
         if self.phlashesArray.count > 0 {
-            self.pendingPhlashesLabel.hidden = false
+            self.pendingPhlashesButton.hidden = false
         } else {
             RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
                 self.phlashesArray = phlashesFromDatabase!
@@ -93,9 +93,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func togglePhlashesLabel() {
         if self.phlashesArray.count < 1 {
-            self.pendingPhlashesLabel.hidden = true
+            self.pendingPhlashesButton.hidden = true
         } else {
-            self.pendingPhlashesLabel.hidden = false
+            self.pendingPhlashesButton.hidden = false
         }
     }
     
@@ -133,8 +133,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func buttonAction(sender: UIButton!) {
         switch sender {
-        case cameraView.logoutButton:
-            logout()
+        case cameraView.settingsButton:
+            //logout()
+            showSettingsView()
         case cameraView.phollowButton:
             showPhollowPage()
         case phollowView.createPhollowButton:
@@ -147,6 +148,18 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             flipFrontBackCamera()
         default:
             break
+        }
+    }
+    
+    func showSettingsView() {
+        if cameraView.settingsView.frame.origin.y < 0 {
+            UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+                self.cameraView.settingsView.frame.origin.y = self.screenBounds.width/5
+                }, completion: nil)
+        } else {
+        UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.cameraView.settingsView.frame.origin.y = -self.screenBounds.width
+            }, completion: nil)
         }
     }
     
@@ -165,19 +178,19 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
         
-        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: 0, appear: true, cameraViewId: cameraView.identificationLabel)
+        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.settingsButton, yValue: 0, appear: true, cameraViewId: cameraView.identificationLabel)
     }
     
     func phollow() {
-        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.settingsButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func unphollow() {
-        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.settingsButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
     }
     
     func cancelPhollowPage() {
-        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.logoutButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
+        PhollowViewSetup().animate(phollowView, phollowButton: cameraView.phollowButton, logoutButton: cameraView.settingsButton, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
     
    func handlePanGesture(panGesture: UIPanGestureRecognizer) {

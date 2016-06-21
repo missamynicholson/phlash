@@ -13,34 +13,36 @@ class CameraView: UIView, UITextFieldDelegate {
     private let mainScreen = UIScreen.mainScreen()
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
-    var logoutButton = UIButton()
+    var settingsButton = UIButton()
     let phollowButton = UIButton()
     let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
     let swipeLeft = UISwipeGestureRecognizer()
     let panGesture = UIPanGestureRecognizer()
     var identificationLabel = UILabel()
-    var pendingPhlashesLabel = UILabel()
+    var pendingPhlashesButton = UIButton()
     var captionField = UITextField()
     private let whiteColor = UIColor.whiteColor()
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
     private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+    let settingsView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame:frame)
         backgroundColor = UIColor.clearColor()
-        addLogoutButton()
-        addPhollowButton()
+        addSettingsButton()
+        //addPhollowButton()
         addFlipCamera()
         addRightSwipe()
         addLeftSwipe()
         addIdLabel()
-        addStatusLabel()
         addCaptionField()
-        addPendingPhlashesLabel()
+        addPendingPhlashesButton()
+        addSettingsView()
         addGestureRecognizer(tap)
+         addStatusLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,27 +50,26 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addFlipCamera() {
-        flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 100, width: screenBounds.width/5, height: 30)
-        flipCamera.setTitleColor(.whiteColor(), forState: .Normal)
+        flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
+        //flipCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
         flipCamera.setTitle("Flip", forState: .Normal)
         addSubview(flipCamera)
     }
     
-    func addLogoutButton() {
-        logoutButton.frame = CGRect(x: screenBounds.width*4/5, y: 20, width: screenBounds.width/5, height: 30)
-        logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
-        logoutButton.setTitle("Logout", forState: .Normal)
-        logoutButton.accessibilityLabel = "logout"
-        addSubview(logoutButton)
+    func addSettingsButton() {
+        settingsButton.frame = CGRect(x: 0, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
+        //settingsCamera.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
+        settingsButton.setTitle("Settings", forState: .Normal)
+        settingsButton.accessibilityLabel = "logout"
+        addSubview(settingsButton)
     }
     
-    func addPendingPhlashesLabel() {
-        pendingPhlashesLabel.frame = CGRect(x: 0, y: 40, width: screenBounds.width, height: 30)
-        pendingPhlashesLabel.textColor = UIColor.whiteColor()
-        pendingPhlashesLabel.textAlignment = .Right
-        pendingPhlashesLabel.userInteractionEnabled = false
-        pendingPhlashesLabel.text = "Phlashes to View"
-        addSubview(pendingPhlashesLabel)
+    func addPendingPhlashesButton() {
+        pendingPhlashesButton.frame = CGRect(x: screenBounds.width*2/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
+        //pendingPhlashesButton.setImage(UIImage(named: "play.png"), forState: UIControlState.Normal)
+        pendingPhlashesButton.setTitle("Phlashes", forState: .Normal)
+        pendingPhlashesButton.userInteractionEnabled = false
+        addSubview(pendingPhlashesButton)
     }
     
     func addRightSwipe() {
@@ -89,6 +90,18 @@ class CameraView: UIView, UITextFieldDelegate {
         addSubview(phollowButton)
     }
     
+    func addSettingsView() {
+        settingsView.frame = CGRect(x: 0, y: -screenBounds.width, width:screenBounds.width/5, height:screenBounds.width/2)
+        let logoutButton = UIButton()
+        logoutButton.setTitle("Phollow", forState: .Normal)
+        logoutButton.frame = CGRect(x: 0, y: 0, width:screenBounds.width/5, height: screenBounds.width/5)
+        let phollowButton = UIButton()
+        phollowButton.setTitle("Logout", forState: .Normal)
+        phollowButton.frame = CGRect(x: 0, y: screenBounds.width/5, width:screenBounds.width/5, height: screenBounds.width/5)
+        settingsView.addSubview(logoutButton)
+        settingsView.addSubview(phollowButton)
+        addSubview(settingsView)
+    }
     func addIdLabel() {
         identificationLabel.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
         identificationLabel.text = "CameraView"
@@ -98,7 +111,7 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addStatusLabel() {
-        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.frame = CGRect(x: 0, y: -60, width: screenBounds.width, height: 60)
         statusLabel.textColor = backgroundGreen
         statusLabel.backgroundColor = whiteColor
         statusLabel.textAlignment = .Center
@@ -113,7 +126,7 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addCaptionField(){
-        captionField.frame = CGRect(x: 0, y: screenBounds.height/8, width: screenBounds.width, height: screenBounds.height/15)
+        captionField.frame = CGRect(x: 0, y: screenBounds.height/3, width: screenBounds.width, height: screenBounds.height/15)
         captionField.backgroundColor = UIColor.colorWithAlphaComponent(whiteColor)(0.5)
         captionField.font = UIFont.systemFontOfSize(FONT_SIZE)
         captionField.placeholder = "Caption..."
