@@ -101,8 +101,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func showPhlash() {
         if phlashesArray.count > 0 {
+            cameraView.swipeLeft.enabled = false
+            cameraView.swipeRight.enabled = false
             let firstPhlash = phlashesArray.first!
-            RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash)
+            RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash, swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
             phlashesArray.removeAtIndex(0)
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
@@ -112,6 +114,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func imagePickerController(picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        cameraView.swipeRight.enabled = false
+        cameraView.swipeLeft.enabled = false
         
         var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         if picker.cameraDevice == UIImagePickerControllerCameraDevice.Front {
@@ -126,7 +131,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
         let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "")
+        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
         SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
     }
     
