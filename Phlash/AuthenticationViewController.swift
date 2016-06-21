@@ -123,7 +123,7 @@ class AuthenticationViewController: UIViewController {
             AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
-        UserAuthentication().login(self, username: username!, password: password!, statusLabel: statusLabel)
+        UserAuthentication().login(self, username: username!, password: password!, statusLabel: statusLabel, submitButton: submitButton)
         clearTextFields()
     }
     
@@ -135,7 +135,7 @@ class AuthenticationViewController: UIViewController {
             AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
-        UserAuthentication().signUp(self, username: username!, email: email!, password: password!, statusLabel: statusLabel)
+        UserAuthentication().signUp(self, username: username!, email: email!, password: password!, statusLabel: statusLabel, submitButton: submitButton)
         clearTextFields()
     }
     

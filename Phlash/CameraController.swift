@@ -172,7 +172,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
-        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: phollowView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        PhollowSomeone().phollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, errorStatusLabel: phollowView.statusLabel, successStatusLabel: statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel, createPhollowButton: phollowView.createPhollowButton)
     }
     
     func unphollow() {
@@ -180,7 +180,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             AlertMessage().show(statusLabel, message: "error: please review your input")
             return
         }
-        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, statusLabel: cameraView.statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel)
+        UnPhollowSomeone().unPhollow(phollowView.usernameField, phollowView: phollowView, logoutButton: cameraView.logoutButton, phollowButton: cameraView.phollowButton, errorStatusLabel: phollowView.statusLabel, successStatusLabel: statusLabel, cameraViewIdentificationLabel: cameraView.identificationLabel, destroyPhollowButton: phollowView.destroyPhollowButton)
     }
     
     func cancelPhollowPage() {

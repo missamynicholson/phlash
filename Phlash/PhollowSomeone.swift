@@ -12,7 +12,10 @@ class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func phollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, createPhollowButton: UIButton) {
+        
+        createPhollowButton.userInteractionEnabled = false
+        
         let userValidation = PFQuery(className: "_User")
         let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
@@ -21,17 +24,22 @@ class PhollowSomeone {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 if results!.count < 1 {
-                    AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
+                    createPhollowButton.userInteractionEnabled = true
+                    AlertMessage().show(errorStatusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
+                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, errorStatusLabel: errorStatusLabel, successStatusLabel: successStatusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel, createPhollowButton: createPhollowButton)
                 }
             }
         }
         
+        Delay().run(5.0) {
+            createPhollowButton.userInteractionEnabled = true
+        }
+        
     }
     
-    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel) {
+    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, createPhollowButton: UIButton) {
         
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
@@ -40,11 +48,11 @@ class PhollowSomeone {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
-                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, statusLabel: statusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel)
-                    
+                    self.addPhollowToDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, errorStatusLabel: errorStatusLabel, successStatusLabel: successStatusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel, createPhollowButton: createPhollowButton)
                 }
                 else {
-                    AlertMessage().show(statusLabel, message: "already phollowing!")
+                    createPhollowButton.userInteractionEnabled = true
+                    AlertMessage().show(errorStatusLabel, message: "already phollowing!")
                 }
             }
             
@@ -52,7 +60,7 @@ class PhollowSomeone {
         
     }
     
-    func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, statusLabel: UILabel, cameraViewIdentificationLabel: UILabel){
+    func addPhollowToDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, createPhollowButton: UIButton){
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             //print ("Checked User  is nil")
@@ -64,7 +72,8 @@ class PhollowSomeone {
         phollow.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
+                createPhollowButton.userInteractionEnabled = true
+                AlertMessage().show(successStatusLabel, message: "Successfully phollowed \(toUsername)")
                 PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
                 Installations().updateInstallation(toUsername)
                 
@@ -76,6 +85,7 @@ class PhollowSomeone {
                 //This will be moved into Cloud Code
                 
             } else  {
+                createPhollowButton.userInteractionEnabled = true
                 print("Error: \(error!) \(error!.userInfo)")
             }
         }
