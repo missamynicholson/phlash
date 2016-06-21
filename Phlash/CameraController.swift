@@ -45,8 +45,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         helpView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         helpView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
 
-        //checkPendingPhlashesStatus()
-        //pendingPhlashesButton = cameraView.pendingPhlashesButton
+        checkPendingPhlashesStatus()
+        pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
     }
     

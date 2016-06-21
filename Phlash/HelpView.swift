@@ -37,7 +37,6 @@ class HelpView: UIView, UITextFieldDelegate {
     }
     
     func addCommentsLabel() {
-        print(commentsLabel.frame.origin.y)
         commentsLabel.frame = CGRect(x:0, y: 0, width: screenBounds.width, height:screenBounds.height)
         commentsLabel.textColor = whiteColor
         commentsLabel.text = "Welcome to Phlash!\n\n\nSwipe left to view phlashes from other people.\n\nSwipe right to phlash your phollowers."
