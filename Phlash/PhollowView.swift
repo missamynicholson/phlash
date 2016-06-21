@@ -89,7 +89,7 @@ class PhollowView: UIView, UITextFieldDelegate {
     }
     
     func addStatusLabel() {
-        statusLabel.frame = CGRect(x: 0, y: -40, width: screenBounds.width, height: 40)
+        statusLabel.frame = CGRect(x: 0, y: -60, width: screenBounds.width, height: 60)
         statusLabel.textColor = backgroundGreen
         statusLabel.backgroundColor = whiteColor
         statusLabel.textAlignment = .Center

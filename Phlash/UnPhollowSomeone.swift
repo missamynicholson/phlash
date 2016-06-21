@@ -12,10 +12,8 @@ class UnPhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     
-    func unPhollow(toUsernameField: UITextField, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, destroyPhollowButton: UIButton) {
-        
-        destroyPhollowButton.userInteractionEnabled = false
-        
+    func unPhollow(toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton) {
+         destroyPhollowButton.userInteractionEnabled = false
         let userValidation = PFQuery(className: "_User")
         let currentUser = PFUser.currentUser()
         let toUsername = toUsernameField.text!
@@ -25,11 +23,10 @@ class UnPhollowSomeone {
             if error == nil {
                 if results!.count < 1 {
                     destroyPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(errorStatusLabel, message: "\(toUsername) does not exist")
+                    AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
                     toUsernameField.text = ""
                 } else {
-                    self.alreadyPhollowing(currentUser!, toUsername: toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, errorStatusLabel: errorStatusLabel, successStatusLabel: successStatusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel, destroyPhollowButton: destroyPhollowButton)
-                    
+                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel, destroyPhollowButton: destroyPhollowButton)
                 }
             }
         }
@@ -40,48 +37,42 @@ class UnPhollowSomeone {
         
     }
     
-    func alreadyPhollowing(currentUser: PFUser, toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, destroyPhollowButton: UIButton) {
-        
+    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton) {
+        let toUsername = toUsernameField.text!
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
-        phollowValidation.whereKey("toUsername", equalTo: toUsername)
+        phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
         phollowValidation.findObjectsInBackgroundWithBlock {
             (results: [PFObject]?, error: NSError?) -> Void in
             if error == nil  {
                 if results!.count < 1 {
                     destroyPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(errorStatusLabel, message: "You are not following \(toUsername)")
+                    AlertMessage().show(statusLabel, message: "You are not following \(toUsername)")
                 }
                 else {
-                    self.removePhollowFromDatabase(toUsername, phollowView: phollowView, logoutButton: logoutButton, phollowButton: phollowButton, errorStatusLabel: errorStatusLabel, successStatusLabel: successStatusLabel, cameraViewIdentificationLabel: cameraViewIdentificationLabel, destroyPhollowButton: destroyPhollowButton)
+                    self.removePhollowFromDatabase(toUsernameField, statusLabel: statusLabel, destroyPhollowButton: destroyPhollowButton)
                 }
             }
             
         }
     }
     
-    func removePhollowFromDatabase(toUsername: String, phollowView: UIView, logoutButton: UIButton, phollowButton: UIButton, errorStatusLabel: UILabel, successStatusLabel: UILabel, cameraViewIdentificationLabel: UILabel, destroyPhollowButton: UIButton){
+    func removePhollowFromDatabase(toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton){
+        let toUsername = toUsernameField.text!
         let currentUser = PFUser.currentUser()
         let unPhollow = PFQuery(className:"Phollow")
         unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
-        unPhollow.whereKey("toUsername", equalTo: toUsername)
+        unPhollow.whereKey("toUsername", equalTo: toUsernameField.text!)
         unPhollow.getFirstObjectInBackgroundWithBlock {
             (object: PFObject?, error: NSError?) -> Void in
             if error != nil || object == nil  {
                 destroyPhollowButton.userInteractionEnabled = true
-                AlertMessage().show(errorStatusLabel, message: "You are not following \(toUsername)")
+                AlertMessage().show(statusLabel, message: "You are not following \(toUsername)")
             } else  {
-                object!.deleteInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        destroyPhollowButton.userInteractionEnabled = true
-                        AlertMessage().show(successStatusLabel, message: "You are now unfollowing \(toUsername)")
-                        PhollowViewSetup().animate(phollowView, phollowButton: phollowButton, logoutButton: logoutButton, yValue: self.screenBounds.height, appear: false, cameraViewId: cameraViewIdentificationLabel)
-                    } else {
-                        destroyPhollowButton.userInteractionEnabled = true
-                        print("Error: \(error!) \(error!.userInfo)")
-                    }
-                }
+                object!.deleteInBackground()
+                AlertMessage().show(statusLabel, message: "You are now unfollowing \(toUsername)")
+                toUsernameField.text = ""
+                destroyPhollowButton.userInteractionEnabled = true
             }
         }
     }
