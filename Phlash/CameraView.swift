@@ -15,6 +15,7 @@ class CameraView: UIView, UITextFieldDelegate {
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     var settingsButton = UIButton()
     var phollowButton = UIButton()
+    var helpButton = UIButton()
     var logoutButton = UIButton()
     let flipCamera = UIButton()
     let swipeRight = UISwipeGestureRecognizer()
@@ -41,6 +42,7 @@ class CameraView: UIView, UITextFieldDelegate {
         addCaptionField()
         addPendingPhlashesButton()
         addPhollowButton()
+        addHelpButton()
         addLogoutButton()
         addGestureRecognizer(tap)
         addContainerView()
@@ -83,22 +85,35 @@ class CameraView: UIView, UITextFieldDelegate {
     }
     
     func addPhollowButton() {
-        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/5, width: screenBounds.width/5, height: 30)
+        phollowButton.frame = CGRect(x: 0, y: -screenBounds.width/6, width: screenBounds.width/5, height: 30)
         phollowButton.setTitleColor(.whiteColor(), forState: .Normal)
-        phollowButton.setTitle("Phollow", forState: .Normal)
+        phollowButton.setTitle(" Phollow", forState: .Normal)
         phollowButton.accessibilityLabel = "phollow"
+         phollowButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
     }
     
+    func addHelpButton() {
+        helpButton.frame = CGRect(x: 0, y: -screenBounds.width/3, width: screenBounds.width/5, height: 30)
+        helpButton.setTitleColor(.whiteColor(), forState: .Normal)
+        helpButton.setTitle(" Help", forState: .Normal)
+        helpButton.accessibilityLabel = "help"
+        helpButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+    }
+    
+    
     func addLogoutButton() {
-        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width*2/5, width: screenBounds.width/5, height: 30)
+        logoutButton.frame = CGRect(x: 0, y: -screenBounds.width/2, width: screenBounds.width/5, height: 30)
         logoutButton.setTitleColor(.whiteColor(), forState: .Normal)
-        logoutButton.setTitle("Logout", forState: .Normal)
+        logoutButton.setTitle(" Logout", forState: .Normal)
         logoutButton.accessibilityLabel = "logout"
+        logoutButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+
     }
     
     func addContainerView() {
         containerView.frame = CGRect(x: 0, y: 0, width:screenBounds.width, height:screenBounds.width)
         containerView.addSubview(phollowButton)
+        containerView.addSubview(helpButton)
         containerView.addSubview(logoutButton)
         containerView.addSubview(flipCamera)
         containerView.addSubview(pendingPhlashesButton)

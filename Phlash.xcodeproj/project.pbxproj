@@ -27,6 +27,8 @@
 		A5CC82561D143EAD0013310D /* PhollowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82551D143EAD0013310D /* PhollowUITests.swift */; };
 		A5CC82581D1442370013310D /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82571D1442370013310D /* AlertMessage.swift */; };
 		A5CC825E1D16787F0013310D /* Installations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC825D1D16787F0013310D /* Installations.swift */; };
+		A5CC82601D198C0A0013310D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC825F1D198C0A0013310D /* HelpView.swift */; };
+		A5CC82621D198EDE0013310D /* HelpViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC82611D198EDE0013310D /* HelpViewSetup.swift */; };
 		A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE467E1D11515E00047C73 /* AppDelegate.swift */; };
 		A5DE46841D11515E00047C73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46821D11515E00047C73 /* Main.storyboard */; };
 		A5DE46861D11515E00047C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DE46851D11515E00047C73 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		A5CC82551D143EAD0013310D /* PhollowUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhollowUITests.swift; sourceTree = "<group>"; };
 		A5CC82571D1442370013310D /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		A5CC825D1D16787F0013310D /* Installations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installations.swift; sourceTree = "<group>"; };
+		A5CC825F1D198C0A0013310D /* HelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		A5CC82611D198EDE0013310D /* HelpViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewSetup.swift; sourceTree = "<group>"; };
 		A5DE467B1D11515E00047C73 /* Phlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DE467E1D11515E00047C73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DE46831D11515E00047C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				8CC1B5911D13F7CA000E892F /* CameraView.swift */,
 				954335531D1413EF00276828 /* PhollowView.swift */,
 				84159A391D15523D00CEC95E /* PhlashView.swift */,
+				A5CC825F1D198C0A0013310D /* HelpView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				A5CC82571D1442370013310D /* AlertMessage.swift */,
 				A5CC825D1D16787F0013310D /* Installations.swift */,
 				847A07621D1842BE00D6F648 /* UnPhollowSomeone.swift */,
+				A5CC82611D198EDE0013310D /* HelpViewSetup.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F026781D14048700083A0B /* Delay.swift in Sources */,
+				A5CC82621D198EDE0013310D /* HelpViewSetup.swift in Sources */,
 				8CCD9CA01D142FD700F5031F /* RetrievePhoto.swift in Sources */,
 				84159A3A1D15523D00CEC95E /* PhlashView.swift in Sources */,
 				A5CC82581D1442370013310D /* AlertMessage.swift in Sources */,
@@ -407,6 +414,7 @@
 				84F0267C1D14083600083A0B /* SendPhoto.swift in Sources */,
 				84F026721D14003800083A0B /* ResizeImage.swift in Sources */,
 				8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */,
+				A5CC82601D198C0A0013310D /* HelpView.swift in Sources */,
 				A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */,
 				847A07631D1842BE00D6F648 /* UnPhollowSomeone.swift in Sources */,
 				A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */,
