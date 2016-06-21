@@ -38,6 +38,7 @@ class UnPhollowSomeone {
     }
     
     func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton) {
+        let toUsername = toUsernameField.text!
         let phollowValidation = PFQuery(className: "Phollow")
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
         phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
@@ -46,7 +47,7 @@ class UnPhollowSomeone {
             if error == nil  {
                 if results!.count < 1 {
                     destroyPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(statusLabel, message: "You are not following \(toUsernameField.text)")
+                    AlertMessage().show(statusLabel, message: "You are not following \(toUsername)")
                 }
                 else {
                     self.removePhollowFromDatabase(toUsernameField, statusLabel: statusLabel, destroyPhollowButton: destroyPhollowButton)
@@ -57,6 +58,7 @@ class UnPhollowSomeone {
     }
     
     func removePhollowFromDatabase(toUsernameField: UITextField, statusLabel: UILabel, destroyPhollowButton: UIButton){
+        let toUsername = toUsernameField.text!
         let currentUser = PFUser.currentUser()
         let unPhollow = PFQuery(className:"Phollow")
         unPhollow.whereKey("fromUsername", equalTo: currentUser!.username!)
@@ -65,10 +67,10 @@ class UnPhollowSomeone {
             (object: PFObject?, error: NSError?) -> Void in
             if error != nil || object == nil  {
                 destroyPhollowButton.userInteractionEnabled = true
-                AlertMessage().show(statusLabel, message: "You are not following \(toUsernameField.text)")
+                AlertMessage().show(statusLabel, message: "You are not following \(toUsername)")
             } else  {
                 object!.deleteInBackground()
-                AlertMessage().show(statusLabel, message: "You are now unfollowing this user")
+                AlertMessage().show(statusLabel, message: "You are now unfollowing \(toUsername)")
                 toUsernameField.text = ""
                 destroyPhollowButton.userInteractionEnabled = true
             }

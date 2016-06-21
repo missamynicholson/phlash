@@ -205,7 +205,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
 
-        UnPhollowSomeone().unPhollow(phollowView.usernameField, statusLabel: cameraView.statusLabel, destroyPhollowButton: phollowView.destroyPhollowButton)
+        UnPhollowSomeone().unPhollow(phollowView.usernameField, statusLabel: phollowView.statusLabel, destroyPhollowButton: phollowView.destroyPhollowButton)
     }
     
     func cancelPhollowPage() {

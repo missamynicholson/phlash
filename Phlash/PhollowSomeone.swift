@@ -39,6 +39,7 @@ class PhollowSomeone {
     
     func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel, createPhollowButton: UIButton) {
         let phollowValidation = PFQuery(className: "Phollow")
+        let toUsername = toUsernameField.text!
         phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
         phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
         phollowValidation.findObjectsInBackgroundWithBlock {
@@ -49,7 +50,7 @@ class PhollowSomeone {
                 }
                 else {
                     createPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(statusLabel, message: "already phollowing!")
+                    AlertMessage().show(statusLabel, message: "Already phollowing \(toUsername)!")
                 }
             }
             
@@ -58,7 +59,7 @@ class PhollowSomeone {
     }
     
     func addPhollowToDatabase(toUsernameField: UITextField, statusLabel: UILabel, createPhollowButton: UIButton) {
-
+        let toUsername = toUsernameField.text!
         let currentUser = PFUser.currentUser()
         guard let checkedUser = currentUser else {
             //print ("Checked User  is nil")
@@ -70,7 +71,7 @@ class PhollowSomeone {
         phollow.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsernameField.text)")
+                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
                 Installations().updateInstallation(toUsernameField.text!)
                 toUsernameField.text = ""
                 createPhollowButton.userInteractionEnabled = true
