@@ -50,6 +50,9 @@ class PhollowView: UIView, UITextFieldDelegate {
         usernameField.textAlignment = .Center
         usernameField.accessibilityLabel = "phollowee"
         usernameField.delegate = self
+        usernameField.autocorrectionType = .No
+        usernameField.autocapitalizationType = UITextAutocapitalizationType.None
+
         addSubview(usernameField)
     }
     
