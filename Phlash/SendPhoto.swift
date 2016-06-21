@@ -17,6 +17,8 @@ class SendPhoto {
     
     func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
         
+        AlertMessage().show(statusLabel, message: "Nice phlash!")
+        
         let currentUser = PFUser.currentUser()
         let currentUsername = currentUser!.username!
         
@@ -35,7 +37,6 @@ class SendPhoto {
         phlash.saveInBackgroundWithBlock { (succeeded, error) -> Void in
             if succeeded {
                 captionField.text = ""
-                AlertMessage().show(statusLabel, message: "Nice phlash!")
                 
                 //This will be moved into CloudCode
                 //let push = PFPush()
