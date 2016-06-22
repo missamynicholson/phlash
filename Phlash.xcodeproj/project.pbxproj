@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		84159A3A1D15523D00CEC95E /* PhlashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84159A391D15523D00CEC95E /* PhlashView.swift */; };
-		847A07631D1842BE00D6F648 /* UnPhollowSomeone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A07621D1842BE00D6F648 /* UnPhollowSomeone.swift */; };
 		84F026721D14003800083A0B /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F026711D14003800083A0B /* ResizeImage.swift */; };
 		84F026741D14024A00083A0B /* ImageViewFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F026731D14024A00083A0B /* ImageViewFrame.swift */; };
 		84F026761D14039800083A0B /* DisplayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F026751D14039800083A0B /* DisplayImage.swift */; };
@@ -67,7 +66,6 @@
 
 /* Begin PBXFileReference section */
 		84159A391D15523D00CEC95E /* PhlashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhlashView.swift; sourceTree = "<group>"; };
-		847A07621D1842BE00D6F648 /* UnPhollowSomeone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnPhollowSomeone.swift; sourceTree = "<group>"; };
 		84F026711D14003800083A0B /* ResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		84F026731D14024A00083A0B /* ImageViewFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewFrame.swift; sourceTree = "<group>"; };
 		84F026751D14039800083A0B /* DisplayImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayImage.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				8CCD9C9F1D142FD700F5031F /* RetrievePhoto.swift */,
 				A5CC82571D1442370013310D /* AlertMessage.swift */,
 				A5CC825D1D16787F0013310D /* Installations.swift */,
-				847A07621D1842BE00D6F648 /* UnPhollowSomeone.swift */,
 				A5CC82611D198EDE0013310D /* HelpViewSetup.swift */,
 			);
 			name = Helpers;
@@ -416,7 +413,6 @@
 				8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */,
 				A5CC82601D198C0A0013310D /* HelpView.swift in Sources */,
 				A5DE467F1D11515E00047C73 /* AppDelegate.swift in Sources */,
-				847A07631D1842BE00D6F648 /* UnPhollowSomeone.swift in Sources */,
 				A5CC82521D13F1590013310D /* UserAuthentication.swift in Sources */,
 				84F026741D14024A00083A0B /* ImageViewFrame.swift in Sources */,
 				84F026761D14039800083A0B /* DisplayImage.swift in Sources */,
@@ -574,7 +570,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Phlash/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,7 +589,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Phlash/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.phlash.phlash;
 				PRODUCT_NAME = "$(TARGET_NAME)";

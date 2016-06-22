@@ -13,7 +13,6 @@ class UserAuthentication {
     func signUp(controller: UIViewController, username: String, email: String, password: String, statusLabel: UILabel, submitButton: UIButton) {
         
         submitButton.userInteractionEnabled = false
-        
         let user = PFUser()
         user.username = username
         user.password = password
@@ -28,7 +27,7 @@ class UserAuthentication {
             } else {
                 submitButton.userInteractionEnabled = true
                 controller.performSegueWithIdentifier("toCamera", sender: nil)
-                Installations().updateInstallation("p\(username)")
+                Installations().addInstallation("p\(username)")
             }
         }
         

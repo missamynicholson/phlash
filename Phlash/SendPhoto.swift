@@ -16,37 +16,21 @@ class SendPhoto {
 
     
     func sendPhoto(image: UIImage, statusLabel: UILabel, captionField: UITextField){
-        
-        AlertMessage().show(statusLabel, message: "Nice phlash!")
-        
-        let currentUser = PFUser.currentUser()
-        let currentUsername = currentUser!.username!
-        
+ 
         let imageData = UIImagePNGRepresentation(image)
         guard let checkedImage = imageData else {
             print ("Checked Image  is nil")
             return
         }
+        let caption:String = captionField.text!
+        let yValue = captionField.frame.origin.y / screenBounds.height
         
-        let imageFile = PFFile(name:"image.png", data:checkedImage)
-        let phlash = PFObject(className: "Phlash")
-        phlash["file"] = imageFile
-        phlash["username"] = currentUsername
-        phlash["caption"] = captionField.text
-        phlash["yValue"] = captionField.frame.origin.y / screenBounds.height
-        phlash.saveInBackgroundWithBlock { (succeeded, error) -> Void in
-            if succeeded {
+        PFCloud.callFunctionInBackground("phlash", withParameters: ["fileData": checkedImage, "caption": caption, "yValue": yValue]) {
+            (response: AnyObject?, error: NSError?) -> Void in
+            if error === nil {
                 captionField.text = ""
-                
-                //This will be moved into CloudCode
-                //let push = PFPush()
-                //push.setChannel(currentUsername)
-                //push.setMessage("\(currentUsername) has just phlashed!")
-                //push.sendPushInBackground()
-                //This will be moved into Cloud Code
-                
             } else {
-                print("Error: \(error)")
+                AlertMessage().show(statusLabel, message: "Uh oh, phlash unsuccessful")
             }
         }
     }

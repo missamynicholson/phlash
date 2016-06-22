@@ -45,9 +45,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         helpView.frame = CGRect(x: 0, y: screenBounds.height, width: screenBounds.width, height: screenBounds.height)
         helpView.cancelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
 
-        checkPendingPhlashesStatus()
         pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(receivePush), name: "receivePush", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(checkBadge), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +59,39 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadImagePicker()
-        AlertMessage().show(statusLabel, message: "Welcome")
+        togglePhlashesLabel()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func checkBadge() {
+        checkDatabase()
+//        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+//            checkDatabase()
+//        }
+    }
+    
+    func receivePush(notification: NSNotification) {
+        checkDatabase()
+        if let aps = notification.userInfo!["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let message = alert["message"] as? NSString {
+                   AlertMessage().show(cameraView.statusLabel, message: message as String)
+                }
+            } else if let alert = aps["alert"] as? NSString {
+                AlertMessage().show(cameraView.statusLabel, message: alert as String)
+            }
+        }
+    }
+    
+    func checkDatabase() {
+        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+            self.phlashesArray = phlashesFromDatabase!
+            self.togglePhlashesLabel()
+        })
     }
     
     func dismissKeyboard() {
@@ -88,17 +122,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-    func checkPendingPhlashesStatus() {
-        if self.phlashesArray.count > 0 {
-            self.pendingPhlashesButton.hidden = false
-        } else {
-            RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-                self.phlashesArray = phlashesFromDatabase!
-                self.togglePhlashesLabel()
-            })
-        }
-    }
-    
+   
     func togglePhlashesLabel() {
         if self.phlashesArray.count < 1 {
             self.pendingPhlashesButton.hidden = true
@@ -114,10 +138,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let firstPhlash = phlashesArray.first!
             RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash, swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
             phlashesArray.removeAtIndex(0)
+           togglePhlashesLabel()
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
-        checkPendingPhlashesStatus()
     }
     
     func imagePickerController(picker: UIImagePickerController,
@@ -190,6 +214,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func logout() {
         PFUser.logOut()
+       
         picker.dismissViewControllerAnimated(false, completion: {
             self.performSegueWithIdentifier("toAuth", sender: nil)
         })
@@ -221,7 +246,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
 
-        PhollowSomeone().phollow(phollowView.usernameField, statusLabel: phollowView.statusLabel, createPhollowButton: phollowView.createPhollowButton)
+        PhollowSomeone().phollow(phollowView.usernameField, statusLabel: phollowView.statusLabel, phollowButton: phollowView.createPhollowButton, type: "phollow")
     }
     
     func unphollow() {
@@ -229,8 +254,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             AlertMessage().show(phollowView.statusLabel, message: "Error: please review your input")
             return
         }
-
-        UnPhollowSomeone().unPhollow(phollowView.usernameField, statusLabel: phollowView.statusLabel, destroyPhollowButton: phollowView.destroyPhollowButton)
+        PhollowSomeone().phollow(phollowView.usernameField, statusLabel: phollowView.statusLabel, phollowButton: phollowView.destroyPhollowButton, type: "unphollow")
     }
     
     func cancelPhollowPage() {

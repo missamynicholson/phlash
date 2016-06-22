@@ -11,82 +11,27 @@ import Parse
 class PhollowSomeone {
     
     let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
-    
-    func phollow(toUsernameField: UITextField, statusLabel: UILabel, createPhollowButton: UIButton) {
-        createPhollowButton.userInteractionEnabled = false
-        let userValidation = PFQuery(className: "_User")
-        let currentUser = PFUser.currentUser()
-        let toUsername = toUsernameField.text!
-        userValidation.whereKey("username", equalTo: toUsername)
-        userValidation.findObjectsInBackgroundWithBlock {
-            (results: [PFObject]?, error: NSError?) -> Void in
-            if error == nil {
-                if results!.count < 1 {
-                    createPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(statusLabel, message: "\(toUsername) does not exist")
-                    toUsernameField.text = ""
-                } else {
-                    self.alreadyPhollowing(currentUser!, toUsernameField: toUsernameField, statusLabel: statusLabel, createPhollowButton: createPhollowButton)
-                }
-            }
-        }
-        
-        Delay().run(5.0) {
-            createPhollowButton.userInteractionEnabled = true
-        }
-        
-    }
-    
-    func alreadyPhollowing(currentUser: PFUser, toUsernameField: UITextField, statusLabel: UILabel, createPhollowButton: UIButton) {
-        let phollowValidation = PFQuery(className: "Phollow")
-        let toUsername = toUsernameField.text!
-        phollowValidation.whereKey("fromUsername", equalTo: currentUser.username!)
-        phollowValidation.whereKey("toUsername", equalTo: toUsernameField.text!)
-        phollowValidation.findObjectsInBackgroundWithBlock {
-            (results: [PFObject]?, error: NSError?) -> Void in
-            if error == nil  {
-                if results!.count < 1 {
-                    self.addPhollowToDatabase(toUsernameField, statusLabel: statusLabel, createPhollowButton: createPhollowButton)
-                }
-                else {
-                    createPhollowButton.userInteractionEnabled = true
-                    AlertMessage().show(statusLabel, message: "Already phollowing \(toUsername)!")
-                }
-            }
-        }
-        
-    }
-    
-    func addPhollowToDatabase(toUsernameField: UITextField, statusLabel: UILabel, createPhollowButton: UIButton) {
-        let toUsername = toUsernameField.text!
-        let currentUser = PFUser.currentUser()
-        guard let checkedUser = currentUser else {
-            //print ("Checked User  is nil")
-            return
-        }
-        let phollow = PFObject(className:"Phollow")
-        phollow["fromUsername"] = checkedUser.username
-        phollow["toUsername"] = toUsernameField.text
-        phollow.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                AlertMessage().show(statusLabel, message: "Successfully phollowed \(toUsername)")
-                Installations().updateInstallation(toUsernameField.text!)
-                toUsernameField.text = ""
-                createPhollowButton.userInteractionEnabled = true
 
-                //This will be moved into Cloud Code
-                //let push = PFPush()
-                //push.setChannel("p\(toUsername)")
-                //push.setMessage("\(checkedUser.username) is now following you!")
-                //push.sendPushInBackground()
-                //This will be moved into Cloud Code
-                
-            } else  {
-                createPhollowButton.userInteractionEnabled = true
-                print("Error: \(error!) \(error!.userInfo)")
+    func phollow(toUsernameField: UITextField, statusLabel: UILabel, phollowButton: UIButton, type: String) {
+        
+        let toUsername = toUsernameField.text!
+        
+        PFCloud.callFunctionInBackground(type, withParameters: ["toUsername": toUsername]) {
+            (response: AnyObject?, error: NSError?) -> Void in
+            if error === nil {
+                AlertMessage().show(statusLabel, message: "Successfully \(type)ed \(toUsername)")
+                Installations().addInstallation(toUsername)
+                toUsernameField.text = ""
+                phollowButton.userInteractionEnabled = true
+            } else {
+                let message = error!.userInfo["error"] as! NSString
+                AlertMessage().show(statusLabel, message: "Unsuccessfully \(type)ed: \(message)")
+                Installations().removeInstallation(toUsername)
+                phollowButton.userInteractionEnabled = true
             }
         }
+        Delay().run(5.0) {
+            phollowButton.userInteractionEnabled = true
+        }
     }
-    
 }
