@@ -26,6 +26,7 @@ class PhollowSomeone {
             } else {
                 let message = error!.userInfo["error"] as! NSString
                 AlertMessage().show(statusLabel, message: "Unsuccessfully \(type)ed: \(message)")
+                Installations().removeInstallation(toUsername)
                 phollowButton.userInteractionEnabled = true
             }
         }

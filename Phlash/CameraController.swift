@@ -67,10 +67,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkBadge() {
-        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-            checkDatabase()
-        }
+        checkDatabase()
+//        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+//            checkDatabase()
+//        }
     }
     
     func receivePush(notification: NSNotification) {
