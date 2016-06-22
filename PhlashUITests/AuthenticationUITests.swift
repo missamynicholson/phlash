@@ -112,9 +112,9 @@ class AuthenticationUITests: XCTestCase {
     }
     
     func testIncorrectSignupDuplicateUsername(){
-        signUp("testcat1", email: "testemail@email.com", password: "abcdef")
-        waitForAppearanceOfText("username testcat1 already taken", app: app)
-        let error = app.staticTexts["username testcat1 already taken"]
+        signUp("testuser1", email: "testemail@email.com", password: "abcdef")
+        waitForAppearanceOfText("username testuser1 already taken", app: app)
+        let error = app.staticTexts["username testuser1 already taken"]
         XCTAssertEqual(error.exists, true)
         waitForAppearanceOfButton("goBack", app: app)
         let goBack = app.buttons["goBack"]
