@@ -204,6 +204,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func help() {
+        showSettings()
         cameraView.addSubview(helpView)
         cameraView.containerView.hidden = true
         HelpViewSetup().animate(helpView, yValue: 0, appear: true)
@@ -215,6 +216,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func showPhollowPage() {
+        showSettings()
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
         cameraView.containerView.hidden = true
