@@ -48,30 +48,45 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         pendingPhlashesButton = cameraView.pendingPhlashesButton
         statusLabel = cameraView.statusLabel
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pushQuery), name: "pushQuery", object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(receivePush), name: "receivePush", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(checkBadge), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        reset()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        reset()
-    }
-    
-    func reset() {
         loadImagePicker()
         togglePhlashesLabel()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func checkBadge() {
         if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
             UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-            pushQuery()
+            checkDatabase()
         }
     }
     
-    func pushQuery() {
+    func receivePush(notification: NSNotification) {
+        checkDatabase()
+        if let aps = notification.userInfo!["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let message = alert["message"] as? NSString {
+                   AlertMessage().show(cameraView.statusLabel, message: message as String)
+                }
+            } else if let alert = aps["alert"] as? NSString {
+                AlertMessage().show(cameraView.statusLabel, message: alert as String)
+            }
+        }
+    }
+    
+    func checkDatabase() {
         RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
             self.phlashesArray = phlashesFromDatabase!
             self.togglePhlashesLabel()
@@ -122,7 +137,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let firstPhlash = phlashesArray.first!
             RetrievePhoto().showFirstPhlashImage(cameraView, firstPhlash: firstPhlash, swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
             phlashesArray.removeAtIndex(0)
-            reset()
+           togglePhlashesLabel()
         } else {
             AlertMessage().show(statusLabel, message: "No phlashes! Try again later.")
         }
@@ -198,6 +213,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func logout() {
         PFUser.logOut()
+       
         picker.dismissViewControllerAnimated(false, completion: {
             self.performSegueWithIdentifier("toAuth", sender: nil)
         })
