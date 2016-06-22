@@ -56,7 +56,7 @@ class CameraView: UIView, UITextFieldDelegate {
     func addFlipCamera() {
         flipCamera.frame = CGRect(x: screenBounds.width*4/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
         flipCamera.setImage(UIImage(named: "camera.png"), forState: UIControlState.Normal)
-        settingsButton.accessibilityLabel = "camera"
+        flipCamera.accessibilityLabel = "camera"
     }
     
     func addSettingsButton() {

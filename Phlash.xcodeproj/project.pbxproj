@@ -13,6 +13,8 @@
 		84F026761D14039800083A0B /* DisplayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F026751D14039800083A0B /* DisplayImage.swift */; };
 		84F026781D14048700083A0B /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F026771D14048700083A0B /* Delay.swift */; };
 		84F0267C1D14083600083A0B /* SendPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0267B1D14083600083A0B /* SendPhoto.swift */; };
+		8C4687011D1AC55200DA9CF5 /* AuthenticationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4687001D1AC55200DA9CF5 /* AuthenticationUITests.swift */; };
+		8C4687021D1AC6EB00DA9CF5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DE46C31D1151B700047C73 /* Parse.framework */; };
 		8CC1B5901D13F627000E892F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B58F1D13F627000E892F /* CameraController.swift */; };
 		8CC1B5921D13F7CA000E892F /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5911D13F7CA000E892F /* CameraView.swift */; };
 		8CC1B5941D13F9CB000E892F /* PickerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B5931D13F9CB000E892F /* PickerSetup.swift */; };
@@ -71,6 +73,7 @@
 		84F026751D14039800083A0B /* DisplayImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayImage.swift; sourceTree = "<group>"; };
 		84F026771D14048700083A0B /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		84F0267B1D14083600083A0B /* SendPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendPhoto.swift; sourceTree = "<group>"; };
+		8C4687001D1AC55200DA9CF5 /* AuthenticationUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationUITests.swift; sourceTree = "<group>"; };
 		8CC1B58F1D13F627000E892F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		8CC1B5911D13F7CA000E892F /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		8CC1B5931D13F9CB000E892F /* PickerSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerSetup.swift; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4687021D1AC6EB00DA9CF5 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +243,7 @@
 				A5DE469E1D11515E00047C73 /* PhlashUITests.swift */,
 				A5DE46A01D11515F00047C73 /* Info.plist */,
 				A5CC82551D143EAD0013310D /* PhollowUITests.swift */,
+				8C4687001D1AC55200DA9CF5 /* AuthenticationUITests.swift */,
 			);
 			path = PhlashUITests;
 			sourceTree = "<group>";
@@ -437,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5DE469F1D11515E00047C73 /* PhlashUITests.swift in Sources */,
+				8C4687011D1AC55200DA9CF5 /* AuthenticationUITests.swift in Sources */,
 				A5CC82561D143EAD0013310D /* PhollowUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,6 +609,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhlashTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashTests;
@@ -618,6 +628,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhlashTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.phlashers.PhlashTests;
@@ -632,6 +646,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chris.PhlashUITests;
@@ -646,6 +664,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhlashUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chris.PhlashUITests;

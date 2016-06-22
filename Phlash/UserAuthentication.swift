@@ -22,7 +22,7 @@ class UserAuthentication {
             (succeeded: Bool, error: NSError?) -> Void in
             if let error = error {
                 submitButton.userInteractionEnabled = true
-                let errorMessage = error.userInfo["error"] as? NSString
+                let errorMessage = error.userInfo["error"] as! NSString
                 AlertMessage().show(statusLabel, message: "\(errorMessage)")
             } else {
                 submitButton.userInteractionEnabled = true
@@ -48,8 +48,8 @@ class UserAuthentication {
                 controller.performSegueWithIdentifier("toCamera", sender: nil)
             } else {
                 submitButton.userInteractionEnabled = true
-                let errorMessage = error!.userInfo["error"] as? NSString
-                AlertMessage().show(statusLabel, message: "\(errorMessage))")
+                let errorMessage = error!.userInfo["error"] as! NSString
+                AlertMessage().show(statusLabel, message: "\(errorMessage)")
             }
         }
         
