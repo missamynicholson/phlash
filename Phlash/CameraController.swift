@@ -51,6 +51,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(receivePush), name: "receivePush", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(checkBadge), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        loadImagePicker()
+        checkDatabase()
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,9 +61,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadImagePicker()
-        checkDatabase()
-        help()
     }
     
     deinit {
@@ -91,16 +90,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func checkDatabase() {
         let phlashCount = phlashesArray.count
         AlertMessage().show(statusLabel, message: "Checking for phlashes......")
-        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-            self.phlashesArray = phlashesFromDatabase!
-            if self.phlashesArray.count > phlashCount {
-                AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
-                self.togglePhlashesLabel()
-            } else {
-                AlertMessage().show(self.statusLabel, message: "No new phlashes.")
-                self.togglePhlashesLabel()
-            }
-        })
+//        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+//            self.phlashesArray = phlashesFromDatabase!
+//            if self.phlashesArray.count > phlashCount {
+//                AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
+//                self.togglePhlashesLabel()
+//            } else {
+//                AlertMessage().show(self.statusLabel, message: "No new phlashes.")
+//                self.togglePhlashesLabel()
+//            }
+//        })
     }
     
     func dismissKeyboard() {
@@ -197,26 +196,28 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         case cameraView.pendingPhlashesButton:
             checkDatabase()
         case cameraView.settingsButton:
-            showSettings()
+            if cameraView.logoutButton.frame.origin.y < 0 {
+                showSettings()
+            } else {
+                hideSettings()
+            }
         default:
             break
         }
     }
     
     func showSettings() {
-        if cameraView.logoutButton.frame.origin.y < 0 {
-            UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-                self.cameraView.logoutButton.frame.origin.y = self.screenBounds.width*2/5
-                self.cameraView.helpButton.frame.origin.y = self.screenBounds.width*3/10
-                self.cameraView.phollowButton.frame.origin.y = self.screenBounds.width/5
-                }, completion: nil)
-        } else {
-            UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-                self.cameraView.logoutButton.frame.origin.y = -self.screenBounds.width*2/5
-                self.cameraView.helpButton.frame.origin.y = -self.screenBounds.width*3/10
-                self.cameraView.phollowButton.frame.origin.y = -self.screenBounds.width/5
+        UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.cameraView.logoutButton.frame.origin.y = self.screenBounds.width*2/5
+            self.cameraView.helpButton.frame.origin.y = self.screenBounds.width*3/10
+            self.cameraView.phollowButton.frame.origin.y = self.screenBounds.width/5
             }, completion: nil)
-        }
+    }
+    
+    func hideSettings() {
+        self.cameraView.logoutButton.frame.origin.y = -self.screenBounds.width*2/5
+        self.cameraView.helpButton.frame.origin.y = -self.screenBounds.width*3/10
+        self.cameraView.phollowButton.frame.origin.y = -self.screenBounds.width/5
     }
     
     func flipFrontBackCamera(){
@@ -232,7 +233,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func help() {
-        showSettings()
+        hideSettings()
         cameraView.addSubview(helpView)
         cameraView.containerView.hidden = true
         HelpViewSetup().animate(helpView, yValue: 0, appear: true)
@@ -244,7 +245,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func showPhollowPage() {
-        showSettings()
+        hideSettings()
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
         cameraView.containerView.hidden = true
