@@ -85,6 +85,7 @@ class PhollowUITests: XCTestCase {
     }
 
     func testPhollowViewIsShown() {
+        logoutFromCameraView()
         loginAsTestUser()
         waitForAppearanceOfButton("settings", app: app)
         app.buttons["settings"].tap()
@@ -113,6 +114,7 @@ class PhollowUITests: XCTestCase {
     }
     
     func testPhollowANonUser() {
+        logoutFromCameraView()
         loginAsTestUser()
         phollow("testuser3")
         waitForAppearanceOfText("Unsuccessfully phollowed: User doesn't exist", app:app)
