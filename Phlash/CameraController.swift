@@ -31,6 +31,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.helpButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.logoutButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
         cameraView.flipCamera.addTarget(self, action: #selector(buttonAction),forControlEvents: .TouchUpInside)
+         cameraView.pendingPhlashesButton.addTarget(self, action: #selector(buttonAction),forControlEvents: .TouchUpInside)
         cameraView.swipeRight.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.swipeLeft.addTarget(self, action: #selector(respondToSwipeGesture))
         cameraView.panGesture.addTarget(self, action: #selector(handlePanGesture))
@@ -59,7 +60,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadImagePicker()
-        togglePhlashesLabel()
+        checkDatabase()
     }
     
     deinit {
@@ -67,11 +68,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkBadge() {
-        checkDatabase()
-//        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-//            checkDatabase()
-//        }
+        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+            checkDatabase()
+        }
     }
     
     func receivePush(notification: NSNotification) {
@@ -88,10 +88,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkDatabase() {
-        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-            self.phlashesArray = phlashesFromDatabase!
-            self.togglePhlashesLabel()
-        })
+        var phlashCount = phlashesArray.count
+            AlertMessage().show(statusLabel, message: "Checking for phlashes......")
+            RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+                self.phlashesArray = phlashesFromDatabase!
+                if self.phlashesArray.count > phlashCount {
+                    AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
+                } else {
+                     AlertMessage().show(self.statusLabel, message: "No new phlashes.")
+                }
+                self.togglePhlashesLabel()
+            })
     }
     
     func dismissKeyboard() {
@@ -125,9 +132,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
    
     func togglePhlashesLabel() {
         if self.phlashesArray.count < 1 {
-            self.pendingPhlashesButton.hidden = true
+            self.pendingPhlashesButton.setImage(UIImage(named: "envelope.png"), forState: .Normal)
         } else {
-            self.pendingPhlashesButton.hidden = false
+             self.pendingPhlashesButton.setImage(UIImage(named: "pendingx1.png"), forState: .Normal)
         }
     }
     
@@ -185,6 +192,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             cancelPhollowPage()
         case cameraView.flipCamera:
             flipFrontBackCamera()
+        case cameraView.pendingPhlashesButton:
+            checkDatabase()
         case cameraView.settingsButton:
             showSettings()
         default:

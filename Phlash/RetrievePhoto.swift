@@ -22,6 +22,7 @@ class RetrievePhoto {
                     let caption = "\(firstPhlash["caption"])"
                     let yValue = "\(firstPhlash["yValue"])"
                     DisplayImage().setup(chosenImage, cameraView: cameraView, animate: true, username: username, caption: caption, yValue: yValue, swipeLeft: swipeLeft, swipeRight: swipeRight)
+                     NSUserDefaults.standardUserDefaults().setObject(firstPhlash.createdAt, forKey: "lastSeen")
                 }
             }
         }
@@ -42,11 +43,6 @@ class RetrievePhoto {
             if error == nil {
                 let results = response as? [PFObject]
                 getPhlashes(phlashesFromDatabase: results, error: error)
-                if results!.count > 0 {
-                    NSUserDefaults.standardUserDefaults().setObject(results!.last!.createdAt, forKey: "lastSeen")
-                } else {
-                    NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "lastSeen")
-                }
             }
         }
     }

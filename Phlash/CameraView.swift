@@ -68,7 +68,7 @@ class CameraView: UIView, UITextFieldDelegate {
     func addPendingPhlashesButton() {
         pendingPhlashesButton.frame = CGRect(x: screenBounds.width*2/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
         pendingPhlashesButton.setImage(UIImage(named: "envelope.png"), forState: UIControlState.Normal)
-        pendingPhlashesButton.userInteractionEnabled = false
+        pendingPhlashesButton.accessibilityLabel = "bolt"
     }
     
     func addRightSwipe() {
