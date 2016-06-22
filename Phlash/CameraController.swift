@@ -68,10 +68,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkBadge() {
-        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-            checkDatabase()
-        }
+//        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+//            checkDatabase()
+//        }
     }
     
     func receivePush(notification: NSNotification) {
@@ -89,16 +89,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func checkDatabase() {
         var phlashCount = phlashesArray.count
-            AlertMessage().show(statusLabel, message: "Checking for phlashes......")
-            RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-                self.phlashesArray = phlashesFromDatabase!
-                if self.phlashesArray.count > phlashCount {
-                    AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
-                } else {
-                     AlertMessage().show(self.statusLabel, message: "No new phlashes.")
-                }
+        AlertMessage().show(statusLabel, message: "Checking for phlashes......")
+        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+            self.phlashesArray = phlashesFromDatabase!
+            if self.phlashesArray.count > phlashCount {
+                AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
                 self.togglePhlashesLabel()
-            })
+            } else {
+                AlertMessage().show(self.statusLabel, message: "No new phlashes.")
+                self.togglePhlashesLabel()
+            }
+        })
     }
     
     func dismissKeyboard() {
@@ -131,7 +132,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
    
     func togglePhlashesLabel() {
-        if self.phlashesArray.count < 1 {
+        if phlashesArray.count < 1 {
             self.pendingPhlashesButton.setImage(UIImage(named: "envelope.png"), forState: .Normal)
         } else {
              self.pendingPhlashesButton.setImage(UIImage(named: "pendingx1.png"), forState: .Normal)
