@@ -11,14 +11,14 @@ Parse.Cloud.define("phlash", function(request, response) {
 		phlash.set("username", Parse.User.current().getUsername());
 		phlash.save(null, {
   			success: function(phlash) {
-          // Parse.Push.send({
-          //   channel: Parse.User.current().getUsername(),
-          //   data: {
-          //     alert: Parse.User.current().getUsername() + " has phlashed!",
-          //     sound: "cheering.caf",
-          //     badge: 1,
-          //   }
-          // });
+          Parse.Push.send({
+            channel: Parse.User.current().getUsername(),
+            data: {
+              alert: Parse.User.current().getUsername() + " has phlashed!",
+              sound: "cheering.caf",
+              badge: 1,
+            }
+          });
 				  response.success();
   			}, error: function(phlash, error) {
   			  response.error(error.code + " - " + error.message);
@@ -47,14 +47,14 @@ Parse.Cloud.define("phollow", function(request, response) {
 							phollow.set("toUsername", request.params.toUsername);
 						  phollow.save(null, {
 						    success: function(phollow) {
-						      // Parse.Push.send({
-						      //   channel: request.params.toUsername,
-						      //   data: {
-						      //     alert: Parse.User.current().getUsername() + " started phollowing you!",
-						      //     sound: "cheering.caf",
-						      //     badge: 1,
-						      //   }
-						      // });
+						      Parse.Push.send({
+						        channel: "p" + request.params.toUsername,
+						        data: {
+						          alert: Parse.User.current().getUsername() + " started phollowing you!",
+						          sound: "cheering.caf",
+						          badge: 0,
+						        }
+						      });
 						      response.success();
 						  		}, error: function(phollow, error) {
 						  			response.error(error.code + " - " + error.message);
