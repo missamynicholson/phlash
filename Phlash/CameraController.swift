@@ -61,6 +61,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidAppear(animated)
         loadImagePicker()
         checkDatabase()
+        help()
     }
     
     deinit {
@@ -68,10 +69,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkBadge() {
-//        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
-//            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-//            checkDatabase()
-//        }
+        if UIApplication.sharedApplication().applicationIconBadgeNumber > 0 {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+            checkDatabase()
+        }
     }
     
     func receivePush(notification: NSNotification) {
@@ -88,7 +89,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func checkDatabase() {
-        var phlashCount = phlashesArray.count
+        let phlashCount = phlashesArray.count
         AlertMessage().show(statusLabel, message: "Checking for phlashes......")
         RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
             self.phlashesArray = phlashesFromDatabase!
@@ -133,9 +134,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
    
     func togglePhlashesLabel() {
         if phlashesArray.count < 1 {
-            self.pendingPhlashesButton.setImage(UIImage(named: "envelope.png"), forState: .Normal)
+            pendingPhlashesButton.setImage(UIImage(named: "emptybolt.png"), forState: .Normal)
         } else {
-             self.pendingPhlashesButton.setImage(UIImage(named: "pendingx1.png"), forState: .Normal)
+            pendingPhlashesButton.setImage(UIImage(named: "bolt.png"), forState: .Normal)
         }
     }
     

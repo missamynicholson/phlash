@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -13,32 +13,32 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="o6a-lK-rAt"/>
+                        <viewControllerLayoutGuide type="bottom" id="R8Y-Xi-tPE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="b2s-Pu-6qG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phlash1024" translatesAutoresizingMaskIntoConstraints="NO" id="7f5-Cu-5OF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phlashLarge" translatesAutoresizingMaskIntoConstraints="NO" id="OEe-iR-E8W">
                                 <rect key="frame" x="150" y="150" width="300" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7f5-Cu-5OF" secondAttribute="height" multiplier="1:1" id="v9h-2P-NwJ"/>
+                                    <constraint firstAttribute="width" secondItem="OEe-iR-E8W" secondAttribute="height" multiplier="1:1" id="zJ7-uo-Nzu"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.18823529411764706" green="0.8901960784313725" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="7f5-Cu-5OF" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="centerXWithinMargins" multiplier="1.5" id="7hM-vM-dQS"/>
-                            <constraint firstItem="7f5-Cu-5OF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Hml-Er-3z7"/>
-                            <constraint firstItem="7f5-Cu-5OF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="TEz-jH-uQu"/>
-                            <constraint firstItem="7f5-Cu-5OF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="centerXWithinMargins" multiplier="0.5" id="Uln-d9-zcx"/>
-                            <constraint firstItem="7f5-Cu-5OF" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" multiplier="1.5" id="jTp-F5-qzN"/>
+                            <constraint firstItem="OEe-iR-E8W" firstAttribute="leading" secondItem="b2s-Pu-6qG" secondAttribute="centerXWithinMargins" multiplier="0.5" id="GJW-DD-aIr"/>
+                            <constraint firstItem="OEe-iR-E8W" firstAttribute="centerX" secondItem="b2s-Pu-6qG" secondAttribute="centerX" id="QTo-79-pon"/>
+                            <constraint firstItem="OEe-iR-E8W" firstAttribute="top" secondItem="o6a-lK-rAt" secondAttribute="bottom" constant="153" id="SLC-i6-AT3"/>
+                            <constraint firstItem="OEe-iR-E8W" firstAttribute="centerY" secondItem="b2s-Pu-6qG" secondAttribute="centerY" id="a9a-gf-xfY"/>
+                            <constraint firstItem="OEe-iR-E8W" firstAttribute="trailing" secondItem="b2s-Pu-6qG" secondAttribute="centerXWithinMargins" multiplier="1.5" id="ccX-tX-k5r"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="TEz-jH-uQu"/>
-                                <exclude reference="jTp-F5-qzN"/>
+                                <exclude reference="QTo-79-pon"/>
+                                <exclude reference="SLC-i6-AT3"/>
                             </mask>
                         </variation>
                     </view>
@@ -49,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="phlash1024" width="1024" height="1024"/>
+        <image name="phlashLarge" width="1024" height="1024"/>
     </resources>
 </document>
