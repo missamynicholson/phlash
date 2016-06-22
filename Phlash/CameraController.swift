@@ -90,16 +90,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func checkDatabase() {
         let phlashCount = phlashesArray.count
         AlertMessage().show(statusLabel, message: "Checking for phlashes......")
-//        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
-//            self.phlashesArray = phlashesFromDatabase!
-//            if self.phlashesArray.count > phlashCount {
-//                AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
-//                self.togglePhlashesLabel()
-//            } else {
-//                AlertMessage().show(self.statusLabel, message: "No new phlashes.")
-//                self.togglePhlashesLabel()
-//            }
-//        })
+        RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
+            self.phlashesArray = phlashesFromDatabase!
+            if self.phlashesArray.count > phlashCount {
+                AlertMessage().show(self.statusLabel, message: "New phlashes in! Swipe left to flick through them.")
+                self.togglePhlashesLabel()
+            } else {
+                AlertMessage().show(self.statusLabel, message: "No new phlashes.")
+                self.togglePhlashesLabel()
+            }
+        })
     }
     
     func dismissKeyboard() {
