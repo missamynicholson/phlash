@@ -13,6 +13,7 @@ class PhlashView: UIImageView {
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let whiteColor = UIColor.whiteColor()
     private let blackColor = UIColor.blackColor()
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(48/255.0), green: CGFloat(227/255.0), blue: CGFloat(202/255.0), alpha: CGFloat(0.75))
     var identificationLabel = UILabel()
     let usernameLabel = UILabel()
     let captionLabel = UILabel()
@@ -41,7 +42,7 @@ class PhlashView: UIImageView {
     func addUsernameLabel() {
         usernameLabel.frame = CGRect(x: 0, y: screenBounds.height*16/17, width: self.frame.width, height: screenBounds.height/17)
         usernameLabel.font = UIFont.systemFontOfSize(FONT_SIZE)
-        usernameLabel.backgroundColor = UIColor.colorWithAlphaComponent(blackColor)(0.4)
+        usernameLabel.backgroundColor = backgroundGreen
         usernameLabel.textColor = whiteColor
         usernameLabel.textAlignment = .Center
         usernameLabel.userInteractionEnabled = false

@@ -158,11 +158,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.swipeRight.enabled = false
         cameraView.swipeLeft.enabled = false
         
-        var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        var image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
         if picker.cameraDevice == UIImagePickerControllerCameraDevice.Front {
-            chosenImage =  UIImage(CGImage: chosenImage.CGImage!, scale: chosenImage.scale, orientation:.LeftMirrored)
+            image =  UIImage(CGImage: image.CGImage!, scale: image.scale, orientation:.LeftMirrored)
+        } else {
+            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Right)
         }
         
+      
         let captionField = cameraView.captionField
         
         guard captionField.text?.characters.count < 100 else {
@@ -170,8 +174,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
         
-        let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
+        let resizedImage = ResizeImage().resizeImage(image, newWidth: ImageViewFrame().getNewWidth(image))
+        DisplayImage().setup(image, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
         SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
     }
     
@@ -234,18 +238,24 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func help() {
         hideSettings()
+        cameraView.swipeLeft.enabled = false
+         cameraView.swipeRight.enabled = false
         cameraView.addSubview(helpView)
         cameraView.containerView.hidden = true
         HelpViewSetup().animate(helpView, yValue: 0, appear: true)
     }
     
     func hideHelpView() {
+        cameraView.swipeLeft.enabled = true
+        cameraView.swipeRight.enabled = true
         cameraView.containerView.hidden = false
         HelpViewSetup().animate(helpView, yValue: screenBounds.height, appear: false)
     }
     
     func showPhollowPage() {
         hideSettings()
+        cameraView.swipeLeft.enabled = false
+        cameraView.swipeRight.enabled = false
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
         cameraView.containerView.hidden = true
@@ -270,6 +280,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func cancelPhollowPage() {
+        cameraView.swipeLeft.enabled = true
+        cameraView.swipeRight.enabled = true
         cameraView.containerView.hidden = false
         PhollowViewSetup().animate(phollowView, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }

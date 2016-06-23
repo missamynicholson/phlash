@@ -40,7 +40,7 @@ class HelpView: UIView, UITextFieldDelegate {
     func addCommentsLabel() {
         commentsLabel.frame = CGRect(x:screenBounds.width/10, y: 0, width: screenBounds.width*4/5, height:screenBounds.height)
         commentsLabel.textColor = whiteColor
-        commentsLabel.text = "Welcome to Phlash!\n\n\n\n\nSwipe right to capture and send a phlash to your phollowers - there's no preview, just swipe and go!\n\n\nSwipe left to view phlashes from other people."
+        commentsLabel.text = "Welcome to Phlash!\n\n\n\n\nSwipe right to capture and send a phlash to your phollowers - there's no preview, just swipe and go!\n\n\nSwipe left to view phlashes from other people.\n\n\n\n\n--------\nFor the best user experience, please allow notifications from Phlash."
         commentsLabel.textAlignment = .Center
         commentsLabel.numberOfLines = 20
         addSubview(commentsLabel)
