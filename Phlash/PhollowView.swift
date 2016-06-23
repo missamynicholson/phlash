@@ -18,7 +18,7 @@ class PhollowView: UIView, UITextFieldDelegate {
     var identificationLabel = UILabel()
     var statusLabel = UILabel()
     private let whiteColor = UIColor.whiteColor()
-    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(48/255.0), green: CGFloat(227/255.0), blue: CGFloat(202/255.0), alpha: CGFloat(0.75))
      let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
 
     
@@ -67,7 +67,8 @@ class PhollowView: UIView, UITextFieldDelegate {
     func addDestroyPhollowButton() {
         destroyPhollowButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height/2, width: screenBounds.width/2, height: 30)
         destroyPhollowButton.setTitleColor(.whiteColor(), forState: .Normal)
-        destroyPhollowButton.setTitle("UnPhollow", forState: .Normal)
+        destroyPhollowButton.setTitle("Unphollow", forState: .Normal)
+        destroyPhollowButton.titleLabel!.font = UIFont.systemFontOfSize(UIScreen.mainScreen().bounds.size.height/45)
         destroyPhollowButton.accessibilityLabel = "unpholloweesubmit"
         addSubview(destroyPhollowButton)
     }
@@ -75,7 +76,8 @@ class PhollowView: UIView, UITextFieldDelegate {
     func addCancelButton() {
         cancelButton.frame = CGRect(x: screenBounds.width*4/5, y: 20, width: screenBounds.width/5, height: 30)
         cancelButton.setTitleColor(.whiteColor(), forState: .Normal)
-        cancelButton.setTitle("Cancel", forState: .Normal)
+        cancelButton.titleLabel!.font = UIFont.systemFontOfSize(UIScreen.mainScreen().bounds.size.width/10)
+        cancelButton.setTitle("x", forState: .Normal)
         cancelButton.accessibilityLabel = "cancel"
         addSubview(cancelButton)
     }
