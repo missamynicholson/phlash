@@ -24,11 +24,12 @@ class SendPhoto {
         }
         let caption:String = captionField.text!
         let yValue = captionField.frame.origin.y / screenBounds.height
+        captionField.text = ""
         
         PFCloud.callFunctionInBackground("phlash", withParameters: ["fileData": checkedImage, "caption": caption, "yValue": yValue]) {
             (response: AnyObject?, error: NSError?) -> Void in
             if error === nil {
-                captionField.text = ""
+                
             } else {
                 AlertMessage().show(statusLabel, message: "Uh oh, phlash unsuccessful")
             }
