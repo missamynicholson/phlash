@@ -13,7 +13,7 @@ class PhlashView: UIImageView {
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let whiteColor = UIColor.whiteColor()
     private let blackColor = UIColor.blackColor()
-    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(48/255.0), green: CGFloat(227/255.0), blue: CGFloat(202/255.0), alpha: CGFloat(0.75))
     var identificationLabel = UILabel()
     let usernameLabel = UILabel()
     let captionLabel = UILabel()
