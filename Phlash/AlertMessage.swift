@@ -13,7 +13,7 @@ class AlertMessage {
     func show(statusLabel: UILabel, message: String) {
         statusLabel.text = message
         statusLabel.hidden = false
-        UIView.animateWithDuration(1.0, delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
             statusLabel.frame.origin.y = 0
             }, completion: nil)
         Delay().run(4.0) {
@@ -22,7 +22,7 @@ class AlertMessage {
     }
     
     func dismissAlert(statusLabel: UILabel) {
-        UIView.animateWithDuration(1.0, delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
             statusLabel.frame.origin.y = -60
             }, completion: { finished in
                 statusLabel.text = ""

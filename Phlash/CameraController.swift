@@ -89,7 +89,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func checkDatabase() {
         let phlashCount = phlashesArray.count
-        AlertMessage().show(statusLabel, message: "Checking for phlashes......")
+        AlertMessage().show(statusLabel, message: "Checking...")
         RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
             self.phlashesArray = phlashesFromDatabase!
             if self.phlashesArray.count > phlashCount {
