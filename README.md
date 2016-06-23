@@ -91,31 +91,6 @@ So that I can communicate fully
 I want to add a caption to my phlashes
 ```
 ```
-As a concerned phlasher
-So that I can stop someone phollowing me
-I want to delete them as a phollower
-```
-```
-As a phlashee
-So that I can express my horror at being phlashed at
-I want to be able to send my reaction (as a phlashback) back to the phlasher
-```
-```
-As a mobile phlasher
-So that I can show people where I am phlashing from
-I want to be able to (optionally) send my location with a phlash
-```
-```
-As a curious phlasher
-So that I can see where a phlash took place
-I want to view the phlash on a map
-```
-```
-As an annoyed phlashee
-So that I can stop getting notifications from a particular phlasher
-I want to turn notification off for that phlasher
-```
-```
 as a user
 so that I can be in the know
 I want to know if there are pending phlashes for me to view
@@ -124,11 +99,6 @@ I want to know if there are pending phlashes for me to view
 as a user
 so that I can sue the sender of the horrible picture
 I want to know the sender of each phlash
-```
-```
-as a user
-so that I can show more details about me
-I want to be able to phlash a video
 ```
 ```
 As a user
@@ -176,11 +146,6 @@ so that my application is efficient in database queries
 I want to check the database only if there is not photos locally to show
 ```
 ```
-as a developer
-so that I personalise my app
-I want to create my own site to manage password resets
-```
-```
 as a user
 so that I want to use the app over and over
 I want to have a fancy app design
@@ -198,7 +163,7 @@ I want to validate the user to phollow exists before adding the relationship to 
 ```  
 as a developer
 so that phlasers use the app appropriately
-I want to ensure only one phollow can be done
+I want to ensure I can't phollow someone twice
 ```  
 ```
 as I user
@@ -223,7 +188,7 @@ I want to validate that field and ensure no capital letters, less than 15 chars 
 ```
 as a user
 so that I can edit my list of people I follow
-I want to be able to unfollow a person
+I want to be able to unphollow a person
 ```  
 ```
 as a developer
@@ -235,16 +200,16 @@ as a developer
 so that my app is widely distributed
 I want my app to be run in many different iOS versions, (from 7.0 till 9.0)
 ```
-```  
-as a developer
-so that the app is tracked
-I want the app to have an activity indicator in the authentication page
-```
 ```
 as a developer
 so that I can drive my user nicely
 I want the keyboard to start with lower cases
 ```
+
+## To Do
+- Manage list of Phollowers
+- Create videos
+- Geolocalise phlashers and show them in a map
 
 ## Challenges
 This is a special team.  Not having enough with being challenged during 4 months coding like crazy in Ruby and Javascript, they decided they wanted to know how to develop a "Phlashy app" to show off with their friends and family, and take pics of [Dougal the Poodle](http://i.imgur.com/0pCDeFB.png?1), [Mabel](http://i.imgur.com/ZI8mXE7.jpg), the notorious [Sergio's neighbour cat](http://i.imgur.com/e6TL1Sr.png), or even [the mother duck-er](http://i.imgur.com/aTSMhz9.png)
