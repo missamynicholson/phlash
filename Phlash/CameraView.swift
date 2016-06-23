@@ -28,7 +28,7 @@ class CameraView: UIView, UITextFieldDelegate {
     var statusLabel = UILabel()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer()
     let FONT_SIZE = UIScreen.mainScreen().bounds.size.height/40
-    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(48/255.0), green: CGFloat(227/255.0), blue: CGFloat(202/255.0), alpha: CGFloat(0.75))
     let containerView = UIView()
     
     override init(frame: CGRect) {
@@ -67,7 +67,7 @@ class CameraView: UIView, UITextFieldDelegate {
     
     func addPendingPhlashesButton() {
         pendingPhlashesButton.frame = CGRect(x: screenBounds.width*2/5, y: 0, width: screenBounds.width/5, height: screenBounds.width/5)
-        pendingPhlashesButton.setImage(UIImage(named: "pendingx1.png"), forState: UIControlState.Normal)
+        pendingPhlashesButton.setImage(UIImage(named: "emptybolt.png"), forState: UIControlState.Normal)
         pendingPhlashesButton.accessibilityLabel = "bolt"
     }
     

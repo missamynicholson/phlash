@@ -28,7 +28,7 @@ class AuthenticationView: UIView, UITextFieldDelegate {
     
     private let screenBounds:CGSize = UIScreen.mainScreen().bounds.size
     private let whiteColor = UIColor.whiteColor()
-    private let backgroundGreen: UIColor = UIColor( red: CGFloat(62/255.0), green: CGFloat(200/255.0), blue: CGFloat(172/255.0), alpha: CGFloat(0.75))
+    private let backgroundGreen: UIColor = UIColor( red: CGFloat(48/255.0), green: CGFloat(227/255.0), blue: CGFloat(202/255.0), alpha: CGFloat(1.0))
     let submitButton = UIButton()
     let loginButton = UIButton()
     let signupButton = UIButton()
@@ -90,13 +90,13 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         submitButton.setTitle("Submit", forState: .Normal)
         submitButton.accessibilityLabel = "submit"
         
-        loginButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height/2 - 50, width: screenBounds.width/5, height: 30)
+        loginButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height*0.45, width: screenBounds.width/5, height: 30)
         loginButton.setTitleColor(.whiteColor(), forState: .Normal)
         loginButton.setTitle("Login", forState: .Normal)
         loginButton.accessibilityLabel = "login"
         
         
-        signupButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height/2, width: screenBounds.width/5, height: 30)
+        signupButton.frame = CGRect(x: screenBounds.width*2/5, y: screenBounds.height*0.55, width: screenBounds.width/5, height: 30)
         signupButton.setTitleColor(.whiteColor(), forState: .Normal)
         signupButton.setTitle("Signup", forState: .Normal)
         signupButton.accessibilityLabel = "signup"
@@ -117,15 +117,13 @@ class AuthenticationView: UIView, UITextFieldDelegate {
         statusLabel.numberOfLines = 1
         statusLabel.hidden = true
         
-        goBackButton.frame = CGRect(x: 0, y: 10, width: screenBounds.width/2, height: 30)
-        goBackButton.setTitleColor(.whiteColor(), forState: .Normal)
-        goBackButton.setTitle("Go back", forState: .Normal)
-        goBackButton.accessibilityLabel = "goBack"
-        goBackButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        goBackButton.frame = CGRect(x: 10, y: 10, width: screenBounds.width/12, height: screenBounds.width/10)
+        goBackButton.setImage(UIImage(named: "arrow.png"), forState: UIControlState.Normal)
         
-        resetPwdButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*0.55, width: screenBounds.width/2, height: 30)
+        resetPwdButton.frame = CGRect(x: screenBounds.width/4, y: screenBounds.height*0.6, width: screenBounds.width/2, height: 10)
+        resetPwdButton.titleLabel!.font = UIFont.systemFontOfSize(UIScreen.mainScreen().bounds.size.height/50)
         resetPwdButton.setTitleColor(.whiteColor(), forState: .Normal)
-        resetPwdButton.setTitle("Forgot Password", forState: .Normal)
+        resetPwdButton.setTitle("Forgot Password?", forState: .Normal)
         resetPwdButton.accessibilityLabel = "resetPwd"
         
         addSubview(usernameField)
