@@ -89,7 +89,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func checkDatabase() {
         let phlashCount = phlashesArray.count
-        AlertMessage().show(statusLabel, message: "Checking for phlashes......")
+        AlertMessage().show(statusLabel, message: "Checking...")
         RetrievePhoto().queryDatabaseForPhotos({ (phlashesFromDatabase, error) -> Void in
             self.phlashesArray = phlashesFromDatabase!
             if self.phlashesArray.count > phlashCount {
@@ -159,23 +159,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.swipeLeft.enabled = false
         
         var image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let orientation = image.imageOrientation
         
         if picker.cameraDevice == UIImagePickerControllerCameraDevice.Front {
             image =  UIImage(CGImage: image.CGImage!, scale: image.scale, orientation:.LeftMirrored)
-        }
-    
-        if(orientation == UIImageOrientation.Up) {
-            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Left)
-        }
-        else if(orientation == UIImageOrientation.Down) {
+        } else {
             image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Right)
-        }
-        else if(orientation == UIImageOrientation.Left) {
-            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Down)
-        }
-        else if(orientation == UIImageOrientation.Right) {
-           image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Up)
         }
         
       
@@ -188,7 +176,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let resizedImage = ResizeImage().resizeImage(image, newWidth: ImageViewFrame().getNewWidth(image))
         DisplayImage().setup(image, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
-        //SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
+        SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
     }
     
     func buttonAction(sender: UIButton!) {
@@ -250,18 +238,24 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func help() {
         hideSettings()
+        cameraView.swipeLeft.enabled = false
+         cameraView.swipeRight.enabled = false
         cameraView.addSubview(helpView)
         cameraView.containerView.hidden = true
         HelpViewSetup().animate(helpView, yValue: 0, appear: true)
     }
     
     func hideHelpView() {
+        cameraView.swipeLeft.enabled = true
+        cameraView.swipeRight.enabled = true
         cameraView.containerView.hidden = false
         HelpViewSetup().animate(helpView, yValue: screenBounds.height, appear: false)
     }
     
     func showPhollowPage() {
         hideSettings()
+        cameraView.swipeLeft.enabled = false
+        cameraView.swipeRight.enabled = false
         cameraView.addSubview(phollowView)
         cameraView.identificationLabel.text = ""
         cameraView.containerView.hidden = true
@@ -286,6 +280,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func cancelPhollowPage() {
+        cameraView.swipeLeft.enabled = true
+        cameraView.swipeRight.enabled = true
         cameraView.containerView.hidden = false
         PhollowViewSetup().animate(phollowView, yValue: screenBounds.height, appear: false, cameraViewId: cameraView.identificationLabel)
     }
