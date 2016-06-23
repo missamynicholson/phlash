@@ -158,11 +158,27 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView.swipeRight.enabled = false
         cameraView.swipeLeft.enabled = false
         
-        var chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        var image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let orientation = image.imageOrientation
+        
         if picker.cameraDevice == UIImagePickerControllerCameraDevice.Front {
-            chosenImage =  UIImage(CGImage: chosenImage.CGImage!, scale: chosenImage.scale, orientation:.LeftMirrored)
+            image =  UIImage(CGImage: image.CGImage!, scale: image.scale, orientation:.LeftMirrored)
+        }
+    
+        if(orientation == UIImageOrientation.Up) {
+            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Left)
+        }
+        else if(orientation == UIImageOrientation.Down) {
+            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Right)
+        }
+        else if(orientation == UIImageOrientation.Left) {
+            image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Down)
+        }
+        else if(orientation == UIImageOrientation.Right) {
+           image = UIImage(CGImage:image.CGImage!, scale: 1.0, orientation: .Up)
         }
         
+      
         let captionField = cameraView.captionField
         
         guard captionField.text?.characters.count < 100 else {
@@ -170,9 +186,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
         
-        let resizedImage = ResizeImage().resizeImage(chosenImage, newWidth: ImageViewFrame().getNewWidth(chosenImage))
-        DisplayImage().setup(chosenImage, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
-        SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
+        let resizedImage = ResizeImage().resizeImage(image, newWidth: ImageViewFrame().getNewWidth(image))
+        DisplayImage().setup(image, cameraView: cameraView, animate: false, username: "", caption: "", yValue: "", swipeLeft: cameraView.swipeLeft, swipeRight: cameraView.swipeRight)
+        //SendPhoto().sendPhoto(resizedImage, statusLabel: statusLabel, captionField: captionField)
     }
     
     func buttonAction(sender: UIButton!) {
