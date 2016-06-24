@@ -14,7 +14,7 @@ Phlash is the idea of a group of [Makers](http://www.makersacademy.com/) as its 
 
 ## Usage
  
- The code is available in this repo, and as of 24-June-16 the app has been approved by Apple, so it is now ready for Beta testing.  If you would like to beta test the app, please [check here](https://phlash.herokuapp.com/) or contact one of the members of the team.
+ The code is available in this repo, and as of 24-June-16 the app has been approved by Apple, so it is now ready for Beta testing.  If you would like to beta test the app, please send and email to phlashapp@gmail.com or [check here.](https://phlash.herokuapp.com/)
  
 ## Technologies
  
