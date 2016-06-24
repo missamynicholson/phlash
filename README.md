@@ -14,7 +14,7 @@ Phlash is the idea of a group of [Makers](http://www.makersacademy.com/) as its 
 
 ## Usage
  
- The code is available in this repo, however the keys to connect to the database have been removed for security reasons.  We are registering the App in the App Store and will share the link when it is available.
+ The code is available in this repo, and as of 24-June-16 the app has been approved by Apple, so it is now ready for Beta testing.  If you would like to beta test the app, please contact one of the members of the team to give you access.
  
 ## Technologies
  
