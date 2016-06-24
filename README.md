@@ -1,7 +1,7 @@
 # Phlash
 ![icon](http://i.imgur.com/XCR468v.png) ![main](http://i.imgur.com/4AyMZ4o.png) ![phlash](http://i.imgur.com/3P3he6l.png)
 
-Phlash is a social network mobile app that allows users to unleash their creativity, taking random pictures (Phlashes), and sharing them with a list of "Phollowers".
+Phlash is a photo-messaging iphone app that encourages sponteneity. Swipe right to capture an image and immediately send it to your phollowers. Swipe left to see phlashes sent by the people you're phollowing. No liking, commenting, sharing - see the phlash while it lasts!
 
 ## Authors
 
@@ -14,7 +14,7 @@ Phlash is the idea of a group of [Makers](http://www.makersacademy.com/) as its 
 
 ## Usage
  
- The code is available in this repo, and as of 24-June-16 the app has been approved by Apple, so it is now ready for Beta testing.  If you would like to beta test the app, please contact one of the members of the team to give you access.
+ The code is available in this repo, and as of 24-June-16 the app has been approved by Apple, so it is now ready for Beta testing.  If you would like to beta test the app, please [check here](https://phlash.herokuapp.com/) or contact one of the members of the team.
  
 ## Technologies
  
